@@ -42,23 +42,30 @@ COLON 	:	':';
 
 BL	:	'\n';
 
-value : (races | DIGIT | classVector);
+value : (RACES | DIGIT | classVector);
 
 classVector: ('(' classVectorElem ')' );
-classVectorElem: (pgClass ('->' subclass)? ',' classVectorElem | pgClass ('->' subclass)?);
+classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
 
-pgClass : ('Cleric'| 'Paladin' | 'Barbarian');
-subclass : ('Berserker' | 'Totem warrior' | 'Domain of life');
+PGCLASS : ('Cleric'| 'Paladin' | 'Barbarian');
+SUBCLASS : ('Berserker' | 'Totem warrior' | 'Domain of life');
 
-races : ('Elf'|'Human'|'Orc'|'Dwarf');
+abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' ')';
 
-mandatory: ('race' | 'hp' | 'archetype' | 'abilities' | 'alignment' | 'skills' | 'languages' | stat);
+alignment: ( LEGALITY BLANKSPACE MORALITY);
+MORALITY: 'good' | 'neutral' | 'evil';
+LEGALITY: 'lawful' | 'neutral' | 'chaotic' ;
 
-stat	:  (STR | DEX | INT | CHA | CON | WIS);
+
+RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
+
+MANDATORY: ('race' | 'hp' | 'archetype' | 'abilities' | 'alignment' | 'skills' | 'languages' | STAT);
+
+STAT	:  (STR | DEX | INT | CHA | CON | WIS);
 
 stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
 
-stat_line: no=stat COLON valore=DIGIT
+stat_line: no=STAT COLON valore=DIGIT
 		{checkStats.checkStatVal($no.text,$valore);}
 	;
 
@@ -71,4 +78,6 @@ pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
 pgBody : (property (BL)?)*;
 
-property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
+property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* value;
+
+start : pgBody;
