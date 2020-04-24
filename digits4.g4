@@ -7,14 +7,14 @@ options {
 
 
 @header{
-	package myLex;
-	import util.checkStats;
-        import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
+	//package myLex;
+	//import util.checkStats;
+        //import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
 
 }
 
 
-BLANKSPACE: ' ';
+BLANKSPACE: ' ' -> skip;
 DIGIT
 	:	('0'..'9')+
 	;
@@ -70,18 +70,13 @@ STAT	:  (STR | DEX | INT | CHA | CON | WIS);
 
 stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
 
-stat_line: no=STAT COLON valore=DIGIT
-		{checkStats.checkStatVal($no.text,$valore);}
-	;
+stat_line: no=STAT COLON valore=DIGIT;
 
-
-sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER
-{classChecker.checkClass($cl);}
-;
+sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER;
 
 pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
-pgBody : (property (BL)?)*;
+pgBody : (property (BL)?)+;
 
 property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
 
