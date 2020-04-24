@@ -69,4 +69,6 @@ sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER
 
 pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
+pgBody : (property (BL)?)*;
+
 property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
