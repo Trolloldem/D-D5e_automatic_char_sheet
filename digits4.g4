@@ -36,13 +36,13 @@ STARTPG : '{';
 ENDPG :   '}';
 CREATE:   'Create ';
 
-LETTER 	: ('a'..'z'|'A'..'Z')+ ;
+
 
 COLON 	:	':';
 
 BL	:	'\n';
 
-value : (RACES | DIGIT | classVector);
+value : (RACES | DIGIT | classVector | alignment | skills);
 
 classVector: ('(' classVectorElem ')' );
 classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
@@ -56,6 +56,11 @@ alignment: ( LEGALITY BLANKSPACE MORALITY);
 MORALITY: 'good' | 'neutral' | 'evil';
 LEGALITY: 'lawful' | 'neutral' | 'chaotic' ;
 
+skills: '(' SKILL ',' SKILL ')';
+SKILL: 'Acrobatics' | 'Animal Handling' | 'History';
+
+languages: '('LANGUAGE (',' LANGUAGE)?')';
+LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
 
@@ -81,3 +86,6 @@ pgBody : (property (BL)?)*;
 property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* value;
 
 start : pgBody;
+
+
+LETTER 	: ('a'..'z'|'A'..'Z')+ ;
