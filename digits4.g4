@@ -64,8 +64,8 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
 
-MANDATORY: ('race' | 'hp' | 'archetype' | 'abilities' | 'alignment' | 'skills' | 'languages' | STAT);
-
+MANDATORY: ( RACE | 'hp' | 'archetype' | 'abilities' | 'alignment' | 'skills' | 'languages' | STAT);
+RACE: 'race';
 STAT	:  (STR | DEX | INT | CHA | CON | WIS);
 
 stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
@@ -83,7 +83,7 @@ pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
 pgBody : (property (BL)?)*;
 
-property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* value;
+property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
 
 start : pgBody;
 
