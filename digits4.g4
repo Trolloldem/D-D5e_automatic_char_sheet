@@ -42,12 +42,12 @@ COLON 	:	':';
 
 BL	:	'\n';
 
-VALUE : (races | DIGIT | classVector);
+value : (races | DIGIT | classVector);
 
 classVector: ('(' classVectorElem ')' );
-classVectorElem: (class ('->' subclass)? ',' classVectorElem | class ('->' subclass)?);
+classVectorElem: (pgClass ('->' subclass)? ',' classVectorElem | pgClass ('->' subclass)?);
 
-class : ('Cleric'| 'Paladin' | 'Barbarian');
+pgClass : ('Cleric'| 'Paladin' | 'Barbarian');
 subclass : ('Berserker' | 'Totem warrior' | 'Domain of life');
 
 races : ('Elf'|'Human'|'Orc'|'Dwarf');
@@ -58,15 +58,15 @@ stat	:  (STR | DEX | INT | CHA | CON | WIS);
 
 stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
 
-stat_line: no=stat DP valore=DIGIT
+stat_line: no=stat COLON valore=DIGIT
 		{checkStats.checkStatVal($no.text,$valore);}
 	;
 
 
-sclass 	:	 CLASS DP (BLANKSPACE)* cl = LETTER
+sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER
 {classChecker.checkClass($cl);}
 ;
 
 pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
-property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* VALUE;
+property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
