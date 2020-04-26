@@ -50,7 +50,7 @@ ALIGN: ('alignment');
 SKILLSID: ('skills');
 LANG: ('languages');
 
-value : (RACES | DIGIT | classVector | abilities |alignment | skills);
+value : (RACES | DIGIT | classVector | abilities |alignment | skills | languages);
 
 classVector: ('(' classVectorElem ')' );
 classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
@@ -58,9 +58,9 @@ classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' S
 PGCLASS : ('Cleric'| 'Paladin' | 'Barbarian');
 SUBCLASS : ('Berserker' | 'Totem warrior' | 'Domain of life');
 
-abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' ')';
+abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
 
-alignment: ( LEGALITY BLANKSPACE MORALITY);
+alignment: ( LEGALITY '_'  MORALITY);
 MORALITY: 'good' | 'neutral' | 'evil';
 LEGALITY: 'lawful' | 'neutral' | 'chaotic' ;
 
