@@ -1,0 +1,29 @@
+
+//Qui solo cose obbligatorie
+new player Nome
+{
+    race: <razza>
+    hp: <vita>
+    archetype: (<class> -> <subclass>,...) //Subclass è opzionale
+    abilities: (F,D,C,I,S,C) //Alternativa dichiariamo singole 
+    alignment: <allignement>
+    skills: (Skill1,Skill2)
+    languages: (Language1,Language2) //Solo 1 = comune
+}
+
+set <prop> for Nome = <value>
+//set Description for Nome = ""
+
+set <prop> of <elem> for Nome = <value> //of <elem> opzionale
+//set Level of Barbarian for Nome = 10
+
+new Equipment equipName
+{
+    Armor: <armor> //Opzionale
+    weapon: (primary,secondary)
+    shield: <yes/no> //Booleano
+    consumables: (<name> * <quantity>,...) //Pozioni,ecc..
+}
+assign <equipName> to <name>
+
+known spells of <nome> = (<spell>,...)
