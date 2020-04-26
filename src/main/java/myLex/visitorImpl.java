@@ -56,12 +56,28 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
                throw new PropertyException("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
            }
        }
-       if (mandatoryTokenType == parser.getTokenType("ARCHTYPE") ||
-               mandatoryTokenType == parser.getTokenType("ABILITY") ||
-               mandatoryTokenType == parser.getTokenType("SKILLS")){
-            throw new PropertyException("IL VALORE DELLA PROPIETÀ "+
-                    mandatoryToken.getText()+
-                    " DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È NEL FORMATO CORRETTO");
+       if(mandatoryTokenType == parser.getTokenType("ARCHTYPE")){
+           throw new PropertyException("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
+       }
+
+       if(mandatoryTokenType == parser.getTokenType("ABILITY")){
+
+               throw new PropertyException("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+
+       }
+
+       if(mandatoryTokenType == parser.getTokenType("SKILLSID")){
+
+               throw new PropertyException("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+
+       }
+       if(mandatoryTokenType == parser.getTokenType("LANG")){
+
+               throw new PropertyException("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
+
+       }
+       if (mandatoryTokenType == parser.getTokenType("ALIGN")){
+           throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
        }
        return false;
    }
@@ -75,7 +91,46 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
                throw new PropertyException("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
            }
        }
-       return false;
+
+        if(mandatoryTokenType == parser.getTokenType("ABILITY")){
+            if(valueChild instanceof digits4Parser.AbilitiesContext){
+                return true;
+            }else{
+                throw new PropertyException("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+            }
+        }
+
+        if(mandatoryTokenType == parser.getTokenType("SKILLSID")){
+            if(valueChild instanceof digits4Parser.SkillsContext){
+                return true;
+            }else{
+                throw new PropertyException("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+            }
+        }
+        if(mandatoryTokenType == parser.getTokenType("LANG")){
+            if(valueChild instanceof digits4Parser.LanguagesContext){
+                return true;
+            }else{
+                throw new PropertyException("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
+            }
+        }
+
+        if (mandatoryTokenType == parser.getTokenType("ALIGN")){
+            if(valueChild instanceof digits4Parser.AlignmentContext){
+             return true;
+            }else {
+                throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
+            }
+        }
+
+        if (mandatoryTokenType == parser.getTokenType("RACE")){
+                throw new PropertyException("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
+
+        }
+        if (mandatoryTokenType == parser.getTokenType("HP")){
+            throw new PropertyException("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
+        }
+        return false;
     }
 
 
