@@ -7,7 +7,7 @@ options {
 
 
 @header{
-	//package myLex;
+	package myLex;
 	//import util.checkStats;
         //import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
 
@@ -42,7 +42,15 @@ COLON 	:	':';
 
 BL	:	'\n';
 
-value : (RACES | DIGIT | classVector | alignment | skills);
+RACE: ('race');
+HP: ('hp');
+ARCHTYPE: ('archetype');
+ABILITY: ('abilities');
+ALIGN: ('alignment');
+SKILLSID: ('skills');
+LANG: ('languages');
+
+value : (RACES | DIGIT | classVector | abilities |alignment | skills);
 
 classVector: ('(' classVectorElem ')' );
 classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
@@ -64,13 +72,13 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
 
-MANDATORY: ( RACE | 'hp' | 'archetype' | 'abilities' | 'alignment' | 'skills' | 'languages' | STAT);
-RACE: 'race';
-STAT	:  (STR | DEX | INT | CHA | CON | WIS);
+mandatory: ( RACE | HP | ARCHTYPE | ABILITY | ALIGN | SKILLSID | LANG) | statID;
+
+statID	:  (STR | DEX | INT | CHA | CON | WIS);
 
 stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
 
-stat_line: no=STAT COLON valore=DIGIT;
+stat_line: no=statID COLON valore=DIGIT;
 
 sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER;
 
@@ -78,7 +86,7 @@ pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
 pgBody : (property (BL)?)+;
 
-property: MANDATORY (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
+property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
 
 start : pgBody;
 
