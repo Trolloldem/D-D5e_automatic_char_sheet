@@ -1,6 +1,6 @@
 
 //Qui solo cose obbligatorie
-create player Nome
+create Player Nome
 {
     race: <razza>
     hp: <vita>
