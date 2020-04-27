@@ -1,6 +1,6 @@
 
 //Qui solo cose obbligatorie
-new player Nome
+create Player Nome
 {
     race: <razza>
     hp: <vita>
@@ -17,9 +17,9 @@ set <prop> for Nome = <value>
 set <prop> of <elem> for Nome = <value> //of <elem> opzionale
 //set Level of Barbarian for Nome = 10
 
-new Equipment equipName
+create Equipment equipName
 {
-    Armor: <armor> //Opzionale
+    armor: <armor> //Opzionale
     weapon: (primary,secondary)
     shield: <yes/no> //Booleano
     consumables: (<name> * <quantity>,...) //Pozioni,ecc..
