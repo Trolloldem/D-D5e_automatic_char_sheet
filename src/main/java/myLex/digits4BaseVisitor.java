@@ -127,14 +127,6 @@ public class digits4BaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAlignment(@NotNull digits4Parser.AlignmentContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public T visitValue(@NotNull digits4Parser.ValueContext ctx) { return visitChildren(ctx); }
 
 	/**

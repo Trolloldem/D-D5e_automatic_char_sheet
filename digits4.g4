@@ -14,7 +14,8 @@ options {
 }
 
 
-BLANKSPACE: ' ' -> skip;
+BLANKSPACE: ' ';
+WS: BLANKSPACE BLANKSPACE -> skip;
 DIGIT
 	:	('0'..'9')+
 	;
@@ -50,7 +51,7 @@ ALIGN: ('alignment');
 SKILLSID: ('skills');
 LANG: ('languages');
 
-value : (RACES | DIGIT | classVector | abilities |alignment | skills | languages);
+value : (RACES | DIGIT | classVector | abilities |ALIGNMENT | skills | languages);
 
 classVector: ('(' classVectorElem ')' );
 classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
@@ -60,9 +61,9 @@ SUBCLASS : ('Berserker' | 'Totem warrior' | 'Domain of life');
 
 abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
 
-alignment: ( LEGALITY '_'  MORALITY);
-MORALITY: 'good' | 'neutral' | 'evil';
-LEGALITY: 'lawful' | 'neutral' | 'chaotic' ;
+ALIGNMENT: 'lawful good' | 'lawful neutral' | 'lawful evil' |
+           'neutral good' | 'neutral' | 'neutral evil' |
+           'chaotic good' | 'chaotic neutral' | 'chaotic evil';
 
 skills: '(' SKILL ',' SKILL ')';
 SKILL: 'Acrobatics' | 'Animal Handling' | 'History';

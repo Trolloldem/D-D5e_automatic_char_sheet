@@ -77,7 +77,11 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
 
        }
        if (mandatoryTokenType == parser.getTokenType("ALIGN")){
-           throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
+           if(valueTokenType == parser.getTokenType("ALIGNMENT")){
+               return true;
+           }else {
+               throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
+           }
        }
        return false;
    }
@@ -116,11 +120,8 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
         }
 
         if (mandatoryTokenType == parser.getTokenType("ALIGN")){
-            if(valueChild instanceof digits4Parser.AlignmentContext){
-             return true;
-            }else {
                 throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
-            }
+
         }
 
         if (mandatoryTokenType == parser.getTokenType("RACE")){
@@ -176,30 +177,5 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
     }
 
 
-    /**
-     * {@inheritDoc}
-     * <p/>
-     * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.
-     *
-     * @param ctx
-     */
-    @Override
-    public T visitMandatory(digits4Parser.MandatoryContext ctx) {
 
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p/>
-     * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.
-     *
-     * @param ctx
-     */
-    @Override
-    public T visitStatID(digits4Parser.StatIDContext ctx) {
-        return super.visitStatID(ctx);
-    }
 }

@@ -108,13 +108,6 @@ public interface digits4Visitor<T> extends ParseTreeVisitor<T> {
 	T visitProperty(@NotNull digits4Parser.PropertyContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link digits4Parser#alignment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAlignment(@NotNull digits4Parser.AlignmentContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link digits4Parser#value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

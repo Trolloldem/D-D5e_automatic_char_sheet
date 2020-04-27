@@ -1,8 +1,8 @@
 race:(Cleric)
 hp:15
-archetype: (Cleric)
+archetype: (Cleric->Berserker)
 abilities: (15,15,15,15,15,15)
-alignment:chaotic_good
+alignment:chaotic good
 skills: (Acrobatics,Acrobatics)
 languages: 15
 DEX: (Cleric)
