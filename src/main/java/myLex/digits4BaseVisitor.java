@@ -1,11 +1,10 @@
-// Generated from /home/oldem/Desktop/ANTLR/GrammarFile/digits4.g4 by ANTLR 4.1
+// Generated from /home/oldem/IdeaProjects/D_and_D_Compiler/digits4.g4 by ANTLR 4.8
 
 	package myLex;
 	//import util.checkStats;
         //import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
 
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -19,121 +18,149 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 public class digits4BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements digits4Visitor<T> {
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStatID(@NotNull digits4Parser.StatIDContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitPiece(digits4Parser.PieceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLanguages(@NotNull digits4Parser.LanguagesContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitPieceValue(digits4Parser.PieceValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSclass(@NotNull digits4Parser.SclassContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitConsumableVector(digits4Parser.ConsumableVectorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStart(@NotNull digits4Parser.StartContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitConsumableVectorElem(digits4Parser.ConsumableVectorElemContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMandatory(@NotNull digits4Parser.MandatoryContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitValue(digits4Parser.ValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAbilities(@NotNull digits4Parser.AbilitiesContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitClassVector(digits4Parser.ClassVectorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSkills(@NotNull digits4Parser.SkillsContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPgBody(@NotNull digits4Parser.PgBodyContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitAbilities(digits4Parser.AbilitiesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitClassVectorElem(@NotNull digits4Parser.ClassVectorElemContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitSkills(digits4Parser.SkillsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStats(@NotNull digits4Parser.StatsContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitLanguages(digits4Parser.LanguagesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitClassVector(@NotNull digits4Parser.ClassVectorContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitMandatory(digits4Parser.MandatoryContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPg(@NotNull digits4Parser.PgContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitStatID(digits4Parser.StatIDContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProperty(@NotNull digits4Parser.PropertyContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitStats(digits4Parser.StatsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValue(@NotNull digits4Parser.ValueContext ctx) { return visitChildren(ctx); }
-
+	@Override public T visitStat_line(digits4Parser.Stat_lineContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStat_line(@NotNull digits4Parser.Stat_lineContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSclass(digits4Parser.SclassContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitPgDefition(digits4Parser.PgDefitionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitEquipPiece(digits4Parser.EquipPieceContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitProperty(digits4Parser.PropertyContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitEntity(digits4Parser.EntityContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStart(digits4Parser.StartContext ctx) { return visitChildren(ctx); }
 }

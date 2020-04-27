@@ -32,10 +32,11 @@ CON 	:	('CON')
 WIS 	:	('WIS')
 ;
 
-CLASS 	: 'Class';
-STARTPG : '{';
-ENDPG :   '}';
-CREATE:   'Create ';
+STARTENTITY : '{';
+ENDENTITY :   '}';
+CREATE:   'create';
+PLAYER: 'Player';
+EQUIPMENT: 'Equipment';
 
 
 
@@ -50,6 +51,22 @@ ABILITY: ('abilities');
 ALIGN: ('alignment');
 SKILLSID: ('skills');
 LANG: ('languages');
+
+ARMOR:    'armor';
+WEAPON: 'weapon';
+SHIELD: 'shield';
+CONSUMABLES: 'consumables';
+
+ARMORTYPE: ('Half plate' | 'Full plate' | NONE);
+WEAPONTYPE: ('Bastard sword' | 'Axe' | NONE);
+SHIELDPRESENCE: ('Yes' | 'No');
+NONE: 'None';
+CONSUMABLE: ('Health potion' | 'Mana potion' | 'Gold');
+piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
+pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );
+
+consumableVector:   NONE |('(' consumableVectorElem ')' );
+consumableVectorElem: (CONSUMABLE '*' DIGIT',' consumableVectorElem | CONSUMABLE '*' DIGIT);
 
 value : (RACES | DIGIT | classVector | abilities |ALIGNMENT | skills | languages);
 
@@ -73,7 +90,7 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
 
-mandatory: ( RACE | HP | ARCHTYPE | ABILITY | ALIGN | SKILLSID | LANG) | statID;
+mandatory: ( RACE | HP | ARCHTYPE | ABILITY | ALIGN | SKILLSID | LANG | statID);
 
 statID	:  (STR | DEX | INT | CHA | CON | WIS);
 
@@ -83,13 +100,21 @@ stat_line: no=statID COLON valore=DIGIT;
 
 sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER;
 
-pg : CREATE LETTER (BL)? STARTPG val=stats (BL)? ENDPG;
 
-pgBody : (property (BL)?)+;
+pgDefition : CREATE BLANKSPACE PLAYER BLANKSPACE LETTER STARTENTITY BL
+             ((property (BL)  property (BL) property (BL) property (BL) property (BL) property (BL) property ) |
+             (property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property ))
+             BL ENDENTITY;
+equipDefinition: CREATE BLANKSPACE EQUIPMENT BLANKSPACE LETTER STARTENTITY BL
+                 equipPiece BL equipPiece BL equipPiece BL equipPiece
+                 BL ENDENTITY;
 
+equipPiece: piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
 property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
 
-start : pgBody;
+entity : (pgDefition | equipDefinition);
+
+start : (entity BL)+;
 
 
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
