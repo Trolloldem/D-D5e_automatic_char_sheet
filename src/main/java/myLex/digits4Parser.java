@@ -50,7 +50,7 @@ public class digits4Parser extends Parser {
 		return new String[] {
 			null, "'('", "')'", "'*'", "','", "'->'", "' '", null, null, null, null, 
 			null, null, null, null, "'{'", "'}'", "'create'", "'Player'", "'Equipment'", 
-			"':'", "'\n'", null, null, null, null, null, null, null, "'armor'", "'weapon'", 
+			"':'", null, null, null, null, null, null, null, null, "'armor'", "'weapon'", 
 			"'shield'", "'consumables'", null, null, null, "'None'"
 		};
 	}

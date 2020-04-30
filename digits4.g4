@@ -42,7 +42,7 @@ EQUIPMENT: 'Equipment';
 
 COLON 	:	':';
 
-BL	:	'\n';
+BL	:	('\n' | '\r\n');
 
 RACE: ('race');
 HP: ('hp');

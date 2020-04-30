@@ -54,7 +54,6 @@ LETTER=44
 'Player'=18
 'Equipment'=19
 ':'=20
-'\n'=21
 'armor'=29
 'weapon'=30
 'shield'=31
