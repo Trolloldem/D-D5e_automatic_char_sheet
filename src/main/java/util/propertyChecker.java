@@ -5,19 +5,18 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
 import propertyExceptions.malformedProperty;
 
-import javax.xml.bind.PropertyException;
 
 public class propertyChecker {
 
 
 
-    private static Boolean checkPropertyToken(int mandatoryTokenType, int valueTokenType, Token mandatoryToken,digits4Parser parser) throws PropertyException {
+    private static Boolean checkPropertyToken(int mandatoryTokenType, int valueTokenType, Token mandatoryToken,digits4Parser parser) throws malformedProperty {
 
         if (mandatoryTokenType == parser.getTokenType("RACE")){
             if(valueTokenType == parser.getTokenType("RACES")){
                 return true;
             }else{
-                throw new PropertyException("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
+                throw new malformedProperty("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
             }
         }
         if (mandatoryTokenType == parser.getTokenType("HP") ||
@@ -30,53 +29,53 @@ public class propertyChecker {
             if(valueTokenType == parser.getTokenType("DIGIT")){
                 return true;
             }else{
-                throw new PropertyException("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
+                throw new malformedProperty("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
             }
         }
         if (mandatoryTokenType == parser.getTokenType("RACE")){
             if(valueTokenType == parser.getTokenType("RACES")){
                 return true;
             }else{
-                throw new PropertyException("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
+                throw new malformedProperty("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
             }
         }
         if(mandatoryTokenType == parser.getTokenType("ARCHTYPE")){
-            throw new PropertyException("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
+            throw new malformedProperty("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
         }
 
         if(mandatoryTokenType == parser.getTokenType("ABILITY")){
 
-            throw new PropertyException("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+            throw new malformedProperty("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
 
         }
 
         if(mandatoryTokenType == parser.getTokenType("SKILLSID")){
 
-            throw new PropertyException("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+            throw new malformedProperty("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
 
         }
         if(mandatoryTokenType == parser.getTokenType("LANG")){
 
-            throw new PropertyException("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
+            throw new malformedProperty("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
 
         }
         if (mandatoryTokenType == parser.getTokenType("ALIGN")){
             if(valueTokenType == parser.getTokenType("ALIGNMENT")){
                 return true;
             }else {
-                throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
+                throw new malformedProperty("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
             }
         }
         return false;
     }
 
-    private static Boolean checkPropertyContext(int mandatoryTokenType, Object valueChild, Token mandatoryToken,digits4Parser parser) throws PropertyException {
+    private static Boolean checkPropertyContext(int mandatoryTokenType, Object valueChild, Token mandatoryToken,digits4Parser parser) throws malformedProperty {
 
         if(mandatoryTokenType == parser.getTokenType("ARCHTYPE")){
             if(valueChild instanceof digits4Parser.ClassVectorContext){
                 return true;
             }else{
-                throw new PropertyException("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
+                throw new malformedProperty("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
             }
         }
 
@@ -84,7 +83,7 @@ public class propertyChecker {
             if(valueChild instanceof digits4Parser.AbilitiesContext){
                 return true;
             }else{
-                throw new PropertyException("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+                throw new malformedProperty("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
             }
         }
 
@@ -92,35 +91,35 @@ public class propertyChecker {
             if(valueChild instanceof digits4Parser.SkillsContext){
                 return true;
             }else{
-                throw new PropertyException("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
+                throw new malformedProperty("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
             }
         }
         if(mandatoryTokenType == parser.getTokenType("LANG")){
             if(valueChild instanceof digits4Parser.LanguagesContext){
                 return true;
             }else{
-                throw new PropertyException("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
+                throw new malformedProperty("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
             }
         }
 
         if (mandatoryTokenType == parser.getTokenType("ALIGN")){
-            throw new PropertyException("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
+            throw new malformedProperty("L'ALLINEAMENTO DEFINITO NELLA RIGA " + mandatoryToken.getLine() + " NON È PRESENTE NEL MANUALE");
 
         }
 
         if (mandatoryTokenType == parser.getTokenType("RACE")){
-            throw new PropertyException("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
+            throw new malformedProperty("IL VALORE DELLA RAZZA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È PRESENTE NEL MANUALE");
 
         }
         if (mandatoryTokenType == parser.getTokenType("HP")){
-            throw new PropertyException("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
+            throw new malformedProperty("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
         }
         return false;
     }
 
 
-    public static Boolean checkValidProperty(digits4Parser.MandatoryContext mandatory, digits4Parser.ValueContext value,digits4Parser parser) {
-        try {
+    public static Boolean checkValidProperty(digits4Parser.MandatoryContext mandatory, digits4Parser.ValueContext value,digits4Parser parser) throws malformedProperty {
+
             if(mandatory.getChildCount()>1 || value.getChildCount()>1){
                 throw new malformedProperty("Wrong number of children nodes");
             }
@@ -149,15 +148,11 @@ public class propertyChecker {
 
                 }
                 if(valueChild instanceof RuleContext){
-                    throw new PropertyException("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
+                    throw new malformedProperty("IL VALORE DELLA STATISTICA DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È UN NUMERO");
                 }
             }
-
-        }catch(Exception e){
-            System.err.println(e);
             return false;
-        }
-        return false;
+
     }
 
 }
