@@ -3,6 +3,7 @@ package myLex;
 import org.antlr.v4.runtime.misc.NotNull;
 import util.propertyChecker;
 import util.classChecker;
+import util.pgChecker;
 
 import java.util.concurrent.ExecutionException;
 
@@ -34,10 +35,12 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
     @Override
     public T visitPgDefition(digits4Parser.PgDefitionContext ctx) {
        try{
-           return visitChildren(ctx);
+           visitChildren(ctx);
+           pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
            System.err.println(e);
            return null;
        }
+       return null;
     }
 }

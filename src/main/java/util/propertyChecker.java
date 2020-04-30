@@ -3,7 +3,7 @@ package util;
 import myLex.digits4Parser;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
-import propertyExceptions.malformedProperty;
+import parsingExceptions.malformedProperty;
 
 
 public class propertyChecker {
