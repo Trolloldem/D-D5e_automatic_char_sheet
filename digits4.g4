@@ -42,7 +42,7 @@ EQUIPMENT: 'Equipment';
 
 COLON 	:	':';
 
-BL	:	'\n'->skip;
+BL	:	'\n';
 
 RACE: ('race');
 HP: ('hp');

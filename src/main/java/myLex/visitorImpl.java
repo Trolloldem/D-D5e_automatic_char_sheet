@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import propertyExceptions.malformedProperty;
 
 import javax.xml.bind.PropertyException;
+import java.util.HashMap;
 
 public class visitorImpl<T> extends digits4BaseVisitor<T>{
     digits4Parser parser;
@@ -21,7 +22,6 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
 
     @Override
     public T visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
-
        checkValidProperty(ctx.mandatory(),ctx.value());
        return visitChildren(ctx);
    }
