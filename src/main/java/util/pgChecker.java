@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class pgChecker {
 
-    public static void checkPgDefinition(List<digits4Parser.PropertyContext> property,String characterName, digits4Parser parser) {
+    public static characterWrapper checkPgDefinition(List<digits4Parser.PropertyContext> property,String characterName, digits4Parser parser) {
         characterWrapper character = new characterWrapper();
         character.setName(characterName);
         switch (property.size()){
@@ -47,7 +47,11 @@ public class pgChecker {
                 }
                 break;
         }
-        System.out.println(character);
+        if(character.allSetted()){
+            return character;
+        }else {
+            throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
+        }
     }
 
     private static void selectOperationCase12(characterWrapper character, digits4Parser.StatIDContext mandatoryChild, Object value, digits4Parser parser) {
@@ -71,6 +75,12 @@ public class pgChecker {
             for(TerminalNode lang : allLang.LANGUAGE()){
                 languages.add(lang.getText());
             }
+            if(languages.size()==1 && !languages.get(0).equals("Common")){
+                languages.add("Common");
+            }else if(languages.get(0).equals("Common")){
+                throw new pgMalformedException("Only 1 language specified for Player '"+character.getName()+"'. If only one language is specified, it cannot be 'Common'");
+            }
+
             character.setLanguages(languages);
       }
       if(mandatoryChild.getType() == parser.getTokenType("SKILLSID")){
@@ -95,15 +105,23 @@ public class pgChecker {
             character.setStats(scores);
       }
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
-    	  digits4Parser.ClassVectorElemContext allclass = (ClassVectorElemContext) value;
-		  Classi tempClasse = Classi.valueOf(allclass.PGCLASS().getText());
-		  subClass tempSubclass=null;
-    	  if(allclass.SUBCLASS()!=null) {
-    		 tempSubclass = subClass.valueOf(allclass.SUBCLASS().getText()); 
-    	  }
-    	  Map<Pair<classChecker.Classi,classChecker.subClass>, Integer> temp=new HashMap<Pair<classChecker.Classi,classChecker.subClass>, Integer>();
-    	  Pair<classChecker.Classi,classChecker.subClass> classes = new Pair<classChecker.Classi, classChecker.subClass>(tempClasse, tempSubclass);
-    	  temp.put(classes, -1);
+          Map<Pair<classChecker.Classi,classChecker.subClass>, Integer> temp=new HashMap<Pair<classChecker.Classi,classChecker.subClass>, Integer>();
+
+          digits4Parser.ClassVectorContext classVector = (ClassVectorContext) value;
+    	  digits4Parser.ClassVectorElemContext allclass = classVector.classVectorElem();
+    	  while (allclass != null) {
+              Classi tempClasse = Classi.valueOf(allclass.PGCLASS().getText());
+              subClass tempSubclass = null;
+
+              if (allclass.SUBCLASS() != null) {
+                  String subClassName = allclass.SUBCLASS().getText().replace(' ', '_');
+                  tempSubclass = subClass.valueOf(subClassName);
+              }
+
+              Pair<classChecker.Classi, classChecker.subClass> classes = new Pair<classChecker.Classi, classChecker.subClass>(tempClasse, tempSubclass);
+              temp.put(classes, -1);
+              allclass = allclass.classVectorElem();
+          }
     	  character.setPgClass(temp);
       }
 

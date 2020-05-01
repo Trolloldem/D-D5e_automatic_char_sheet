@@ -8,14 +8,14 @@ options {
 
 @header{
 	package myLex;
-	//import util.checkStats;
-        //import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
 
 }
 
 
 BLANKSPACE: ' ';
 WS: BLANKSPACE BLANKSPACE -> skip;
+TAB: '\t'->skip;
+BLANKORTAB: (BLANKSPACE | TAB | WS);
 DIGIT
 	:	('0'..'9')+
 	;
@@ -73,8 +73,57 @@ value : (RACES | DIGIT | classVector | abilities |ALIGNMENT | skills | languages
 classVector: ('(' classVectorElem ')' );
 classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
 
-PGCLASS : ('Cleric'| 'Paladin' | 'Barbarian');
-SUBCLASS : ('Berserker' | 'Totem warrior' | 'Domain of life');
+PGCLASS : ('Barbarian'|
+           'Bard'|
+           'Cleric'|
+           'Druid'|
+           'Monk'|
+           'Paladin'|
+           'Ranger'|
+           'Rogue'|
+           'Sorcerer'|
+           'Warlock'|
+           'Wizard');
+SUBCLASS : ('Berserker'|
+            'Path of the Totem warrior'|
+            'College of Lore'|
+            'College of Valor'|
+            'Knowledge Domain'|
+            'Life Domain'|
+            'Light Domain'|
+            'Nature Domain'|
+            'Tempest Domain'|
+            'Trickery Domain'|
+            'War Domain'|
+            'Circle of the land'|
+            'Circle of the moon'|
+            'Champion'|
+            'Battle master'|
+            'Eldritch knight'|
+            'Way of the open hand'|
+            'Way of shadow'|
+            'Way of the four elements'|
+            'Oath of devotion'|
+            'Oath of the ancients'|
+            'Oath of vengeance'|
+            'Hunter'|
+            'Beast master'|
+            'Thief'|
+            'Assassin'|
+            'Arcane trickster'|
+            'Dragonic bloodline'|
+            'Wild magic'|
+            'The fiend'|
+            'The great old one'|
+            'the archfey'|
+            'School of abjuration'|
+            'School of conjuration'|
+            'School of divination'|
+            'School of enchantment'|
+            'School of evocation'|
+            'School of illusion'|
+            'School of necromancy'|
+            'School of transmutation');
 
 abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
 
@@ -88,7 +137,7 @@ SKILL: 'Acrobatics' | 'Animal Handling' | 'History';
 languages: '('LANGUAGE (',' LANGUAGE)?')';
 LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
-RACES : ('Elf'|'Human'|'Orc'|'Dwarf');
+RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
 mandatory: ( RACE | HP | ARCHTYPE | ABILITY | ALIGN | SKILLSID | LANG | statID);
 
@@ -109,8 +158,8 @@ equipDefinition: CREATE BLANKSPACE EQUIPMENT BLANKSPACE LETTER STARTENTITY BL
                  equipPiece BL equipPiece BL equipPiece BL equipPiece
                  BL ENDENTITY;
 
-equipPiece: piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
-property: mandatory (BLANKSPACE)* COLON (BLANKSPACE)* valore=value;
+equipPiece: (BLANKORTAB)* piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
+property: (BLANKORTAB)* mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
 
 entity : (pgDefition | equipDefinition);
 

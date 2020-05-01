@@ -97,6 +97,8 @@ public enum subClass{
 	School_of_illusion,
 	School_of_necromancy,
 	School_of_transmutation;
+
+
 }
 
 
@@ -107,13 +109,13 @@ public enum subClass{
         	
         	for(subClass temp:check.subClasses) {
             if (tokens.getText().equals(check.name()) || tokens.getText().equals(temp.name())){
-                System.out.println("Il personaggio è della classe:"+tokens.getText());
+                System.out.println("Il personaggio ï¿½ della classe:"+tokens.getText());
                 return;
 
             }
         }
         }
-        System.out.println("Il personaggio non è di una classe valida");
+        System.out.println("Il personaggio non ï¿½ di una classe valida");
         return;
         }
     
@@ -124,11 +126,12 @@ public enum subClass{
     	boolean flag=false;
     	if(ctx.SUBCLASS()!= null) {
     		String S = ctx.SUBCLASS().getText();
+    		S = S.replace(' ','_');
     		for( Classi check:Classi.values()){
     			if(C.equals(check.name())) {
     				for(subClass tempo:check.subClasses) {
     					if(S.equals(tempo.name())) {
-    						System.out.println("ok");
+
     						flag=true;
     				 }
     			 }

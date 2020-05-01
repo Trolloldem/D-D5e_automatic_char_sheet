@@ -1,14 +1,15 @@
 package util;
 
 public enum Races {
-    Elf("Elf"),
-    Human("Human"),
-    Orc("Orc"),
-    Dwarf("Dwarf");
+   Dragonborn,
+    Dwarf,
+    Elf,
+    Gnome,
+    Half_Elf,
+    Halfling,
+    Half_Orc,
+    Human,
+    Tiefling;
 
-    String name;
 
-    Races(String name){
-        this.name = name;
-    }
 }

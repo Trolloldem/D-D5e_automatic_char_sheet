@@ -1,8 +1,6 @@
-// Generated from /home/oldem/IdeaProjects/D_and_D_Compiler/digits4.g4 by ANTLR 4.8
+// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
 
 	package myLex;
-	//import util.checkStats;
-        //import util.classChecker; //util è il nome del mio package, chiamalo come vuoi te
 
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;

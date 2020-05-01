@@ -1,6 +1,7 @@
 package wrappers;
 
 import org.antlr.v4.runtime.misc.Pair;
+import parsingExceptions.pgMalformedException;
 import util.Races;
 import util.classChecker;
 
@@ -28,6 +29,7 @@ public class characterWrapper {
         languages = new ArrayList<String>();
         skills = new ArrayList<String>();
         stats = new HashMap<String, Integer>();
+        pgClass = new HashMap<Pair<classChecker.Classi, classChecker.subClass>, Integer>();
     }
 
 
@@ -42,12 +44,15 @@ public class characterWrapper {
     }
 
     public void setRace(Races razza) {
-        settedProperty++;
-        this.race = razza;
+        if(race==null){
+            settedProperty++;
+            this.race = razza;
+        }
+
     }
 
     public void setRace(String razza) {
-        setRace(Races.valueOf(razza));
+        setRace(Races.valueOf(razza.replace(' ','_')));
     }
 
     public Map<Pair<classChecker.Classi, classChecker.subClass>, Integer> getPgClass() {
@@ -64,8 +69,14 @@ public class characterWrapper {
     }
 
     public void setHp(int hp) {
-        settedProperty++;
-        this.hp = hp;
+        if(this.hp==0){
+            settedProperty++;
+            this.hp = hp;
+        }
+        if(hp<=0){
+            throw new pgMalformedException("Hp of Player '"+name+"' are 0 or lower. HP must be a positive number");
+        }
+
     }
 
     public Map<String, Integer> getStats() {
@@ -73,8 +84,11 @@ public class characterWrapper {
     }
 
     public void setStats(Map<String, Integer> stats) {
-        settedProperty = settedProperty+ 6;
-        this.stats = stats;
+        if(this.stats.entrySet().size()==0){
+            settedProperty = settedProperty+ 6;
+            this.stats = stats;
+        }
+
     }
 
 
@@ -83,8 +97,11 @@ public class characterWrapper {
     }
 
     public void setAlignment(String alignment) {
-        settedProperty++;
-        this.alignment = alignment;
+        if(this.alignment ==null){
+            settedProperty++;
+            this.alignment = alignment;
+        }
+
     }
 
     public List<String> getSkills() {
@@ -92,8 +109,11 @@ public class characterWrapper {
     }
 
     public void setSkills(List<String> skills) {
-        settedProperty++;
-        this.skills = skills;
+        if(this.skills.size()==0)
+        {
+            settedProperty++;
+            this.skills = skills;
+        }
     }
 
     public List<String> getLanguages() {
@@ -101,14 +121,17 @@ public class characterWrapper {
     }
 
     public void setLanguages(List<String> languages) {
-        settedProperty++;
-        this.languages = languages;
+       if(this.languages.size()==0){
+           settedProperty++;
+           this.languages = languages;
+       }
+
     }
 
     @Override
     public String toString() {
         String result = "Player "+this.name+"\n"+"{"+"\n"
-                       +"race: "+this.race+"\n"
+                       +"race: "+this.race.name().replace('_',' ')+"\n"
                        +"hp: "+this.hp+"\n"
                        +"alignment: "+this.alignment+"\n"
                        + "languages: (";
@@ -116,6 +139,7 @@ public class characterWrapper {
         result = result +"skills: (";
         result = addSkill(result);
         result = addAbilities(result);
+        result = addClasses(result);
         result = result + "}\n"
         +"TOREMOVE: setter->"+settedProperty;
         return result;
@@ -130,7 +154,18 @@ public class characterWrapper {
         return result;
 
     }
+    private String addClasses(String result){
+        result = result + "archetype: (";
+        for(Map.Entry<Pair<classChecker.Classi, classChecker.subClass>, Integer> singleClass : pgClass.entrySet()){
+            result = result  + singleClass.getKey().a.name();
+            if(singleClass.getKey().b != null)
+                result = result + "->"+singleClass.getKey().b.name().replace('_',' ');
+            result = result + ',';
+        }
 
+        result = result.substring(0,result.length()-1) +")\n";
+        return result;
+    }
     private String addSkill(String result){
         for(int i=0;i<skills.size()-1;i++){
             result = result + skills.get(i) + ",";
@@ -161,6 +196,46 @@ public class characterWrapper {
             stats.put(statName, value);
             settedProperty++;
         }
+    }
+
+    public String notSettedProperty(){
+        String result = "[";
+
+        if(this.hp == 0)
+            result=result+"hp,";
+        if(this.languages.size()<2)
+            result=result+"languages,";
+        if(this.skills.size()<2)
+            result=result+"skills,";
+        if(this.race==null)
+            result=result+"race,";
+        if(this.pgClass.entrySet().size()==0 )
+            result=result+"class,";
+        if(this.alignment ==null)
+            result=result+"alignment,";
+        if(this.stats.entrySet().size()<6) {
+            if(this.stats.get("STR")==null){
+                result=result+"STR,";
+            }
+            if(this.stats.get("DEX")==null){
+                result=result+"DEX,";
+            }
+            if(this.stats.get("WIS")==null){
+                result=result+"WIS,";
+            }
+            if(this.stats.get("INT")==null){
+                result=result+"INT,";
+            }
+            if(this.stats.get("CON")==null){
+                result=result+"CON,";
+            }
+            if(this.stats.get("CHA")==null){
+                result=result+"CHA,";
+            }
+        }
+
+
+        return result.substring(0,result.length()-1)+"]";
     }
 
 
