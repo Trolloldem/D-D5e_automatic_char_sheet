@@ -1,16 +1,16 @@
 create Player Ado{
-race:(Cleric)
+race:Orc
 hp:15
-archetype: (Cleric->Berserker)
-abilities: (15,15,15,15,15,15)
+archetype: (Barbarian->Berserker)
+STR: 15
+DEX: 15
+WIS: 15
+INT: 15
+CON: 15
+CHA: 15
 alignment:chaotic good
 skills: (Acrobatics,Acrobatics)
-languages: 15
-languages: 15
-languages: 15
-languages: 15
-languages: 15
-DEX: 15
+languages: (Common,Common)
 }
 create Equipment AdoEquip{
 armor:Yes

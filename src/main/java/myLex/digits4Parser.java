@@ -1,4 +1,4 @@
-// Generated from /home/oldem/IdeaProjects/D_and_D_Compiler/digits4.g4 by ANTLR 4.8
+// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
 
 	package myLex;
 	//import util.checkStats;
@@ -50,7 +50,7 @@ public class digits4Parser extends Parser {
 		return new String[] {
 			null, "'('", "')'", "'*'", "','", "'->'", "' '", null, null, null, null, 
 			null, null, null, null, "'{'", "'}'", "'create'", "'Player'", "'Equipment'", 
-			"':'", "'\n'", null, null, null, null, null, null, null, "'armor'", "'weapon'", 
+			"':'", null, null, null, null, null, null, null, null, "'armor'", "'weapon'", 
 			"'shield'", "'consumables'", null, null, null, "'None'"
 		};
 	}

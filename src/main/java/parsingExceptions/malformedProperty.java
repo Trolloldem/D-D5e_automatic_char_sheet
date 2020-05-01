@@ -1,4 +1,4 @@
-package propertyExceptions;
+package parsingExceptions;
 
 public class malformedProperty extends RuntimeException{
     public malformedProperty(String message) {
