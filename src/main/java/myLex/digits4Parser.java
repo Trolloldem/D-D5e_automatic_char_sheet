@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
+// Generated from /home/oldem/IdeaProjects/D_and_D_Compiler/digits4.g4 by ANTLR 4.8
 
 	package myLex;
 	//import util.checkStats;
@@ -1101,40 +1101,28 @@ public class digits4Parser extends Parser {
 				{
 				setState(167);
 				property();
-				{
 				setState(168);
 				match(BL);
-				}
 				setState(169);
 				property();
-				{
 				setState(170);
 				match(BL);
-				}
 				setState(171);
 				property();
-				{
 				setState(172);
 				match(BL);
-				}
 				setState(173);
 				property();
-				{
 				setState(174);
 				match(BL);
-				}
 				setState(175);
 				property();
-				{
 				setState(176);
 				match(BL);
-				}
 				setState(177);
 				property();
-				{
 				setState(178);
 				match(BL);
-				}
 				setState(179);
 				property();
 				}
@@ -1145,70 +1133,48 @@ public class digits4Parser extends Parser {
 				{
 				setState(181);
 				property();
-				{
 				setState(182);
 				match(BL);
-				}
 				setState(183);
 				property();
-				{
 				setState(184);
 				match(BL);
-				}
 				setState(185);
 				property();
-				{
 				setState(186);
 				match(BL);
-				}
 				setState(187);
 				property();
-				{
 				setState(188);
 				match(BL);
-				}
 				setState(189);
 				property();
-				{
 				setState(190);
 				match(BL);
-				}
 				setState(191);
 				property();
-				{
 				setState(192);
 				match(BL);
-				}
 				setState(193);
 				property();
-				{
 				setState(194);
 				match(BL);
-				}
 				setState(195);
 				property();
-				{
 				setState(196);
 				match(BL);
-				}
 				setState(197);
 				property();
-				{
 				setState(198);
 				match(BL);
-				}
 				setState(199);
 				property();
-				{
 				setState(200);
 				match(BL);
-				}
 				setState(201);
 				property();
-				{
 				setState(202);
 				match(BL);
-				}
 				setState(203);
 				property();
 				}

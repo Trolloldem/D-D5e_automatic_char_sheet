@@ -102,8 +102,8 @@ sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER;
 
 
 pgDefition : CREATE BLANKSPACE PLAYER BLANKSPACE LETTER STARTENTITY BL
-             ((property (BL)  property (BL) property (BL) property (BL) property (BL) property (BL) property ) |
-             (property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property (BL) property ))
+             ((property BL  property BL property BL property BL property BL property BL property ) |
+             (property BL property BL property BL property BL property BL property BL property BL property BL property BL property BL property BL property ))
              BL ENDENTITY;
 equipDefinition: CREATE BLANKSPACE EQUIPMENT BLANKSPACE LETTER STARTENTITY BL
                  equipPiece BL equipPiece BL equipPiece BL equipPiece

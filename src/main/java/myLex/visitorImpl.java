@@ -26,7 +26,6 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
 
     @Override
     public T visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
-
             propertyChecker.checkValidProperty(ctx.mandatory(),ctx.value(), parser);
             return visitChildren(ctx);
 

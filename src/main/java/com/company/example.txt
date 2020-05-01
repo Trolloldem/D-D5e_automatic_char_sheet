@@ -1,6 +1,6 @@
 create Player Ado{
 race:Orc
-hp:15
+hp3:15
 archetype: (Barbarian->Berserker)
 STR: 15
 DEX: 15

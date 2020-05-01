@@ -2,18 +2,24 @@ package com.company;
 
 import myLex.*;
 import org.antlr.v4.runtime.*;
+import parsingExceptions.CustomErrorListener;
 
 class Scan{
     public void example() {
         try{
-        String fileIn = "C:\\Users\\gianl\\IdeaProjects\\d_and_d_auto\\src\\main\\java\\com\\company\\example.txt";
+        String fileIn = "./src/main/java/com/company/example.txt";
         digits4Lexer lexer = new digits4Lexer(CharStreams.fromFileName(fileIn));
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(CustomErrorListener.INSTANCE);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         digits4Parser parser = new digits4Parser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(CustomErrorListener.INSTANCE);
         digits4Visitor visitor = new visitorImpl(parser);
-        visitor.visitStart(parser.start());
+        digits4Parser.StartContext parserTree = parser.start();
+        visitor.visitStart(parserTree);
         }catch(Exception e){
-            System.out.println(e);
+            System.err.println(e);
             return;
         }
     }
