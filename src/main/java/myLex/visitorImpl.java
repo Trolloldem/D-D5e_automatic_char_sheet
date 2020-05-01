@@ -16,11 +16,11 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
 
     @Override
     public T visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
-       String classe = ctx.PGCLASS().getText();
-       if(ctx.SUBCLASS()!= null) {
-           String sottoClasse = ctx.SUBCLASS().getText();
-           classChecker.check(classe, sottoClasse);
-       }
+      // String classe = ctx.PGCLASS().getText();
+      // if(ctx.SUBCLASS()!= null) {
+       //    String sottoClasse = ctx.SUBCLASS().getText();
+           classChecker.check(ctx);
+     //  }
         return visitChildren(ctx);
     }
 

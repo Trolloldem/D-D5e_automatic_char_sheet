@@ -5,6 +5,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 //import org.antlr.runtime.Token;
 import org.antlr.v4.runtime.Token;
 
+import myLex.digits4Parser;
+import parsingExceptions.malformedProperty;
+import parsingExceptions.notSubclass;
+
 
 
 public class classChecker {
@@ -48,7 +52,9 @@ public class classChecker {
    public Classi getClassi() {
 	   return c;
    }
-   
+   public void setC(Classi c) {
+	this.c = c;
+}
 
 public enum subClass{
 	Berserker,
@@ -93,8 +99,10 @@ public enum subClass{
 	School_of_transmutation;
 }
 
-    public static void checkClass(CommonTokenStream tokens){
-    
+
+
+	public static void checkClass(CommonTokenStream tokens){
+   
         for( Classi check:Classi.values()){
         	
         	for(subClass temp:check.subClasses) {
@@ -109,22 +117,27 @@ public enum subClass{
         return;
         }
     
-    public static void check(String t1, String t2) {
+    public static void check(digits4Parser.ClassVectorElemContext ctx) {
+    	Object mandaToryChild = ctx.getChild(0).getPayload();
+    	Token mandatoryToken = (Token) mandaToryChild;
+    	String C = ctx.PGCLASS().getText();
     	boolean flag=false;
-    	 for( Classi check:Classi.values()){
-    		 if(t1.equals(check.name())) {
-    			 for(subClass tempo:check.subClasses) {
-    				 if(t2.equals(tempo.name())) {
-    					 System.out.println("ok");
-    					 flag=true;
+    	if(ctx.SUBCLASS()!= null) {
+    		String S = ctx.SUBCLASS().getText();
+    		for( Classi check:Classi.values()){
+    			if(C.equals(check.name())) {
+    				for(subClass tempo:check.subClasses) {
+    					if(S.equals(tempo.name())) {
+    						System.out.println("ok");
+    						flag=true;
     				 }
     			 }
     		 }
     	 }
             if(flag==false)
-            	System.out.println("no");
-    	
+            	throw new notSubclass("LA SOTTOCLASSE NON APPARTIENE ALLA CLASSE "+mandatoryToken.getLine());
+    }else
+    	System.out.println("SOTTOCLASSE NON PRESENTE");
     }
-    
     };
   

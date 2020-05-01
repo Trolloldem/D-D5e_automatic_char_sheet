@@ -1,9 +1,14 @@
 package util;
 
 import myLex.digits4Parser;
+import myLex.digits4Parser.ClassVectorContext;
+import myLex.digits4Parser.ClassVectorElemContext;
+
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.misc.Pair;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parsingExceptions.pgMalformedException;
+import util.classChecker.*;
 import wrappers.characterWrapper;
 
 import java.util.ArrayList;
@@ -90,7 +95,16 @@ public class pgChecker {
             character.setStats(scores);
       }
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
-            //TODO utilizzare metodo valerio per recupero vettore di classi/sottoclassi
+    	  digits4Parser.ClassVectorElemContext allclass = (ClassVectorElemContext) value;
+		  Classi tempClasse = Classi.valueOf(allclass.PGCLASS().getText());
+		  subClass tempSubclass=null;
+    	  if(allclass.SUBCLASS()!=null) {
+    		 tempSubclass = subClass.valueOf(allclass.SUBCLASS().getText()); 
+    	  }
+    	  Map<Pair<classChecker.Classi,classChecker.subClass>, Integer> temp=new HashMap<Pair<classChecker.Classi,classChecker.subClass>, Integer>();
+    	  Pair<classChecker.Classi,classChecker.subClass> classes = new Pair<classChecker.Classi, classChecker.subClass>(tempClasse, tempSubclass);
+    	  temp.put(classes, -1);
+    	  character.setPgClass(temp);
       }
 
     }
