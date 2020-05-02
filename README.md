@@ -5,3 +5,4 @@
 - vettore di consumabili -> Valerio
 - PDFBox, vedere come scrivere -> in futuro
 - set -> in futuro
+- da vedere: come scaricare un eventuale PDF
