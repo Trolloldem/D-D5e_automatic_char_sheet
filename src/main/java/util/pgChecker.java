@@ -109,7 +109,7 @@ public class pgChecker {
       }
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
           Map<Pair<Classi,subClass>, Integer> temp=new HashMap<Pair<Classi,subClass>, Integer>();
-
+          List<String> classAlredySetted = new ArrayList<String>();
           digits4Parser.ClassVectorContext classVector = (ClassVectorContext) value;
     	  digits4Parser.ClassVectorElemContext allclass = classVector.classVectorElem();
     	  while (allclass != null) {
@@ -122,7 +122,13 @@ public class pgChecker {
               }
 
               Pair<Classi, subClass> classes = new Pair<Classi, subClass>(tempClasse, tempSubclass);
-              temp.put(classes, -1);
+
+              if(!classAlredySetted.contains(tempClasse.name())) {
+                  classAlredySetted.add(tempClasse.name());
+                  temp.put(classes, -1);
+              }else {
+                  throw new pgMalformedException("The class '"+tempClasse+"' is specified more than 1 time for Player '"+character.getName()+"'");
+              }
               allclass = allclass.classVectorElem();
           }
     	  character.setPgClass(temp);

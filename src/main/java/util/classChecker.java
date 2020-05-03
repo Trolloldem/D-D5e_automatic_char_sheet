@@ -1,11 +1,9 @@
 package util;
 
 
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
 
+import org.antlr.v4.runtime.Token;
 import myLex.digits4Parser;
-import parsingExceptions.malformedProperty;
 import parsingExceptions.notSubclass;
 import util.lexEnum.Classi;
 import util.lexEnum.subClass;
@@ -14,13 +12,7 @@ import util.lexEnum.subClass;
 public class classChecker {
 
 
-
-
-
-
-
-    
-    public static void check(digits4Parser.ClassVectorElemContext ctx) {
+	public static void check(digits4Parser.ClassVectorElemContext ctx) {
     	Object mandaToryChild = ctx.getChild(0).getPayload();
     	Token mandatoryToken = (Token) mandaToryChild;
     	String C = ctx.PGCLASS().getText();
@@ -37,11 +29,10 @@ public class classChecker {
     				 }
     			 }
     		 }
-    	 }
-            if(flag==false)
+    	 	}
+    	 	if(flag==false)
             	throw new notSubclass("LA SOTTOCLASSE NON APPARTIENE ALLA CLASSE "+mandatoryToken.getLine());
-    }else
-    	System.out.println("SOTTOCLASSE NON PRESENTE");
+    	}
     }
-    };
+}
   
