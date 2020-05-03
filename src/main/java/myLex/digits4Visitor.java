@@ -86,24 +86,6 @@ public interface digits4Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatID(digits4Parser.StatIDContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link digits4Parser#stats}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStats(digits4Parser.StatsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link digits4Parser#stat_line}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStat_line(digits4Parser.Stat_lineContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link digits4Parser#sclass}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSclass(digits4Parser.SclassContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link digits4Parser#pgDefition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

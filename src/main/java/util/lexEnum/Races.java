@@ -1,4 +1,4 @@
-package util;
+package util.lexEnum;
 
 public enum Races {
    Dragonborn,

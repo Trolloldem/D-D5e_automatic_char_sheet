@@ -2,19 +2,17 @@ package wrappers;
 
 import org.antlr.v4.runtime.misc.Pair;
 import parsingExceptions.pgMalformedException;
-import util.Races;
-import util.classChecker;
+import util.lexEnum.Classi;
+import util.lexEnum.Races;
+import util.lexEnum.subClass;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class characterWrapper {
     String name;
     Races race;
-    Map<Pair<classChecker.Classi, classChecker.subClass>, Integer> pgClass;
+    Map<Pair<Classi, subClass>, Integer> pgClass;
     int hp;
     Map<String, Integer> stats;
     String alignment;
@@ -29,7 +27,7 @@ public class characterWrapper {
         languages = new ArrayList<String>();
         skills = new ArrayList<String>();
         stats = new HashMap<String, Integer>();
-        pgClass = new HashMap<Pair<classChecker.Classi, classChecker.subClass>, Integer>();
+        pgClass = new HashMap<Pair<Classi, subClass>, Integer>();
     }
 
 
@@ -55,11 +53,11 @@ public class characterWrapper {
         setRace(Races.valueOf(razza.replace(' ','_')));
     }
 
-    public Map<Pair<classChecker.Classi, classChecker.subClass>, Integer> getPgClass() {
+    public Map<Pair<Classi, subClass>, Integer> getPgClass() {
         return pgClass;
     }
 
-    public void setPgClass(Map<Pair<classChecker.Classi, classChecker.subClass>, Integer> pgClass) {
+    public void setPgClass(Map<Pair<Classi, subClass>, Integer> pgClass) {
         settedProperty++;
         this.pgClass = pgClass;
     }
@@ -125,6 +123,9 @@ public class characterWrapper {
            settedProperty++;
            this.languages = languages;
        }
+       if(this.languages.size()==1){
+           throw new pgMalformedException("Only 1 language specified for Player '"+this.getName()+"'. If only one language is specified, it cannot be 'Common'");
+       }
 
     }
 
@@ -140,23 +141,23 @@ public class characterWrapper {
         result = addSkill(result);
         result = addAbilities(result);
         result = addClasses(result);
-        result = result + "}\n"
-        +"TOREMOVE: setter->"+settedProperty;
+        result = result + "}\n";
         return result;
     }
     private String addLang(String result){
         for(int i=0;i<languages.size()-1;i++){
-            result = result + languages.get(i) + ",";
+            result = result + languages.toArray()[i] + ",";
+
         }
         if(languages.size()>0)
-            result = result + languages.get(languages.size()-1);
+            result = result + languages.toArray()[languages.size()-1];
         result = result + ")\n";
         return result;
 
     }
     private String addClasses(String result){
         result = result + "archetype: (";
-        for(Map.Entry<Pair<classChecker.Classi, classChecker.subClass>, Integer> singleClass : pgClass.entrySet()){
+        for(Map.Entry<Pair<Classi, subClass>, Integer> singleClass : pgClass.entrySet()){
             result = result  + singleClass.getKey().a.name();
             if(singleClass.getKey().b != null)
                 result = result + "->"+singleClass.getKey().b.name().replace('_',' ');

@@ -14,8 +14,7 @@ options {
 
 BLANKSPACE: ' ';
 WS: BLANKSPACE BLANKSPACE -> skip;
-TAB: '\t'->skip;
-BLANKORTAB: (BLANKSPACE | TAB | WS);
+
 DIGIT
 	:	('0'..'9')+
 	;
@@ -62,16 +61,10 @@ WEAPONTYPE: ('Bastard sword' | 'Axe' | NONE);
 SHIELDPRESENCE: ('Yes' | 'No');
 NONE: 'None';
 CONSUMABLE: ('Health potion' | 'Mana potion' | 'Gold');
-piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
-pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );
 
-consumableVector:   NONE |('(' consumableVectorElem ')' );
-consumableVectorElem: (CONSUMABLE '*' DIGIT',' consumableVectorElem | CONSUMABLE '*' DIGIT);
-
-value : (RACES | DIGIT | classVector | abilities |ALIGNMENT | skills | languages);
-
-classVector: ('(' classVectorElem ')' );
-classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
+ALIGNMENT: 'lawful good' | 'lawful neutral' | 'lawful evil' |
+           'neutral good' | 'neutral' | 'neutral evil' |
+           'chaotic good' | 'chaotic neutral' | 'chaotic evil';
 
 PGCLASS : ('Barbarian'|
            'Bard'|
@@ -125,30 +118,58 @@ SUBCLASS : ('Berserker'|
             'School of necromancy'|
             'School of transmutation');
 
-abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
+SKILL:
+         'Acrobatics' |
+         'Animal Handling' |
+         'Arcana'|
+         'Athletics'|
+         'Deception' |
+         'History' |
+         'Insight' |
+         'Intimidation' |
+         'Investigation' |
+         'Medicine'|
+         'Nature' |
+         'Perception' |
+         'Performance'|
+         'Persuasion' |
+         'Religion' |
+         'Sleight of Hand' |
+         'Stealth' |
+         'Survival';
 
-ALIGNMENT: 'lawful good' | 'lawful neutral' | 'lawful evil' |
-           'neutral good' | 'neutral' | 'neutral evil' |
-           'chaotic good' | 'chaotic neutral' | 'chaotic evil';
-
-skills: '(' SKILL ',' SKILL ')';
-SKILL: 'Acrobatics' | 'Animal Handling' | 'History';
-
-languages: '('LANGUAGE (',' LANGUAGE)?')';
 LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
+LETTER 	: ('a'..'z'|'A'..'Z')+ ;
+
+piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
+pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );
+
+consumableVector:   NONE |('(' consumableVectorElem ')' );
+consumableVectorElem: (CONSUMABLE '*' DIGIT',' consumableVectorElem | CONSUMABLE '*' DIGIT);
+
+value : (RACES | DIGIT | classVector | abilities |ALIGNMENT | skills | languages);
+
+classVector: ('(' classVectorElem ')' );
+classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' SUBCLASS)?);
+
+
+
+abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
+
+skills: '(' SKILL ',' SKILL ')';
+
+
+languages: '('LANGUAGE (',' LANGUAGE)?')';
+
+
+
+
 mandatory: ( RACE | HP | ARCHTYPE | ABILITY | ALIGN | SKILLSID | LANG | statID);
 
 statID	:  (STR | DEX | INT | CHA | CON | WIS);
-
-stats : stat_line BL stat_line BL stat_line BL stat_line BL stat_line BL stat_line;
-
-stat_line: no=statID COLON valore=DIGIT;
-
-sclass 	:	 CLASS COLON (BLANKSPACE)* cl = LETTER;
-
 
 pgDefition : CREATE BLANKSPACE PLAYER BLANKSPACE LETTER STARTENTITY BL
              ((property BL  property BL property BL property BL property BL property BL property ) |
@@ -158,12 +179,11 @@ equipDefinition: CREATE BLANKSPACE EQUIPMENT BLANKSPACE LETTER STARTENTITY BL
                  equipPiece BL equipPiece BL equipPiece BL equipPiece
                  BL ENDENTITY;
 
-equipPiece: (BLANKORTAB)* piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
-property: (BLANKORTAB)* mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
+equipPiece: (BLANKSPACE)* piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
+property:  (BLANKSPACE)* mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
 
 entity : (pgDefition | equipDefinition);
 
-start : (entity BL)+;
+start : (entity BL)+ EOF;
 
 
-LETTER 	: ('a'..'z'|'A'..'Z')+ ;

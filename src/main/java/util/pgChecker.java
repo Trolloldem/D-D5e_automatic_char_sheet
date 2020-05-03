@@ -2,19 +2,15 @@ package util;
 
 import myLex.digits4Parser;
 import myLex.digits4Parser.ClassVectorContext;
-import myLex.digits4Parser.ClassVectorElemContext;
-
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.Pair;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parsingExceptions.pgMalformedException;
-import util.classChecker.*;
+import util.lexEnum.Classi;
+import util.lexEnum.subClass;
 import wrappers.characterWrapper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class pgChecker {
 
@@ -48,6 +44,7 @@ public class pgChecker {
                 break;
         }
         if(character.allSetted()){
+            System.out.println(character);
             return character;
         }else {
             throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
@@ -75,20 +72,26 @@ public class pgChecker {
             for(TerminalNode lang : allLang.LANGUAGE()){
                 languages.add(lang.getText());
             }
-            if(languages.size()==1 && !languages.get(0).equals("Common")){
+            if(languages.size()==1 && !languages.toArray()[0].equals("Common")){
                 languages.add("Common");
-            }else if(languages.get(0).equals("Common")){
+            }else if(languages.size()==1 && languages.toArray()[0].equals("Common")){
                 throw new pgMalformedException("Only 1 language specified for Player '"+character.getName()+"'. If only one language is specified, it cannot be 'Common'");
+            }
+            if(languages.size()==2 && languages.toArray()[0].equals(languages.toArray()[1])){
+                throw new pgMalformedException("The character must know 2 languages. The language '"+languages.toArray()[0]+"' is specified 2 times for Player '"+character.getName()+"'");
             }
 
             character.setLanguages(languages);
       }
       if(mandatoryChild.getType() == parser.getTokenType("SKILLSID")){
-          // (Acrobatics,Acrobatics)
+
             List<String > skills = new ArrayList<String>();
             digits4Parser.SkillsContext allSkills = (digits4Parser.SkillsContext) value;
             for(TerminalNode skill : allSkills.SKILL()){
                 skills.add(skill.getText());
+            }
+            if(skills.toArray()[1].equals(skills.toArray()[0])){
+                throw new pgMalformedException("The character must have 2 skills. The skill '"+skills.toArray()[0]+"' is specified 2 times for Player '"+character.getName()+"'");
             }
             character.setSkills(skills);
       }
@@ -105,7 +108,7 @@ public class pgChecker {
             character.setStats(scores);
       }
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
-          Map<Pair<classChecker.Classi,classChecker.subClass>, Integer> temp=new HashMap<Pair<classChecker.Classi,classChecker.subClass>, Integer>();
+          Map<Pair<Classi,subClass>, Integer> temp=new HashMap<Pair<Classi,subClass>, Integer>();
 
           digits4Parser.ClassVectorContext classVector = (ClassVectorContext) value;
     	  digits4Parser.ClassVectorElemContext allclass = classVector.classVectorElem();
@@ -118,7 +121,7 @@ public class pgChecker {
                   tempSubclass = subClass.valueOf(subClassName);
               }
 
-              Pair<classChecker.Classi, classChecker.subClass> classes = new Pair<classChecker.Classi, classChecker.subClass>(tempClasse, tempSubclass);
+              Pair<Classi, subClass> classes = new Pair<Classi, subClass>(tempClasse, tempSubclass);
               temp.put(classes, -1);
               allclass = allclass.classVectorElem();
           }
