@@ -2,9 +2,6 @@ package wrappers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.antlr.v4.runtime.misc.Pair;
 
 import util.lexEnum.Armors;
 import util.lexEnum.Consumables;
@@ -17,9 +14,7 @@ public class equipWrapper {
 	private Shields shield;
 	private Weapons weapon;
 	private Map<Consumables,Integer> consumables;
-	
-	private AtomicInteger counter = new AtomicInteger(0);
-	
+		
 	public equipWrapper() {
 		consumables = new HashMap<Consumables,Integer>();
 	}
