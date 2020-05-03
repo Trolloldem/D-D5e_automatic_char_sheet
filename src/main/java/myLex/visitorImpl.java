@@ -3,8 +3,10 @@ package myLex;
 import org.antlr.v4.runtime.misc.NotNull;
 import util.propertyChecker;
 import util.classChecker;
+import util.equipChecker;
 import util.pgChecker;
 import wrappers.characterWrapper;
+import wrappers.equipWrapper;
 
 import java.util.concurrent.ExecutionException;
 
@@ -42,5 +44,17 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
            return null;
        }
        return null;
+    }
+    
+    @Override
+    public T visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) { 
+    	try{
+	    	visitChildren(ctx);
+	    	equipWrapper eq =  equipChecker.check(ctx,ctx.LETTER().getText());
+	    	System.out.println(eq);
+    	} catch (Exception e) {
+			System.err.println(e);
+		}
+    	return null;
     }
 }
