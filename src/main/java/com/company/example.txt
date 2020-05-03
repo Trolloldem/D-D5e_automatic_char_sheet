@@ -2,7 +2,12 @@ create Player Ado{
     race: Half Orc
     hp:10
     archetype: (Barbarian->Path of the Totem warrior,Bard->College of Lore)
-    abilities: (15,15,15,15,15,15)
+    DEX: 15
+    DEX: 15
+    DEX: 15
+    DEX: 15
+    DEX: 15
+    DEX: 15
     alignment:chaotic good
     skills: (Acrobatics,Medicine)
     languages: (Abissal,Common)
