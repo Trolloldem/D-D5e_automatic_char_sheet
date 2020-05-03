@@ -59,7 +59,7 @@ public class equipChecker {
 						throw new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(), prop.getStart().getLine());
 					consumableElem = consumableElem.consumableVectorElem();
 
-					wrapper.addConsumable(new Pair<Consumables, Integer>(consumable, digit));
+					wrapper.addConsumable(consumable, digit);
 				}
 			}
 		}

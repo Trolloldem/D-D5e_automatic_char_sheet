@@ -16,17 +16,17 @@ public class equipWrapper {
 	private Armors armor;
 	private Shields shield;
 	private Weapons weapon;
-	private Map<Pair<Consumables,Integer>, Integer> consumables;
+	private Map<Consumables,Integer> consumables;
 	
 	private AtomicInteger counter = new AtomicInteger(0);
 	
 	public equipWrapper() {
-		consumables = new HashMap<Pair<Consumables,Integer>,Integer>();
+		consumables = new HashMap<Consumables,Integer>();
 	}
 	
 	public equipWrapper(String name) {
 		this.name = name;
-		consumables = new HashMap<Pair<Consumables,Integer>,Integer>();
+		consumables = new HashMap<Consumables,Integer>();
 	}
 
 	public String getName() {
@@ -69,12 +69,12 @@ public class equipWrapper {
 	}
 
 
-	public Map<Pair<Consumables, Integer>, Integer> getConsumables() {
+	public Map<Consumables, Integer> getConsumables() {
 		return consumables;
 	}
 	
-	public void addConsumable(Pair<Consumables,Integer> consumable) {
-		consumables.put(consumable,counter.incrementAndGet());
+	public void addConsumable(Consumables consumable, Integer quantity) {
+		consumables.put(consumable, quantity);
 	}
 
 	@Override
