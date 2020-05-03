@@ -9,6 +9,7 @@ import parsingExceptions.pgMalformedException;
 import util.lexEnum.Classi;
 import util.lexEnum.subClass;
 import wrappers.characterWrapper;
+import wrappers.equipWrapper;
 
 import java.util.*;
 
@@ -45,6 +46,14 @@ public class pgChecker {
         }
         if(character.allSetted()){
             System.out.println(character);
+            equipWrapper equip = new equipWrapper("TEST");
+            equip.setArmor("prova1");
+            equip.setWeapon("LOL");
+            equip.setShield(true);
+            Map<String,Integer> mappa = new HashMap<String, Integer>();
+            mappa.put("Gold", 10);
+            mappa.put("Mana",11);
+            System.out.println(equip);
             return character;
         }else {
             throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
