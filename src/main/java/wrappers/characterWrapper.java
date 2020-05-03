@@ -88,7 +88,17 @@ public class characterWrapper {
         }
 
     }
-
+    
+    public Map<String, Integer> getBonus(){
+    	Map<String, Integer> result = new HashMap<String, Integer>();;
+    	String[] abilitiesName = {"STR","DEX","CON","INT","WIS","CHA"};
+    	for(int i=0;i<6;i++) {
+    		int temp=stats.get(abilitiesName[i])/2 -5;
+    		result.put(abilitiesName[i], temp);
+    	}
+		return result;
+    	
+    }
 
     public String getAlignment() {
         return alignment;
