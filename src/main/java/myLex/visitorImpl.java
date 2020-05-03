@@ -5,8 +5,8 @@ import util.propertyChecker;
 import util.classChecker;
 import util.pgChecker;
 import wrappers.characterWrapper;
-
-import java.util.concurrent.ExecutionException;
+import wrappers.equipWrapper;
+import util.equipChecker;
 
 public class visitorImpl<T> extends digits4BaseVisitor<T>{
     digits4Parser parser;
@@ -17,11 +17,9 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
 
     @Override
     public T visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
-      // String classe = ctx.PGCLASS().getText();
-      // if(ctx.SUBCLASS()!= null) {
-       //    String sottoClasse = ctx.SUBCLASS().getText();
+
            classChecker.check(ctx);
-     //  }
+
         return visitChildren(ctx);
     }
 
@@ -36,11 +34,25 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
     public T visitPgDefition(digits4Parser.PgDefitionContext ctx) {
        try{
            visitChildren(ctx);
-          characterWrapper pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+           characterWrapper pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
            System.err.println(e);
            return null;
        }
        return null;
+    }
+
+    @Override
+    public T visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) {
+        try{
+            visitChildren(ctx);
+            equipWrapper equip = equipChecker.checkEquipDefinition(ctx.equipPiece(),ctx.LETTER().getText(),parser);
+System.out.println(equip);
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+        return null;
+
     }
 }
