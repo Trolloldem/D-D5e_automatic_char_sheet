@@ -34,42 +34,34 @@ public class equipChecker {
 			PieceContext mandatoryChild = prop.piece();
             PieceValueContext value = prop.pieceValue();
             String strValue = value.getText().replaceAll(" ","_"); //Come nel nome degli enumerativi
-            
-            switch(mandatoryChild.getText()) {
-            case "armor": 
-            	wrapper.setArmor(Armors.valueOf(strValue));
-            	break;
-            	
-            case "shield":
-            	wrapper.setShield(Shields.valueOf(strValue));
-            	break;
-            	
-            case "weapon":
-            	wrapper.setWeapon(Weapons.valueOf(strValue));
-            	break;
-            
-            case "consumables":
-            	if(strValue.equals("None"))
-            		break;
-            	
-            	ConsumableVectorContext consumableList = value.consumableVector();
-            	ConsumableVectorElemContext consumableElem = consumableList.consumableVectorElem();
-            	while(consumableElem != null){
-            		Consumables consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
-            		Integer digit = new Integer(consumableElem.DIGIT().getText());
-            		
-            		if(digit <= 1)
-            			throw new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(),prop.getStart().getLine());
-            		consumableElem = consumableElem.consumableVectorElem();
-            		
-            		wrapper.addConsumable(new Pair<Consumables, Integer>(consumable, digit));
-            	}
-            	
-            	break;
-            	
-            default:
-            	throw new equipMalformedException("The piece: " + mandatoryChild.getText() + " does not exist",prop.getStart().getLine());
-            }
+
+			String text = mandatoryChild.getText();
+			if ("armor".equals(text)) {
+				wrapper.setArmor(Armors.valueOf(strValue));
+			}
+			if ("shield".equals(text)) {
+				wrapper.setShield(Shields.valueOf(strValue));
+			}
+			if ("weapon".equals(text)) {
+				wrapper.setWeapon(Weapons.valueOf(strValue));
+			}
+			if ("consumables".equals(text)) {
+				if (strValue.equals("None"))
+					continue;
+
+				ConsumableVectorContext consumableList = value.consumableVector();
+				ConsumableVectorElemContext consumableElem = consumableList.consumableVectorElem();
+				while (consumableElem != null) {
+					Consumables consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
+					Integer digit = new Integer(consumableElem.DIGIT().getText());
+
+					if (digit <= 1)
+						throw new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(), prop.getStart().getLine());
+					consumableElem = consumableElem.consumableVectorElem();
+
+					wrapper.addConsumable(new Pair<Consumables, Integer>(consumable, digit));
+				}
+			}
 		}
 		return wrapper;
 	}
