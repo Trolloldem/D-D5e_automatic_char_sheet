@@ -16,6 +16,7 @@ public class listOfResults implements semanticResult {
     public listOfResults(List<semanticResult> list){
         results=list;
         checkName(results);
+        checkEquipName(results);
     }
 
     public listOfResults(){
@@ -51,7 +52,7 @@ public class listOfResults implements semanticResult {
     		 }
     	}
     	if(flag==true) {
-    		throw new sameName("multiple player have the same name: \n" + error);
+    		throw new sameName("multiple Player have the same name: \n" + error);
     	}
     }
     
@@ -76,7 +77,7 @@ public class listOfResults implements semanticResult {
     		 }
     	}
     	if(flag==true) {
-    		throw new sameName("multiple player have the same Equipname: \n" + error);
+    		throw new sameName("multiple Equipment have the same name: \n" + error);
     	}
     }
     
