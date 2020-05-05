@@ -49,7 +49,7 @@ public class listOfResults implements semanticResult {
     		 }
     	}
     	if(flag==true) {
-    		throw new sameName("multiple people have the same name: \n" + error);
+    		throw new sameName("multiple player have the same name: \n" + error);
     	}
     }
     
