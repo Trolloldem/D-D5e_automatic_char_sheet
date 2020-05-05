@@ -186,7 +186,7 @@ importData: IMPORT BLANKSPACE LETTER BLANKSPACE FROM BLANKSPACE LETTER;
 
 entity : (pgDefition | equipDefinition);
 
-line: (entity | importData) BL;
+line: (entity | importData) BL | BL;
 
 start : (line)+ EOF;
 
