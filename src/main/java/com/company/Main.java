@@ -4,10 +4,11 @@ import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
 
+//TODO: BASEPATH conterrà la path della directory base del file da parsare
 class Scan{
     public void example() {
         try{
-        String fileIn = "./src/main/java/com/company/example.txt";
+        String fileIn = Main.BASEPATH + "example.txt";
         digits4Lexer lexer = new digits4Lexer(CharStreams.fromFileName(fileIn));
         lexer.removeErrorListeners();
         lexer.addErrorListener(CustomErrorListener.INSTANCE);
@@ -29,7 +30,9 @@ class Scan{
 
 public class Main {
 
-    public static void main(String[] args) {
+	public static final String BASEPATH = "./src/main/java/com/company/";
+
+	public static void main(String[] args) {
 	Scan a = new Scan();
 	a.example();
     }

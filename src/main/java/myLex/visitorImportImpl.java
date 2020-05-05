@@ -17,23 +17,16 @@ import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Per ogni classe bisogna controllare che non ho già definito il relativo pg o equipaggiamento
-public class visitorImpl extends digits4BaseVisitor<semanticResult>{
+public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     digits4Parser parser;
-
-   public visitorImpl(digits4Parser parser){
+    String entityName;
+    semanticResult imported;
+    
+   public visitorImportImpl(digits4Parser parser,String entityName){
       this.parser = parser;
+      this.entityName = entityName;
+      this.imported = null;
    }
-
-   
-   	@Override public semanticResult visitImportData(digits4Parser.ImportDataContext ctx) { 
-   		String fileName = ctx.LETTER(1).getText() + ".ddm";
-   		String moduleFileName = com.company.Main.BASEPATH + fileName;
-   		String entityName = ctx.LETTER(0).getText();
-
-        semanticResult importedEntity = entityImporter.load(moduleFileName, entityName);
-		return importedEntity; //Non fa nulla, non ho children nell' import
-   	}
    	
     @Override
     public semanticResult visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
@@ -55,7 +48,10 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         characterWrapper pg = null;
        try{
            visitChildren(ctx);
-            pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+           if(ctx.LETTER().getText().equals(entityName)) {
+        	   pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+        	   imported = pg;
+           }
        } catch (Exception e) {
            System.err.println(e);
            return null;
@@ -68,7 +64,10 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         equipWrapper eq= null;
        try{
 	    	visitChildren(ctx);
-	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
+	    	if(ctx.LETTER().getText().equals(entityName)) {
+	    		eq =  equipChecker.check(ctx,ctx.LETTER().getText());	
+	    		imported = eq;
+	    	}
     	} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -77,7 +76,6 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
 
     @Override
     public semanticResult visitEntity(digits4Parser.EntityContext ctx) {
-
         semanticResult entity = visitChildren(ctx);
 
         return entity;
@@ -85,6 +83,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
 
     @Override
     public semanticResult visitLine(digits4Parser.LineContext ctx) {
+
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
@@ -92,6 +91,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
             if(res != null)
                 prova.add(res);
         }
+
         if(prova.size()>0)
             return prova.get(0);
         else
@@ -100,16 +100,19 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
 
     @Override
     public semanticResult visitStart(digits4Parser.StartContext ctx) {
-
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
+
             if(res != null)
                 prova.add(res);
         }
         listOfResults aggregateResult = new listOfResults(prova);
-        System.out.println(aggregateResult);
-        return null;
+        return aggregateResult;
+    }
+    
+    public semanticResult getImported() {
+    	return this.imported;
     }
 }

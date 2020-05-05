@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
+// Generated from digits4.g4 by ANTLR 4.8
 
 	package myLex;
 
@@ -110,11 +110,23 @@ public interface digits4Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProperty(digits4Parser.PropertyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link digits4Parser#importData}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportData(digits4Parser.ImportDataContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link digits4Parser#entity}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEntity(digits4Parser.EntityContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link digits4Parser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLine(digits4Parser.LineContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link digits4Parser#start}.
 	 * @param ctx the parse tree
