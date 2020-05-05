@@ -69,7 +69,10 @@ public class equipWrapper implements semanticResult {
 	}
 	
 	public void addConsumable(Consumables consumable, Integer quantity) {
-		consumables.put(consumable, quantity);
+		if(!consumables.containsKey(consumable))
+			consumables.put(consumable, quantity);
+		else
+			consumables.replace(consumable,consumables.get(consumable)+quantity);
 	}
 
 	@Override
