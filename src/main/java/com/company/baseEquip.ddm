@@ -1,0 +1,12 @@
+create Equipment rogueEquip{
+    armor:None
+    shield:No
+    consumables:(Gold*10,Health potion*1)
+    weapon:Bastard sword
+}
+create Equipment heavyEquip{
+    armor:Full plate
+    shield:Yes
+    consumables:(Health potion*5)
+    weapon:Axe
+}

@@ -36,7 +36,8 @@ ENDENTITY :   '}';
 CREATE:   'create';
 PLAYER: 'Player';
 EQUIPMENT: 'Equipment';
-
+IMPORT: 'import';
+FROM: 'from';
 
 
 COLON 	:	':';
@@ -181,8 +182,12 @@ equipDefinition: CREATE BLANKSPACE EQUIPMENT BLANKSPACE LETTER STARTENTITY BL
 equipPiece: (BLANKSPACE)* piece (BLANKSPACE)* COLON (BLANKSPACE)* pieceValue;
 property:  (BLANKSPACE)* mandatory (BLANKSPACE)* COLON (BLANKSPACE)* value;
 
+importData: IMPORT BLANKSPACE LETTER BLANKSPACE FROM BLANKSPACE LETTER;
+
 entity : (pgDefition | equipDefinition);
 
-start : (entity BL)+ EOF;
+line: (entity | importData) BL;
+
+start : (line)+ EOF;
 
 

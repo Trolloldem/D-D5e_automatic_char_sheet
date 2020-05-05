@@ -17,26 +17,16 @@ import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Per ogni classe bisogna controllare che non ho già definito il relativo pg o equipaggiamento
-public class visitorImpl extends digits4BaseVisitor<semanticResult>{
+public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     digits4Parser parser;
-
-   public visitorImpl(digits4Parser parser){
+    String entityName;
+    Object imported;
+    
+   public visitorImportImpl(digits4Parser parser,String entityName){
       this.parser = parser;
+      this.entityName = entityName;
+      this.imported = null;
    }
-
-   
-   	@Override public semanticResult visitImportData(digits4Parser.ImportDataContext ctx) { 
-   		String fileName = ctx.LETTER(1).getText() + ".ddm";
-   		String moduleFileName = com.company.Main.BASEPATH + fileName;
-   		String entityName = ctx.LETTER(0).getText();
-   		
-   		Object importedEntity = entityImporter.load(moduleFileName, entityName);
-   		
-   		System.out.println("Imported: " + importedEntity);
-   		
-		return visitChildren(ctx); //Non fa nulla, non ho children nell' import
-   	}
    	
     @Override
     public semanticResult visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
@@ -58,7 +48,10 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         characterWrapper pg = null;
        try{
            visitChildren(ctx);
-            pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+           if(ctx.LETTER().getText().equals(entityName)) {
+        	   pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+        	   imported = pg;
+           }
        } catch (Exception e) {
            System.err.println(e);
            return null;
@@ -71,7 +64,10 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         equipWrapper eq= null;
        try{
 	    	visitChildren(ctx);
-	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
+	    	if(ctx.LETTER().getText().equals(entityName)) {
+	    		eq =  equipChecker.check(ctx,ctx.LETTER().getText());	
+	    		imported = eq;
+	    	}
     	} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -97,5 +93,9 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         listOfResults aggregateResult = new listOfResults(prova);
         System.out.println(aggregateResult);
        return null;
+    }
+    
+    public Object getImported() {
+    	return this.imported;
     }
 }

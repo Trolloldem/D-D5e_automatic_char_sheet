@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
+// Generated from digits4.g4 by ANTLR 4.8
 
 	package myLex;
 
@@ -132,7 +132,21 @@ public class digits4BaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitImportData(digits4Parser.ImportDataContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitEntity(digits4Parser.EntityContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLine(digits4Parser.LineContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
