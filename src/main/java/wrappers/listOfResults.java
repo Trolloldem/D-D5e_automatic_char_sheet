@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import parsingExceptions.sameName;
+import parsingExceptions.sameNameException;
 
 public class listOfResults implements semanticResult {
 
@@ -51,7 +51,7 @@ public class listOfResults implements semanticResult {
     		 }
     	}
     	if(flag==true) {
-    		throw new sameName("multiple player have the same name: " + error);
+    		throw new sameNameException("multiple player have the same name: " + error);
     	}
     }
     
@@ -76,7 +76,7 @@ public class listOfResults implements semanticResult {
     		 }
     	}
     	if(flag==true) {
-    		throw new sameName("multiple equipment have the same name: " + error);
+    		throw new sameNameException("multiple equipment have the same name: " + error);
     	}
     }
     

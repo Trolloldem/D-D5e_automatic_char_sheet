@@ -4,7 +4,7 @@ package util;
 
 import org.antlr.v4.runtime.Token;
 import myLex.digits4Parser;
-import parsingExceptions.notSubclass;
+import parsingExceptions.notSubclassException;
 import util.lexEnum.Classi;
 import util.lexEnum.subClass;
 import wrappers.semanticResult;
@@ -36,7 +36,7 @@ public class classChecker implements semanticResult {
     	 		for(subClass tempS:TempClasse.subClasses)
     				s=s+tempS+"\n";
     	 		s=s.replace("_", " ");
-            	throw new notSubclass(s);
+            	throw new notSubclassException(s);
     	}
     	}
     }
