@@ -32,10 +32,10 @@ public class classChecker implements semanticResult {
     		 }
     	 	}
     	 	if(flag==false) {
-    	 		System.out.println("the subclass is not compatible with the class, please select a one of: ");
+    	 		String s="the subclass is not compatible with the class, please select a one of:"+ "\n";
     	 		for(subClass tempS:TempClasse.subClasses)
-    				System.out.println(tempS);
-            	throw new notSubclass("line error number "+mandatoryToken.getLine());
+    				s=s+tempS+"\n";
+            	throw new notSubclass(s);
     	}
     	}
     }
