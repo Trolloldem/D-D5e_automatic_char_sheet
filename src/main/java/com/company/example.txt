@@ -1,3 +1,4 @@
+import rogueEquip from baseEquip
 create Player Ado{
     race: Half Orc
     hp:10
