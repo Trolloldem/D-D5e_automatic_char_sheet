@@ -20,7 +20,7 @@ import java.util.List;
 public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     digits4Parser parser;
     String entityName;
-    Object imported;
+    semanticResult imported;
     
    public visitorImportImpl(digits4Parser parser,String entityName){
       this.parser = parser;
@@ -82,7 +82,8 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+    public semanticResult visitLine(digits4Parser.LineContext ctx) {
+
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
@@ -90,12 +91,28 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
             if(res != null)
                 prova.add(res);
         }
+
+        if(prova.size()>0)
+            return prova.get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+        List<semanticResult> prova = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            semanticResult res = visit(c);
+
+            if(res != null)
+                prova.add(res);
+        }
         listOfResults aggregateResult = new listOfResults(prova);
-        System.out.println(aggregateResult);
-       return null;
+        return aggregateResult;
     }
     
-    public Object getImported() {
+    public semanticResult getImported() {
     	return this.imported;
     }
 }

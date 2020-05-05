@@ -30,12 +30,9 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
    		String fileName = ctx.LETTER(1).getText() + ".ddm";
    		String moduleFileName = com.company.Main.BASEPATH + fileName;
    		String entityName = ctx.LETTER(0).getText();
-   		
-   		Object importedEntity = entityImporter.load(moduleFileName, entityName);
-   		
-   		//System.out.println("Imported: " + importedEntity);
-   		
-		return visitChildren(ctx); //Non fa nulla, non ho children nell' import
+
+        semanticResult importedEntity = entityImporter.load(moduleFileName, entityName);
+		return importedEntity; //Non fa nulla, non ho children nell' import
    	}
    	
     @Override
@@ -80,6 +77,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
 
     @Override
     public semanticResult visitEntity(digits4Parser.EntityContext ctx) {
+
         semanticResult entity = visitChildren(ctx);
 
         return entity;
@@ -94,8 +92,24 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
             if(res != null)
                 prova.add(res);
         }
+        if(prova.size()>0)
+            return prova.get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+
+        List<semanticResult> prova = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            semanticResult res = visit(c);
+            if(res != null)
+                prova.add(res);
+        }
         listOfResults aggregateResult = new listOfResults(prova);
         System.out.println(aggregateResult);
-       return null;
+        return null;
     }
 }

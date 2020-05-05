@@ -13,11 +13,12 @@ import myLex.visitorImpl;
 import myLex.visitorImportImpl;
 import parsingExceptions.CustomErrorListener;
 import parsingExceptions.importException;
+import wrappers.semanticResult;
 
 public class entityImporter {
 	
-	public static Object load(String moduleFileName, String entityName) {
-		Object importedEntity = null;
+	public static semanticResult load(String moduleFileName, String entityName) {
+		semanticResult importedEntity = null;
 		digits4Lexer lexer;
 		try {
 			lexer = new digits4Lexer(CharStreams.fromFileName(moduleFileName));
