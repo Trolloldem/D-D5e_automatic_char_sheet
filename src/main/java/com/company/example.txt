@@ -2,7 +2,23 @@ import rogueEquip from baseEquip
 create Player Ado{
     race: Half Orc
     hp:10
-    archetype: (Barbarian->Path of the Totem warrior,Bard->College of Lore)
+    archetype: (Barbarian->Berserker,Bard->College of Lore)
+    abilities:(15,15,15,15,15,15)
+    alignment:chaotic good
+    skills: (Religion,Medicine)
+    languages: (Abissal,Common)
+}
+create Equipment AdoEquip{
+    armor:Full plate
+    shield:Yes
+    consumables:(Gold*100,Health potion*2)
+    weapon:Axe
+}
+import rogueEquip from baseEquip
+create Player Ado{
+    race: Half Orc
+    hp:10
+    archetype: (Barbarian->Berserker,Bard->College of Lore)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good
     skills: (Religion,Medicine)

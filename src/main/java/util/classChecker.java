@@ -35,6 +35,7 @@ public class classChecker implements semanticResult {
     	 		String s="the subclass is not compatible with the class, please select a one of:"+ "\n";
     	 		for(subClass tempS:TempClasse.subClasses)
     				s=s+tempS+"\n";
+    	 		s=s.replace("_", " ");
             	throw new notSubclass(s);
     	}
     	}
