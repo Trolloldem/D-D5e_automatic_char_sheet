@@ -11,6 +11,6 @@ create Player Ado{
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
-    consumables:(Gold*100,Health potion*2)
+    consumables:(Gold*100,Gold*2,Health potion*2)
     weapon:Axe
 }
