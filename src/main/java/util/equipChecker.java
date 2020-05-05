@@ -43,7 +43,7 @@ public class equipChecker {
 					Consumables consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
 					Integer digit = new Integer(consumableElem.DIGIT().getText());
 
-					if (digit <= 1)
+					if (digit < 1)
 						throw new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(), prop.getStart().getLine());
 					consumableElem = consumableElem.consumableVectorElem();
 
