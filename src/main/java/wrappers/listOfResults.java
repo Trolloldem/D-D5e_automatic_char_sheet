@@ -42,16 +42,44 @@ public class listOfResults implements semanticResult {
     		}
     	}
     	Set result = new HashSet();
+    	Set Duplicate = new HashSet();
     	for(int i=0;i<ListName.size();i++) {
     		 if (!result.add(ListName.get(i))) {
     			 flag=true;
-    			 error=error+ListName.get(i);
+    			 if (Duplicate.add(ListName.get(i)))
+    				 error=error+ListName.get(i)+"\n";
     		 }
     	}
     	if(flag==true) {
     		throw new sameName("multiple player have the same name: \n" + error);
     	}
     }
+    
+    public void checkEquipName(List<semanticResult> results) {
+    	List<String> ListEquipName = new ArrayList<String>();
+    	equipWrapper temp;
+    	String error = "";
+    	boolean flag=false;
+    	for(int i=0;i<results.size();i++) {
+    		if(results.get(i) instanceof equipWrapper) {
+    			temp=(equipWrapper) results.get(i);
+    			ListEquipName.add(temp.getName());
+    		}
+    	}
+    	Set result = new HashSet();
+    	Set Duplicate = new HashSet();
+    	for(int i=0;i<ListEquipName.size();i++) {
+    		 if (!result.add(ListEquipName.get(i))) {
+    			 flag=true;
+    			 if (Duplicate.add(ListEquipName.get(i)))
+    				 error=error+ListEquipName.get(i)+"\n";
+    		 }
+    	}
+    	if(flag==true) {
+    		throw new sameName("multiple player have the same Equipname: \n" + error);
+    	}
+    }
+    
     
     @Override
     public String toString() {
