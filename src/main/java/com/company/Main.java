@@ -4,7 +4,6 @@ import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
 
-//TODO: BASEPATH conterrà la path della directory base del file da parsare
 class Scan{
     public void example() {
         try{
