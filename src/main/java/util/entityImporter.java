@@ -25,7 +25,7 @@ public class entityImporter {
 			throw new importException("module " + moduleFileName + " cannot be parsed: " + e.getMessage());
 		}
 		
-		System.out.println("Loading: " + entityName +" from: " + moduleFileName);
+		//System.out.println("Loading: " + entityName +" from: " + moduleFileName);
 		
         lexer.removeErrorListeners();
         lexer.addErrorListener(CustomErrorListener.INSTANCE);
