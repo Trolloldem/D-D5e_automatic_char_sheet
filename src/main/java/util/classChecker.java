@@ -12,11 +12,11 @@ import wrappers.semanticResult;
 
 public class classChecker implements semanticResult {
 
-
 	public static void check(digits4Parser.ClassVectorElemContext ctx) {
     	Object mandaToryChild = ctx.getChild(0).getPayload();
     	Token mandatoryToken = (Token) mandaToryChild;
     	String C = ctx.PGCLASS().getText();
+    	Classi TempClasse = Classi.valueOf(C);
     	boolean flag=false;
     	if(ctx.SUBCLASS()!= null) {
     		String S = ctx.SUBCLASS().getText();
@@ -31,9 +31,14 @@ public class classChecker implements semanticResult {
     			 }
     		 }
     	 	}
-    	 	if(flag==false)
-            	throw new notSubclass("LA SOTTOCLASSE NON APPARTIENE ALLA CLASSE "+mandatoryToken.getLine());
+    	 	if(flag==false) {
+    	 		System.out.println("the subclass is not compatible with the class, please select a one of: ");
+    	 		for(subClass tempS:TempClasse.subClasses)
+    				System.out.println(tempS);
+            	throw new notSubclass("line error number "+mandatoryToken.getLine());
+    	}
     	}
     }
+	
 }
   
