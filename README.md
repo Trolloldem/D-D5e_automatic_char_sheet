@@ -1,9 +1,6 @@
 # D-D5e_automatic_char_sheet
 
 ## Urgenti:
-* equipment wrapper -> Gianluca
-* equipmentPiece checker -> Gabriele
-* vettore di consumabili -> Valerio
 
 ## Non urgenti:
 * Modificare il nome delle classi malformedPropery e notSubClass aggiungendo la parola Exception
