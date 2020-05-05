@@ -1,4 +1,6 @@
 import rogueEquip from baseEquip
+import Brando from unibgPlayers
+
 create Player Ado{
     race: Half Orc
     hp:10
@@ -8,6 +10,7 @@ create Player Ado{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
+
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
