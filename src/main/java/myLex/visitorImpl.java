@@ -33,7 +33,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
    		
    		Object importedEntity = entityImporter.load(moduleFileName, entityName);
    		
-   		System.out.println("Imported: " + importedEntity);
+   		//System.out.println("Imported: " + importedEntity);
    		
 		return visitChildren(ctx); //Non fa nulla, non ho children nell' import
    	}
@@ -86,7 +86,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+    public semanticResult visitLine(digits4Parser.LineContext ctx) {
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
