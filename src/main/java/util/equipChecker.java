@@ -25,13 +25,25 @@ public class equipChecker {
 
 			String text = mandatoryChild.getText();
 			if ("armor".equals(text)) {
-				wrapper.setArmor(Armors.valueOf(strValue));
+				try {
+					wrapper.setArmor(Armors.valueOf(strValue));
+				}catch (IllegalArgumentException e) {
+					throw new equipMalformedException(value.getText() + " is not a valid armor", prop.getStart().getLine());
+				}
 			}
 			if ("shield".equals(text)) {
-				wrapper.setShield(Shields.valueOf(strValue));
+				try {
+					wrapper.setShield(Shields.valueOf(strValue));
+				}catch (IllegalArgumentException e) {
+					throw new equipMalformedException(value.getText() + " is not a valid shield", prop.getStart().getLine());
+				}
 			}
 			if ("weapon".equals(text)) {
-				wrapper.setWeapon(Weapons.valueOf(strValue));
+				try {
+					wrapper.setWeapon(Weapons.valueOf(strValue));
+				}catch (IllegalArgumentException e) {
+					throw new equipMalformedException(value.getText() + " is not a valid weapon", prop.getStart().getLine());
+				}
 			}
 			if ("consumables".equals(text)) {
 				if (strValue.equals("None"))
@@ -40,7 +52,12 @@ public class equipChecker {
 				ConsumableVectorContext consumableList = value.consumableVector();
 				ConsumableVectorElemContext consumableElem = consumableList.consumableVectorElem();
 				while (consumableElem != null) {
-					Consumables consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
+					Consumables consumable = null;
+					try {
+						consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
+					}catch (IllegalArgumentException e) {
+						throw new equipMalformedException(value.getText() + " is not a valid consumable", prop.getStart().getLine());
+					}
 					Integer digit = new Integer(consumableElem.DIGIT().getText());
 
 					if (digit < 1)
