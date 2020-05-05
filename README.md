@@ -1,9 +1,8 @@
 # D-D5e_automatic_char_sheet
 
 ## Urgenti:
-
+* Implemetare i SET
 ## Non urgenti:
-* Modificare il nome delle classi malformedPropery e notSubClass aggiungendo la parola Exception
 
 ## Opzionali
 * PDFBox, vedere come scrivere
