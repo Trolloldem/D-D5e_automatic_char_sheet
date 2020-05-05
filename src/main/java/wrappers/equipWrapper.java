@@ -8,7 +8,7 @@ import util.lexEnum.Consumables;
 import util.lexEnum.Shields;
 import util.lexEnum.Weapons;
 
-public class equipWrapper {
+public class equipWrapper implements semanticResult {
 	private String name;
 	private Armors armor;
 	private Shields shield;

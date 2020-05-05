@@ -1,14 +1,17 @@
 package myLex;
 
 import org.antlr.v4.runtime.misc.NotNull;
-import util.propertyChecker;
-import util.classChecker;
-import util.equipChecker;
-import util.pgChecker;
+import org.antlr.v4.runtime.tree.ParseTree;
+import util.*;
 import wrappers.characterWrapper;
 import wrappers.equipWrapper;
+import wrappers.listOfResults;
+import wrappers.semanticResult;
 
-public class visitorImpl<T> extends digits4BaseVisitor<T>{
+import java.util.ArrayList;
+import java.util.List;
+
+public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     digits4Parser parser;
 
    public visitorImpl(digits4Parser parser){
@@ -16,7 +19,7 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
    }
 
     @Override
-    public T visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
+    public semanticResult visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
 
            classChecker.check(ctx);
 
@@ -24,33 +27,55 @@ public class visitorImpl<T> extends digits4BaseVisitor<T>{
     }
 
     @Override
-    public T visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
+    public semanticResult visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
             propertyChecker.checkValidProperty(ctx.mandatory(),ctx.value(), parser);
             return visitChildren(ctx);
 
    }
 
     @Override
-    public T visitPgDefition(digits4Parser.PgDefitionContext ctx) {
+    public semanticResult visitPgDefition(digits4Parser.PgDefitionContext ctx) {
+        characterWrapper pg = null;
        try{
            visitChildren(ctx);
-           characterWrapper pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
+            pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
            System.err.println(e);
            return null;
        }
-       return null;
+       return  pg;
     }
     
     @Override
-    public T visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) { 
-    	try{
+    public semanticResult visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) {
+        equipWrapper eq= null;
+       try{
 	    	visitChildren(ctx);
-	    	equipWrapper eq =  equipChecker.check(ctx,ctx.LETTER().getText());
-	    	System.out.println(eq);
+	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());
     	} catch (Exception e) {
 			System.err.println(e);
 		}
-    	return null;
+    	return  eq;
+    }
+
+    @Override
+    public semanticResult visitEntity(digits4Parser.EntityContext ctx) {
+        semanticResult entity = visitChildren(ctx);
+
+        return entity;
+    }
+
+    @Override
+    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+        List<semanticResult> prova = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            semanticResult res =visit(c);
+            if(res != null)
+                prova.add(res);
+        }
+        listOfResults aggregateResult = new listOfResults(prova);
+        System.out.println(aggregateResult);
+       return null;
     }
 }

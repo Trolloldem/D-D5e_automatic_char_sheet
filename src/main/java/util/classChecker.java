@@ -7,9 +7,10 @@ import myLex.digits4Parser;
 import parsingExceptions.notSubclass;
 import util.lexEnum.Classi;
 import util.lexEnum.subClass;
+import wrappers.semanticResult;
 
 
-public class classChecker {
+public class classChecker implements semanticResult {
 
 
 	public static void check(digits4Parser.ClassVectorElemContext ctx) {

@@ -9,7 +9,7 @@ import util.lexEnum.subClass;
 import java.util.*;
 
 
-public class characterWrapper {
+public class characterWrapper implements semanticResult{
     String name;
     Races race;
     Map<Pair<Classi, subClass>, Integer> pgClass;
