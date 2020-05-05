@@ -14,6 +14,8 @@ options {
 
 BLANKSPACE: ' ';
 WS: BLANKSPACE BLANKSPACE -> skip;
+COMMENT: '/*' .*? '*/' -> skip;
+LINE_COMMENT: '//' ~[\r\n]* -> skip;
 
 DIGIT
 	:	('0'..'9')+
