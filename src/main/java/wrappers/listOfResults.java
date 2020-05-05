@@ -16,6 +16,7 @@ public class listOfResults implements semanticResult {
     public listOfResults(List<semanticResult> list){
         results=list;
         checkName(results);
+        checkEquipName(results);
     }
 
     public listOfResults(){
