@@ -15,7 +15,7 @@ create Player Ado{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Description for Ado = "LOL"
+set Level for Ado = "LOL"
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes

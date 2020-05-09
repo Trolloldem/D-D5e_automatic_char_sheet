@@ -145,7 +145,7 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
-OPTIONAL : ('Description');
+OPTIONAL : ('Description' | 'Level');
 
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
 
