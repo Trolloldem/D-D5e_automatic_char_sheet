@@ -7,10 +7,7 @@ import com.company.Main;
 
 import parsingExceptions.importException;
 import util.*;
-import wrappers.characterWrapper;
-import wrappers.equipWrapper;
-import wrappers.listOfResults;
-import wrappers.semanticResult;
+import wrappers.*;
 
 import java.io.File;
 import java.nio.charset.MalformedInputException;
@@ -109,13 +106,11 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
                 prova.add(res);
         }
         listOfResults aggregateResult = new listOfResults(prova);
-        System.out.println(aggregateResult);
-        return null;
+        return aggregateResult;
     }
 
     @Override
     public semanticResult visitSetting(digits4Parser.SettingContext ctx) {
-       System.out.println(ctx.OPTIONAL());
         return visitChildren(ctx);
     }
 }

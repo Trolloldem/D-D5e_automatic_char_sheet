@@ -3,6 +3,7 @@ package com.company;
 import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
+import wrappers.semanticResult;
 
 class Scan{
     public void example() {
@@ -15,9 +16,10 @@ class Scan{
         digits4Parser parser = new digits4Parser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(CustomErrorListener.INSTANCE);
-        digits4Visitor visitor = new visitorImpl(parser);
+        digits4Visitor<semanticResult> visitor = new visitorImpl(parser);
         digits4Parser.StartContext parserTree = parser.start();
-        visitor.visitStart(parserTree);
+        semanticResult resParsing = visitor.visitStart(parserTree);
+        System.out.println(resParsing);
         }catch(Exception e){
             System.err.println(e);
             return;

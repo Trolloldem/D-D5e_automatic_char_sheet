@@ -15,7 +15,7 @@ create Player Ado{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Level of Barbarian for Ado = "LOL"
+set Level of Barbarian for Ado = "LOL LOL"
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
