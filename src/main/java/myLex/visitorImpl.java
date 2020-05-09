@@ -112,4 +112,10 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
         System.out.println(aggregateResult);
         return null;
     }
+
+    @Override
+    public semanticResult visitSetting(digits4Parser.SettingContext ctx) {
+       System.out.println(ctx.OPTIONAL());
+        return visitChildren(ctx);
+    }
 }

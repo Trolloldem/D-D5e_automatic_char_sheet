@@ -1,4 +1,4 @@
-// Generated from digits4.g4 by ANTLR 4.8
+// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
 
 	package myLex;
 
@@ -13,6 +13,24 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface digits4Visitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link digits4Parser#optionalValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOptionalValue(digits4Parser.OptionalValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link digits4Parser#toSet}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitToSet(digits4Parser.ToSetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link digits4Parser#description}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescription(digits4Parser.DescriptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link digits4Parser#piece}.
 	 * @param ctx the parse tree
@@ -121,6 +139,12 @@ public interface digits4Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEntity(digits4Parser.EntityContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link digits4Parser#setting}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetting(digits4Parser.SettingContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link digits4Parser#line}.
 	 * @param ctx the parse tree

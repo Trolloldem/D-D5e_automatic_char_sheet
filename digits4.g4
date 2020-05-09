@@ -145,7 +145,14 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
+OPTIONAL : ('Description');
+
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
+
+
+optionalValue : (description | DIGIT);
+toSet : (PGCLASS);
+description : '"'(LETTER | BLANKSPACE)+ '"';
 
 piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
 pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );
@@ -188,7 +195,9 @@ importData: IMPORT BLANKSPACE LETTER BLANKSPACE FROM BLANKSPACE LETTER;
 
 entity : (pgDefition | equipDefinition);
 
-line: (entity | importData) BL | BL;
+setting : 'set' BLANKSPACE OPTIONAL  BLANKSPACE ('of' BLANKSPACE toSet)? 'for' BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
+
+line : (entity | importData | setting) BL | BL;
 
 start : (line)+ EOF;
 
