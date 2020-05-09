@@ -1,6 +1,6 @@
 package util;
 
-import myLex.digits4Parser;
+import myLex.ddmLangParser;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
 import parsingExceptions.malformedPropertyException;
@@ -10,7 +10,7 @@ public class propertyChecker {
 
 
 
-    private static Boolean checkPropertyToken(int mandatoryTokenType, int valueTokenType, Token mandatoryToken,digits4Parser parser) throws malformedPropertyException {
+    private static Boolean checkPropertyToken(int mandatoryTokenType, int valueTokenType, Token mandatoryToken,ddmLangParser parser) throws malformedPropertyException {
 
         if (mandatoryTokenType == parser.getTokenType("RACE")){
             if(valueTokenType == parser.getTokenType("RACES")){
@@ -69,10 +69,10 @@ public class propertyChecker {
         return false;
     }
 
-    private static Boolean checkPropertyContext(int mandatoryTokenType, Object valueChild, Token mandatoryToken,digits4Parser parser) throws malformedPropertyException {
+    private static Boolean checkPropertyContext(int mandatoryTokenType, Object valueChild, Token mandatoryToken,ddmLangParser parser) throws malformedPropertyException {
 
         if(mandatoryTokenType == parser.getTokenType("ARCHTYPE")){
-            if(valueChild instanceof digits4Parser.ClassVectorContext){
+            if(valueChild instanceof ddmLangParser.ClassVectorContext){
                 return true;
             }else{
                 throw new malformedPropertyException("LA CLASSE DEFINITA NELLA RIGA "+mandatoryToken.getLine()+" NON È ESPRESSA NEL FORMATO CORRETTO");
@@ -80,7 +80,7 @@ public class propertyChecker {
         }
 
         if(mandatoryTokenType == parser.getTokenType("ABILITY")){
-            if(valueChild instanceof digits4Parser.AbilitiesContext){
+            if(valueChild instanceof ddmLangParser.AbilitiesContext){
                 return true;
             }else{
                 throw new malformedPropertyException("LE STATISTICHE DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
@@ -88,14 +88,14 @@ public class propertyChecker {
         }
 
         if(mandatoryTokenType == parser.getTokenType("SKILLSID")){
-            if(valueChild instanceof digits4Parser.SkillsContext){
+            if(valueChild instanceof ddmLangParser.SkillsContext){
                 return true;
             }else{
                 throw new malformedPropertyException("LE ABILITÀ DEFINITE NELLA RIGA "+mandatoryToken.getLine()+" NON SONO ESPRESSE NEL FORMATO CORRETTO");
             }
         }
         if(mandatoryTokenType == parser.getTokenType("LANG")){
-            if(valueChild instanceof digits4Parser.LanguagesContext){
+            if(valueChild instanceof ddmLangParser.LanguagesContext){
                 return true;
             }else{
                 throw new malformedPropertyException("I LINGUAGGI DEFINITI NELLA RIGA "+mandatoryToken.getLine()+" NON PRESENTI NEL MANUALE");
@@ -118,7 +118,7 @@ public class propertyChecker {
     }
 
 
-    public static Boolean checkValidProperty(digits4Parser.MandatoryContext mandatory, digits4Parser.ValueContext value,digits4Parser parser) throws malformedPropertyException {
+    public static Boolean checkValidProperty(ddmLangParser.MandatoryContext mandatory, ddmLangParser.ValueContext value,ddmLangParser parser) throws malformedPropertyException {
 
             if(mandatory.getChildCount()>1 || value.getChildCount()>1){
                 throw new malformedPropertyException("Wrong number of children nodes");
@@ -139,8 +139,8 @@ public class propertyChecker {
                 }
 
             }
-            if(mandaToryChild instanceof digits4Parser.StatIDContext){
-                digits4Parser.StatIDContext mandatoryContext = (digits4Parser.StatIDContext) mandaToryChild;
+            if(mandaToryChild instanceof ddmLangParser.StatIDContext){
+                ddmLangParser.StatIDContext mandatoryContext = (ddmLangParser.StatIDContext) mandaToryChild;
                 Token mandatoryToken = (Token) mandatoryContext.getChild(0).getPayload();
                 if(valueChild instanceof Token) {
                     int valueTokenType = ((Token) valueChild).getType();

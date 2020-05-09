@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
+// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\ddmLang.g4 by ANTLR 4.8
 
 	package myLex;
 
@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class digits4Parser extends Parser {
+public class ddmLangParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -103,7 +103,7 @@ public class digits4Parser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "digits4.g4"; }
+	public String getGrammarFileName() { return "ddmLang.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -114,7 +114,7 @@ public class digits4Parser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public digits4Parser(TokenStream input) {
+	public ddmLangParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -123,14 +123,14 @@ public class digits4Parser extends Parser {
 		public DescriptionContext description() {
 			return getRuleContext(DescriptionContext.class,0);
 		}
-		public TerminalNode DIGIT() { return getToken(digits4Parser.DIGIT, 0); }
+		public TerminalNode DIGIT() { return getToken(ddmLangParser.DIGIT, 0); }
 		public OptionalValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_optionalValue; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitOptionalValue(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitOptionalValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -173,14 +173,14 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ToSetContext extends ParserRuleContext {
-		public TerminalNode PGCLASS() { return getToken(digits4Parser.PGCLASS, 0); }
+		public TerminalNode PGCLASS() { return getToken(ddmLangParser.PGCLASS, 0); }
 		public ToSetContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_toSet; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitToSet(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitToSet(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -209,13 +209,13 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class DescriptionContext extends ParserRuleContext {
-		public List<TerminalNode> LETTER() { return getTokens(digits4Parser.LETTER); }
+		public List<TerminalNode> LETTER() { return getTokens(ddmLangParser.LETTER); }
 		public TerminalNode LETTER(int i) {
-			return getToken(digits4Parser.LETTER, i);
+			return getToken(ddmLangParser.LETTER, i);
 		}
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
 		public DescriptionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -223,7 +223,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_description; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitDescription(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitDescription(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -275,17 +275,17 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class PieceContext extends ParserRuleContext {
-		public TerminalNode ARMOR() { return getToken(digits4Parser.ARMOR, 0); }
-		public TerminalNode WEAPON() { return getToken(digits4Parser.WEAPON, 0); }
-		public TerminalNode SHIELD() { return getToken(digits4Parser.SHIELD, 0); }
-		public TerminalNode CONSUMABLES() { return getToken(digits4Parser.CONSUMABLES, 0); }
+		public TerminalNode ARMOR() { return getToken(ddmLangParser.ARMOR, 0); }
+		public TerminalNode WEAPON() { return getToken(ddmLangParser.WEAPON, 0); }
+		public TerminalNode SHIELD() { return getToken(ddmLangParser.SHIELD, 0); }
+		public TerminalNode CONSUMABLES() { return getToken(ddmLangParser.CONSUMABLES, 0); }
 		public PieceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_piece; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitPiece(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitPiece(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -321,9 +321,9 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class PieceValueContext extends ParserRuleContext {
-		public TerminalNode ARMORTYPE() { return getToken(digits4Parser.ARMORTYPE, 0); }
-		public TerminalNode WEAPONTYPE() { return getToken(digits4Parser.WEAPONTYPE, 0); }
-		public TerminalNode SHIELDPRESENCE() { return getToken(digits4Parser.SHIELDPRESENCE, 0); }
+		public TerminalNode ARMORTYPE() { return getToken(ddmLangParser.ARMORTYPE, 0); }
+		public TerminalNode WEAPONTYPE() { return getToken(ddmLangParser.WEAPONTYPE, 0); }
+		public TerminalNode SHIELDPRESENCE() { return getToken(ddmLangParser.SHIELDPRESENCE, 0); }
 		public ConsumableVectorContext consumableVector() {
 			return getRuleContext(ConsumableVectorContext.class,0);
 		}
@@ -333,7 +333,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_pieceValue; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitPieceValue(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitPieceValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -389,7 +389,7 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ConsumableVectorContext extends ParserRuleContext {
-		public TerminalNode NONE() { return getToken(digits4Parser.NONE, 0); }
+		public TerminalNode NONE() { return getToken(ddmLangParser.NONE, 0); }
 		public ConsumableVectorElemContext consumableVectorElem() {
 			return getRuleContext(ConsumableVectorElemContext.class,0);
 		}
@@ -399,7 +399,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_consumableVector; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitConsumableVector(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitConsumableVector(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -447,8 +447,8 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ConsumableVectorElemContext extends ParserRuleContext {
-		public TerminalNode CONSUMABLE() { return getToken(digits4Parser.CONSUMABLE, 0); }
-		public TerminalNode DIGIT() { return getToken(digits4Parser.DIGIT, 0); }
+		public TerminalNode CONSUMABLE() { return getToken(ddmLangParser.CONSUMABLE, 0); }
+		public TerminalNode DIGIT() { return getToken(ddmLangParser.DIGIT, 0); }
 		public ConsumableVectorElemContext consumableVectorElem() {
 			return getRuleContext(ConsumableVectorElemContext.class,0);
 		}
@@ -458,7 +458,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_consumableVectorElem; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitConsumableVectorElem(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitConsumableVectorElem(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -511,15 +511,15 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ValueContext extends ParserRuleContext {
-		public TerminalNode RACES() { return getToken(digits4Parser.RACES, 0); }
-		public TerminalNode DIGIT() { return getToken(digits4Parser.DIGIT, 0); }
+		public TerminalNode RACES() { return getToken(ddmLangParser.RACES, 0); }
+		public TerminalNode DIGIT() { return getToken(ddmLangParser.DIGIT, 0); }
 		public ClassVectorContext classVector() {
 			return getRuleContext(ClassVectorContext.class,0);
 		}
 		public AbilitiesContext abilities() {
 			return getRuleContext(AbilitiesContext.class,0);
 		}
-		public TerminalNode ALIGNMENT() { return getToken(digits4Parser.ALIGNMENT, 0); }
+		public TerminalNode ALIGNMENT() { return getToken(ddmLangParser.ALIGNMENT, 0); }
 		public SkillsContext skills() {
 			return getRuleContext(SkillsContext.class,0);
 		}
@@ -532,7 +532,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_value; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitValue(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -612,7 +612,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_classVector; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitClassVector(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitClassVector(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -645,18 +645,18 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ClassVectorElemContext extends ParserRuleContext {
-		public TerminalNode PGCLASS() { return getToken(digits4Parser.PGCLASS, 0); }
+		public TerminalNode PGCLASS() { return getToken(ddmLangParser.PGCLASS, 0); }
 		public ClassVectorElemContext classVectorElem() {
 			return getRuleContext(ClassVectorElemContext.class,0);
 		}
-		public TerminalNode SUBCLASS() { return getToken(digits4Parser.SUBCLASS, 0); }
+		public TerminalNode SUBCLASS() { return getToken(ddmLangParser.SUBCLASS, 0); }
 		public ClassVectorElemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_classVectorElem; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitClassVectorElem(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitClassVectorElem(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -726,9 +726,9 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class AbilitiesContext extends ParserRuleContext {
-		public List<TerminalNode> DIGIT() { return getTokens(digits4Parser.DIGIT); }
+		public List<TerminalNode> DIGIT() { return getTokens(ddmLangParser.DIGIT); }
 		public TerminalNode DIGIT(int i) {
-			return getToken(digits4Parser.DIGIT, i);
+			return getToken(ddmLangParser.DIGIT, i);
 		}
 		public AbilitiesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -736,7 +736,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_abilities; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitAbilities(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitAbilities(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -787,9 +787,9 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class SkillsContext extends ParserRuleContext {
-		public List<TerminalNode> SKILL() { return getTokens(digits4Parser.SKILL); }
+		public List<TerminalNode> SKILL() { return getTokens(ddmLangParser.SKILL); }
 		public TerminalNode SKILL(int i) {
-			return getToken(digits4Parser.SKILL, i);
+			return getToken(ddmLangParser.SKILL, i);
 		}
 		public SkillsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -797,7 +797,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_skills; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitSkills(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitSkills(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -832,9 +832,9 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class LanguagesContext extends ParserRuleContext {
-		public List<TerminalNode> LANGUAGE() { return getTokens(digits4Parser.LANGUAGE); }
+		public List<TerminalNode> LANGUAGE() { return getTokens(ddmLangParser.LANGUAGE); }
 		public TerminalNode LANGUAGE(int i) {
-			return getToken(digits4Parser.LANGUAGE, i);
+			return getToken(ddmLangParser.LANGUAGE, i);
 		}
 		public LanguagesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -842,7 +842,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_languages; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitLanguages(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitLanguages(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -886,13 +886,13 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class MandatoryContext extends ParserRuleContext {
-		public TerminalNode RACE() { return getToken(digits4Parser.RACE, 0); }
-		public TerminalNode HP() { return getToken(digits4Parser.HP, 0); }
-		public TerminalNode ARCHTYPE() { return getToken(digits4Parser.ARCHTYPE, 0); }
-		public TerminalNode ABILITY() { return getToken(digits4Parser.ABILITY, 0); }
-		public TerminalNode ALIGN() { return getToken(digits4Parser.ALIGN, 0); }
-		public TerminalNode SKILLSID() { return getToken(digits4Parser.SKILLSID, 0); }
-		public TerminalNode LANG() { return getToken(digits4Parser.LANG, 0); }
+		public TerminalNode RACE() { return getToken(ddmLangParser.RACE, 0); }
+		public TerminalNode HP() { return getToken(ddmLangParser.HP, 0); }
+		public TerminalNode ARCHTYPE() { return getToken(ddmLangParser.ARCHTYPE, 0); }
+		public TerminalNode ABILITY() { return getToken(ddmLangParser.ABILITY, 0); }
+		public TerminalNode ALIGN() { return getToken(ddmLangParser.ALIGN, 0); }
+		public TerminalNode SKILLSID() { return getToken(ddmLangParser.SKILLSID, 0); }
+		public TerminalNode LANG() { return getToken(ddmLangParser.LANG, 0); }
 		public StatIDContext statID() {
 			return getRuleContext(StatIDContext.class,0);
 		}
@@ -902,7 +902,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_mandatory; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitMandatory(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitMandatory(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -986,19 +986,19 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class StatIDContext extends ParserRuleContext {
-		public TerminalNode STR() { return getToken(digits4Parser.STR, 0); }
-		public TerminalNode DEX() { return getToken(digits4Parser.DEX, 0); }
-		public TerminalNode INT() { return getToken(digits4Parser.INT, 0); }
-		public TerminalNode CHA() { return getToken(digits4Parser.CHA, 0); }
-		public TerminalNode CON() { return getToken(digits4Parser.CON, 0); }
-		public TerminalNode WIS() { return getToken(digits4Parser.WIS, 0); }
+		public TerminalNode STR() { return getToken(ddmLangParser.STR, 0); }
+		public TerminalNode DEX() { return getToken(ddmLangParser.DEX, 0); }
+		public TerminalNode INT() { return getToken(ddmLangParser.INT, 0); }
+		public TerminalNode CHA() { return getToken(ddmLangParser.CHA, 0); }
+		public TerminalNode CON() { return getToken(ddmLangParser.CON, 0); }
+		public TerminalNode WIS() { return getToken(ddmLangParser.WIS, 0); }
 		public StatIDContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statID; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitStatID(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitStatID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1034,17 +1034,17 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class PgDefitionContext extends ParserRuleContext {
-		public TerminalNode CREATE() { return getToken(digits4Parser.CREATE, 0); }
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public TerminalNode CREATE() { return getToken(ddmLangParser.CREATE, 0); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
-		public TerminalNode PLAYER() { return getToken(digits4Parser.PLAYER, 0); }
-		public TerminalNode LETTER() { return getToken(digits4Parser.LETTER, 0); }
-		public TerminalNode STARTENTITY() { return getToken(digits4Parser.STARTENTITY, 0); }
-		public List<TerminalNode> BL() { return getTokens(digits4Parser.BL); }
+		public TerminalNode PLAYER() { return getToken(ddmLangParser.PLAYER, 0); }
+		public TerminalNode LETTER() { return getToken(ddmLangParser.LETTER, 0); }
+		public TerminalNode STARTENTITY() { return getToken(ddmLangParser.STARTENTITY, 0); }
+		public List<TerminalNode> BL() { return getTokens(ddmLangParser.BL); }
 		public TerminalNode BL(int i) {
-			return getToken(digits4Parser.BL, i);
+			return getToken(ddmLangParser.BL, i);
 		}
 		public List<PropertyContext> property() {
 			return getRuleContexts(PropertyContext.class);
@@ -1052,14 +1052,14 @@ public class digits4Parser extends Parser {
 		public PropertyContext property(int i) {
 			return getRuleContext(PropertyContext.class,i);
 		}
-		public TerminalNode ENDENTITY() { return getToken(digits4Parser.ENDENTITY, 0); }
+		public TerminalNode ENDENTITY() { return getToken(ddmLangParser.ENDENTITY, 0); }
 		public PgDefitionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pgDefition; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitPgDefition(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitPgDefition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1156,17 +1156,17 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class EquipDefinitionContext extends ParserRuleContext {
-		public TerminalNode CREATE() { return getToken(digits4Parser.CREATE, 0); }
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public TerminalNode CREATE() { return getToken(ddmLangParser.CREATE, 0); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
-		public TerminalNode EQUIPMENT() { return getToken(digits4Parser.EQUIPMENT, 0); }
-		public TerminalNode LETTER() { return getToken(digits4Parser.LETTER, 0); }
-		public TerminalNode STARTENTITY() { return getToken(digits4Parser.STARTENTITY, 0); }
-		public List<TerminalNode> BL() { return getTokens(digits4Parser.BL); }
+		public TerminalNode EQUIPMENT() { return getToken(ddmLangParser.EQUIPMENT, 0); }
+		public TerminalNode LETTER() { return getToken(ddmLangParser.LETTER, 0); }
+		public TerminalNode STARTENTITY() { return getToken(ddmLangParser.STARTENTITY, 0); }
+		public List<TerminalNode> BL() { return getTokens(ddmLangParser.BL); }
 		public TerminalNode BL(int i) {
-			return getToken(digits4Parser.BL, i);
+			return getToken(ddmLangParser.BL, i);
 		}
 		public List<EquipPieceContext> equipPiece() {
 			return getRuleContexts(EquipPieceContext.class);
@@ -1174,14 +1174,14 @@ public class digits4Parser extends Parser {
 		public EquipPieceContext equipPiece(int i) {
 			return getRuleContext(EquipPieceContext.class,i);
 		}
-		public TerminalNode ENDENTITY() { return getToken(digits4Parser.ENDENTITY, 0); }
+		public TerminalNode ENDENTITY() { return getToken(ddmLangParser.ENDENTITY, 0); }
 		public EquipDefinitionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_equipDefinition; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitEquipDefinition(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitEquipDefinition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1241,13 +1241,13 @@ public class digits4Parser extends Parser {
 		public PieceContext piece() {
 			return getRuleContext(PieceContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(digits4Parser.COLON, 0); }
+		public TerminalNode COLON() { return getToken(ddmLangParser.COLON, 0); }
 		public PieceValueContext pieceValue() {
 			return getRuleContext(PieceValueContext.class,0);
 		}
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
 		public EquipPieceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1255,7 +1255,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_equipPiece; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitEquipPiece(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitEquipPiece(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1332,13 +1332,13 @@ public class digits4Parser extends Parser {
 		public MandatoryContext mandatory() {
 			return getRuleContext(MandatoryContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(digits4Parser.COLON, 0); }
+		public TerminalNode COLON() { return getToken(ddmLangParser.COLON, 0); }
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
 		public PropertyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1346,7 +1346,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_property; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitProperty(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitProperty(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1420,23 +1420,23 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class ImportDataContext extends ParserRuleContext {
-		public TerminalNode IMPORT() { return getToken(digits4Parser.IMPORT, 0); }
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public TerminalNode IMPORT() { return getToken(ddmLangParser.IMPORT, 0); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
-		public List<TerminalNode> LETTER() { return getTokens(digits4Parser.LETTER); }
+		public List<TerminalNode> LETTER() { return getTokens(ddmLangParser.LETTER); }
 		public TerminalNode LETTER(int i) {
-			return getToken(digits4Parser.LETTER, i);
+			return getToken(ddmLangParser.LETTER, i);
 		}
-		public TerminalNode FROM() { return getToken(digits4Parser.FROM, 0); }
+		public TerminalNode FROM() { return getToken(ddmLangParser.FROM, 0); }
 		public ImportDataContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_importData; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitImportData(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitImportData(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1487,7 +1487,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_entity; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitEntity(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitEntity(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1528,12 +1528,12 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class SettingContext extends ParserRuleContext {
-		public List<TerminalNode> BLANKSPACE() { return getTokens(digits4Parser.BLANKSPACE); }
+		public List<TerminalNode> BLANKSPACE() { return getTokens(ddmLangParser.BLANKSPACE); }
 		public TerminalNode BLANKSPACE(int i) {
-			return getToken(digits4Parser.BLANKSPACE, i);
+			return getToken(ddmLangParser.BLANKSPACE, i);
 		}
-		public TerminalNode OPTIONAL() { return getToken(digits4Parser.OPTIONAL, 0); }
-		public TerminalNode LETTER() { return getToken(digits4Parser.LETTER, 0); }
+		public TerminalNode OPTIONAL() { return getToken(ddmLangParser.OPTIONAL, 0); }
+		public TerminalNode LETTER() { return getToken(ddmLangParser.LETTER, 0); }
 		public OptionalValueContext optionalValue() {
 			return getRuleContext(OptionalValueContext.class,0);
 		}
@@ -1546,7 +1546,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_setting; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitSetting(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitSetting(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1634,7 +1634,7 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class LineContext extends ParserRuleContext {
-		public TerminalNode BL() { return getToken(digits4Parser.BL, 0); }
+		public TerminalNode BL() { return getToken(ddmLangParser.BL, 0); }
 		public EntityContext entity() {
 			return getRuleContext(EntityContext.class,0);
 		}
@@ -1650,7 +1650,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_line; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitLine(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1718,7 +1718,7 @@ public class digits4Parser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(digits4Parser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(ddmLangParser.EOF, 0); }
 		public List<LineContext> line() {
 			return getRuleContexts(LineContext.class);
 		}
@@ -1731,7 +1731,7 @@ public class digits4Parser extends Parser {
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof digits4Visitor ) return ((digits4Visitor<? extends T>)visitor).visitStart(this);
+			if ( visitor instanceof ddmLangVisitor ) return ((ddmLangVisitor<? extends T>)visitor).visitStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}

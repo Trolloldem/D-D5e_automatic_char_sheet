@@ -1,4 +1,4 @@
-grammar digits4;
+grammar ddmLang;
 
 options {
    language = Java;

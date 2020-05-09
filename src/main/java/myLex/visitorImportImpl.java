@@ -17,19 +17,19 @@ import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
-    digits4Parser parser;
+public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
+    ddmLangParser parser;
     String entityName;
     semanticResult imported;
     
-   public visitorImportImpl(digits4Parser parser,String entityName){
+   public visitorImportImpl(ddmLangParser parser,String entityName){
       this.parser = parser;
       this.entityName = entityName;
       this.imported = null;
    }
    	
     @Override
-    public semanticResult visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
+    public semanticResult visitClassVectorElem(ddmLangParser.ClassVectorElemContext ctx) {
 
            classChecker.check(ctx);
 
@@ -37,14 +37,14 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
+    public semanticResult visitProperty(@NotNull ddmLangParser.PropertyContext ctx) {
             propertyChecker.checkValidProperty(ctx.mandatory(),ctx.value(), parser);
             return visitChildren(ctx);
 
    }
 
     @Override
-    public semanticResult visitPgDefition(digits4Parser.PgDefitionContext ctx) {
+    public semanticResult visitPgDefition(ddmLangParser.PgDefitionContext ctx) {
         characterWrapper pg = null;
        try{
            visitChildren(ctx);
@@ -60,7 +60,7 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     }
     
     @Override
-    public semanticResult visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) {
+    public semanticResult visitEquipDefinition(ddmLangParser.EquipDefinitionContext ctx) {
         equipWrapper eq= null;
        try{
 	    	visitChildren(ctx);
@@ -75,14 +75,14 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitEntity(digits4Parser.EntityContext ctx) {
+    public semanticResult visitEntity(ddmLangParser.EntityContext ctx) {
         semanticResult entity = visitChildren(ctx);
 
         return entity;
     }
 
     @Override
-    public semanticResult visitLine(digits4Parser.LineContext ctx) {
+    public semanticResult visitLine(ddmLangParser.LineContext ctx) {
 
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
@@ -99,7 +99,7 @@ public class visitorImportImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+    public semanticResult visitStart(ddmLangParser.StartContext ctx) {
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);

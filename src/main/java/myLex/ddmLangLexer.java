@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\digits4.g4 by ANTLR 4.8
+// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\ddmLang.g4 by ANTLR 4.8
 
 	package myLex;
 
@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class digits4Lexer extends Lexer {
+public class ddmLangLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -106,13 +106,13 @@ public class digits4Lexer extends Lexer {
 	}
 
 
-	public digits4Lexer(CharStream input) {
+	public ddmLangLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "digits4.g4"; }
+	public String getGrammarFileName() { return "ddmLang.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

@@ -1,12 +1,12 @@
 package util;
 
 
-import myLex.digits4Parser.ConsumableVectorContext;
-import myLex.digits4Parser.ConsumableVectorElemContext;
-import myLex.digits4Parser.EquipDefinitionContext;
-import myLex.digits4Parser.EquipPieceContext;
-import myLex.digits4Parser.PieceContext;
-import myLex.digits4Parser.PieceValueContext;
+import myLex.ddmLangParser.ConsumableVectorContext;
+import myLex.ddmLangParser.ConsumableVectorElemContext;
+import myLex.ddmLangParser.EquipDefinitionContext;
+import myLex.ddmLangParser.EquipPieceContext;
+import myLex.ddmLangParser.PieceContext;
+import myLex.ddmLangParser.PieceValueContext;
 import parsingExceptions.equipMalformedException;
 import util.lexEnum.Armors;
 import util.lexEnum.Shields;

@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Per ogni classe bisogna controllare che non ho già definito il relativo pg o equipaggiamento
-public class visitorImpl extends digits4BaseVisitor<semanticResult>{
-    digits4Parser parser;
+public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
+    ddmLangParser parser;
 
-   public visitorImpl(digits4Parser parser){
+   public visitorImpl(ddmLangParser parser){
       this.parser = parser;
    }
 
    
-   	@Override public semanticResult visitImportData(digits4Parser.ImportDataContext ctx) { 
+   	@Override public semanticResult visitImportData(ddmLangParser.ImportDataContext ctx) {
    		String fileName = ctx.LETTER(1).getText() + ".ddm";
    		String moduleFileName = com.company.Main.BASEPATH + fileName;
    		String entityName = ctx.LETTER(0).getText();
@@ -33,7 +33,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
    	}
    	
     @Override
-    public semanticResult visitClassVectorElem(digits4Parser.ClassVectorElemContext ctx) {
+    public semanticResult visitClassVectorElem(ddmLangParser.ClassVectorElemContext ctx) {
 
            classChecker.check(ctx);
 
@@ -41,14 +41,14 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitProperty(@NotNull digits4Parser.PropertyContext ctx) {
+    public semanticResult visitProperty(@NotNull ddmLangParser.PropertyContext ctx) {
             propertyChecker.checkValidProperty(ctx.mandatory(),ctx.value(), parser);
             return visitChildren(ctx);
 
    }
 
     @Override
-    public semanticResult visitPgDefition(digits4Parser.PgDefitionContext ctx) {
+    public semanticResult visitPgDefition(ddmLangParser.PgDefitionContext ctx) {
         characterWrapper pg = null;
        try{
            visitChildren(ctx);
@@ -61,7 +61,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
     
     @Override
-    public semanticResult visitEquipDefinition(digits4Parser.EquipDefinitionContext ctx) {
+    public semanticResult visitEquipDefinition(ddmLangParser.EquipDefinitionContext ctx) {
         equipWrapper eq= null;
        try{
 	    	visitChildren(ctx);
@@ -73,7 +73,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitEntity(digits4Parser.EntityContext ctx) {
+    public semanticResult visitEntity(ddmLangParser.EntityContext ctx) {
 
         semanticResult entity = visitChildren(ctx);
 
@@ -81,7 +81,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitLine(digits4Parser.LineContext ctx) {
+    public semanticResult visitLine(ddmLangParser.LineContext ctx) {
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
@@ -96,7 +96,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitStart(digits4Parser.StartContext ctx) {
+    public semanticResult visitStart(ddmLangParser.StartContext ctx) {
 
         List<semanticResult> prova = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
@@ -110,7 +110,7 @@ public class visitorImpl extends digits4BaseVisitor<semanticResult>{
     }
 
     @Override
-    public semanticResult visitSetting(digits4Parser.SettingContext ctx) {
+    public semanticResult visitSetting(ddmLangParser.SettingContext ctx) {
         return visitChildren(ctx);
     }
 }

@@ -3,14 +3,9 @@ package util;
 import java.io.File;
 import java.io.IOException;
 
+import myLex.*;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-
-import myLex.digits4Lexer;
-import myLex.digits4Parser;
-import myLex.digits4Visitor;
-import myLex.visitorImpl;
-import myLex.visitorImportImpl;
 import parsingExceptions.CustomErrorListener;
 import parsingExceptions.importException;
 import wrappers.semanticResult;
@@ -19,9 +14,9 @@ public class entityImporter {
 	
 	public static semanticResult load(String moduleFileName, String entityName) {
 		semanticResult importedEntity = null;
-		digits4Lexer lexer;
+        ddmLangLexer lexer;
 		try {
-			lexer = new digits4Lexer(CharStreams.fromFileName(moduleFileName));
+			lexer = new ddmLangLexer(CharStreams.fromFileName(moduleFileName));
 		} catch (IOException e) {
 			throw new importException("module " + moduleFileName + " cannot be parsed: " + e.getMessage());
 		}
@@ -31,11 +26,11 @@ public class entityImporter {
         lexer.removeErrorListeners();
         lexer.addErrorListener(CustomErrorListener.INSTANCE);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        digits4Parser parser = new digits4Parser(tokens);
+        ddmLangParser parser = new ddmLangParser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(CustomErrorListener.INSTANCE);
-        digits4Visitor visitor = new visitorImportImpl(parser,entityName);
-        digits4Parser.StartContext parserTree = parser.start();
+        ddmLangVisitor visitor = new visitorImportImpl(parser,entityName);
+        ddmLangParser.StartContext parserTree = parser.start();
         visitor.visitStart(parserTree);
         
         importedEntity = ((visitorImportImpl) visitor).getImported();

@@ -1,7 +1,7 @@
 package util;
 
-import myLex.digits4Parser;
-import myLex.digits4Parser.ClassVectorContext;
+import myLex.ddmLangParser;
+import myLex.ddmLangParser.ClassVectorContext;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.Pair;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -15,12 +15,12 @@ import java.util.*;
 
 public class pgChecker {
 
-    public static characterWrapper checkPgDefinition(List<digits4Parser.PropertyContext> property,String characterName, digits4Parser parser) {
+    public static characterWrapper checkPgDefinition(List<ddmLangParser.PropertyContext> property,String characterName, ddmLangParser parser) {
         characterWrapper character = new characterWrapper();
         character.setName(characterName);
         switch (property.size()){
             case 7:
-                for(digits4Parser.PropertyContext prop : property){
+                for(ddmLangParser.PropertyContext prop : property){
                     Object mandatoryChild = prop.mandatory().getChild(0).getPayload();
                     Object value = prop.value().getChild(0).getPayload();
                     if(mandatoryChild instanceof Token){
@@ -32,13 +32,13 @@ public class pgChecker {
                 }
                 break;
             case 12:
-                for(digits4Parser.PropertyContext prop : property){
+                for(ddmLangParser.PropertyContext prop : property){
                     Object mandatoryChild = prop.mandatory().getChild(0).getPayload();
                     Object value = prop.value().getChild(0).getPayload();
                     if(mandatoryChild instanceof Token){
                         selectOperationCase7(character, (Token)mandatoryChild,value, parser);
-                    }else if(mandatoryChild instanceof digits4Parser.StatIDContext){
-                        selectOperationCase12(character, (digits4Parser.StatIDContext)mandatoryChild,value, parser);;
+                    }else if(mandatoryChild instanceof ddmLangParser.StatIDContext){
+                        selectOperationCase12(character, (ddmLangParser.StatIDContext)mandatoryChild,value, parser);;
                     }
 
                 }
@@ -51,11 +51,11 @@ public class pgChecker {
         }
     }
 
-    private static void selectOperationCase12(characterWrapper character, digits4Parser.StatIDContext mandatoryChild, Object value, digits4Parser parser) {
+    private static void selectOperationCase12(characterWrapper character, ddmLangParser.StatIDContext mandatoryChild, Object value, ddmLangParser parser) {
         character.setSingleStat(mandatoryChild.getText(),Integer.parseInt(((Token)value).getText()) );
     }
 
-    private static void selectOperationCase7(characterWrapper character, Token mandatoryChild, Object value, digits4Parser parser) {
+    private static void selectOperationCase7(characterWrapper character, Token mandatoryChild, Object value, ddmLangParser parser) {
       if(mandatoryChild.getType() == parser.getTokenType("RACE")){
           character.setRace(((Token)value).getText());
       }
@@ -68,7 +68,7 @@ public class pgChecker {
       }
       if(mandatoryChild.getType() == parser.getTokenType("LANG")){
             List<String > languages = new ArrayList<String>();
-            digits4Parser.LanguagesContext allLang = (digits4Parser.LanguagesContext) value;
+          ddmLangParser.LanguagesContext allLang = (ddmLangParser.LanguagesContext) value;
             for(TerminalNode lang : allLang.LANGUAGE()){
                 languages.add(lang.getText());
             }
@@ -86,7 +86,7 @@ public class pgChecker {
       if(mandatoryChild.getType() == parser.getTokenType("SKILLSID")){
 
             List<String > skills = new ArrayList<String>();
-            digits4Parser.SkillsContext allSkills = (digits4Parser.SkillsContext) value;
+          ddmLangParser.SkillsContext allSkills = (ddmLangParser.SkillsContext) value;
             for(TerminalNode skill : allSkills.SKILL()){
                 skills.add(skill.getText());
             }
@@ -99,7 +99,7 @@ public class pgChecker {
       if(mandatoryChild.getType() == parser.getTokenType("ABILITY")){
             Map<String,Integer > scores = new HashMap<String, Integer>();
             String[] abilitiesName = {"STR","DEX","CON","INT","WIS","CHA"};
-            digits4Parser.AbilitiesContext allScores = (digits4Parser.AbilitiesContext) value;
+          ddmLangParser.AbilitiesContext allScores = (ddmLangParser.AbilitiesContext) value;
             int i = 0;
             for(TerminalNode score : allScores.DIGIT()){
                 scores.put(abilitiesName[i],Integer.parseInt(score.getText()));
@@ -110,8 +110,8 @@ public class pgChecker {
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
           Map<Pair<Classi,subClass>, Integer> temp=new HashMap<Pair<Classi,subClass>, Integer>();
           List<String> classAlredySetted = new ArrayList<String>();
-          digits4Parser.ClassVectorContext classVector = (ClassVectorContext) value;
-    	  digits4Parser.ClassVectorElemContext allclass = classVector.classVectorElem();
+          ddmLangParser.ClassVectorContext classVector = (ClassVectorContext) value;
+          ddmLangParser.ClassVectorElemContext allclass = classVector.classVectorElem();
     	  while (allclass != null) {
               Classi tempClasse = Classi.valueOf(allclass.PGCLASS().getText());
               subClass tempSubclass = null;
