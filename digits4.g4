@@ -195,7 +195,7 @@ importData: IMPORT BLANKSPACE LETTER BLANKSPACE FROM BLANKSPACE LETTER;
 
 entity : (pgDefition | equipDefinition);
 
-setting : 'set' BLANKSPACE OPTIONAL  BLANKSPACE ('of' BLANKSPACE toSet)? 'for' BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
+setting : 'set' BLANKSPACE OPTIONAL  BLANKSPACE ('of' BLANKSPACE toSet BLANKSPACE)? 'for' BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
 
 line : (entity | importData | setting) BL | BL;
 
