@@ -29,7 +29,7 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
    		String entityName = ctx.LETTER(0).getText();
 
         semanticResult importedEntity = entityImporter.load(moduleFileName, entityName);
-		return importedEntity; //Non fa nulla, non ho children nell' import
+		return importedEntity;
    	}
    	
     @Override
@@ -54,8 +54,8 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
            visitChildren(ctx);
             pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
-           System.err.println(e);
-           return new exceptionWrapper();
+
+           return new exceptionWrapper(e);
        }
        return  pg;
     }
@@ -67,8 +67,8 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
 	    	visitChildren(ctx);
 	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
     	} catch (Exception e) {
-			System.err.println(e);
-			return new exceptionWrapper();
+
+			return new exceptionWrapper(e);
 		}
     	return  eq;
     }
@@ -100,20 +100,33 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
     public semanticResult visitStart(ddmLangParser.StartContext ctx) {
 
         List<semanticResult> prova = new ArrayList<semanticResult>();
+        List<semanticResult> errorList = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
             if(res != null && !(res instanceof exceptionWrapper))
                 prova.add(res);
             if(res instanceof exceptionWrapper)
-                return null;
+                errorList.add(res);
         }
-        listOfResults aggregateResult = new listOfResults(prova);
+        listOfResults aggregateResult;
+        if(errorList.size()==0)
+         aggregateResult = new listOfResults(prova);
+        else
+            aggregateResult = new listOfResults(errorList);
+
         return aggregateResult;
     }
 
     @Override
     public semanticResult visitSetting(ddmLangParser.SettingContext ctx) {
-        return visitChildren(ctx);
+       try {
+           settingChecker.checkSettingFormat(ctx,parser);
+       }catch (Exception e){
+
+           return new exceptionWrapper(e);
+       }
+
+       return visitChildren(ctx);
     }
 }

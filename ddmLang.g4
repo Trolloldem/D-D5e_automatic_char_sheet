@@ -40,7 +40,9 @@ PLAYER: 'Player';
 EQUIPMENT: 'Equipment';
 IMPORT: 'import';
 FROM: 'from';
-
+SET : 'set';
+FOR : 'for';
+OF : 'of';
 
 COLON 	:	':';
 
@@ -173,7 +175,7 @@ LETTER 	: ('a'..'z'|'A'..'Z')+ ;
 
 optionalValue : (description | DIGIT | BACKGROUND);
 toSet : (PGCLASS);
-description : '"'(LETTER | BLANKSPACE)+ '"';
+description : '"'(DIGIT | LETTER | BLANKSPACE)+ '"';
 
 piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
 pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );
@@ -216,7 +218,7 @@ importData: IMPORT BLANKSPACE LETTER BLANKSPACE FROM BLANKSPACE LETTER;
 
 entity : (pgDefition | equipDefinition);
 
-setting : 'set' BLANKSPACE OPTIONAL  BLANKSPACE ('of' BLANKSPACE toSet BLANKSPACE)? 'for' BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
+setting : SET BLANKSPACE OPTIONAL  BLANKSPACE (OF BLANKSPACE toSet BLANKSPACE)? FOR BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
 
 line : (entity | importData | setting) BL | BL;
 

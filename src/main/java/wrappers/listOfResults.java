@@ -84,6 +84,16 @@ public class listOfResults implements semanticResult {
     
     @Override
     public String toString() {
-        return results.toString();
+
+    	if(results.size()>0){
+    		if(!(results.get(0) instanceof exceptionWrapper))
+    			return results.toString();
+		}
+		String toReturn = "";
+        for(semanticResult res : results){
+        	toReturn = toReturn + res +"\n";
+		}
+        return toReturn;
+
     }
 }

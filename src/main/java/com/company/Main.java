@@ -3,6 +3,8 @@ package com.company;
 import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
+import wrappers.exceptionWrapper;
+import wrappers.listOfResults;
 import wrappers.semanticResult;
 
 class Scan{
@@ -19,7 +21,10 @@ class Scan{
             ddmLangVisitor<semanticResult> visitor = new visitorImpl(parser);
             ddmLangParser.StartContext parserTree = parser.start();
         semanticResult resParsing = visitor.visitStart(parserTree);
-        System.out.println(resParsing);
+        if(((listOfResults)resParsing).getResults().get(0) instanceof exceptionWrapper)
+            System.err.println(resParsing);
+        else
+            System.out.println(resParsing);
         }catch(Exception e){
             System.err.println(e);
             return;

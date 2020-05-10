@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import com.company.Main;
 
+import parsingExceptions.equipMalformedException;
 import parsingExceptions.importException;
 import util.*;
 import wrappers.*;
@@ -50,8 +51,8 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
         	   imported = pg;
            }
        } catch (Exception e) {
-           System.err.println(e);
-           return new exceptionWrapper();
+           equipMalformedException newExc = new equipMalformedException("Error during import of '"+entityName+"' :"+e.getMessage());
+           imported = new exceptionWrapper(newExc);
        }
        return  pg;
     }
@@ -66,8 +67,9 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
 	    		imported = eq;
 	    	}
     	} catch (Exception e) {
-			System.err.println(e);
-			return new exceptionWrapper();
+
+           equipMalformedException newExc = new equipMalformedException("Error during import of '"+entityName+"' :"+e.getMessage());
+           imported = new exceptionWrapper(newExc);
 		}
     	return  eq;
     }
@@ -99,6 +101,7 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
     @Override
     public semanticResult visitStart(ddmLangParser.StartContext ctx) {
         List<semanticResult> prova = new ArrayList<semanticResult>();
+        List<semanticResult> listaEccezioni = new ArrayList<semanticResult>();
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
@@ -106,9 +109,14 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
             if(res != null && !(res instanceof exceptionWrapper))
                 prova.add(res);
             if(res instanceof exceptionWrapper)
-                return null;
+                listaEccezioni.add(res);
         }
-        listOfResults aggregateResult = new listOfResults(prova);
+        listOfResults aggregateResult;
+        if(listaEccezioni.size()==0)
+             aggregateResult = new listOfResults(prova);
+        else
+             aggregateResult = new listOfResults(listaEccezioni);
+
         return aggregateResult;
     }
     
