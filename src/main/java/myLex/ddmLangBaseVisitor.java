@@ -1,4 +1,4 @@
-// Generated from C:/Users/gianl/IdeaProjects/d_and_d_auto\ddmLang.g4 by ANTLR 4.8
+// Generated from /home/oldem/IdeaProjects/D_and_D_Compiler/ddmLang.g4 by ANTLR 4.8
 
 	package myLex;
 
