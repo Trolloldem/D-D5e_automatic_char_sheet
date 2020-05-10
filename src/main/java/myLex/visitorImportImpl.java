@@ -7,10 +7,7 @@ import com.company.Main;
 
 import parsingExceptions.importException;
 import util.*;
-import wrappers.characterWrapper;
-import wrappers.equipWrapper;
-import wrappers.listOfResults;
-import wrappers.semanticResult;
+import wrappers.*;
 
 import java.io.File;
 import java.nio.charset.MalformedInputException;
@@ -54,7 +51,7 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
            }
        } catch (Exception e) {
            System.err.println(e);
-           return null;
+           return new exceptionWrapper();
        }
        return  pg;
     }
@@ -70,6 +67,7 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
 	    	}
     	} catch (Exception e) {
 			System.err.println(e);
+			return new exceptionWrapper();
 		}
     	return  eq;
     }
@@ -105,8 +103,10 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
 
-            if(res != null)
+            if(res != null && !(res instanceof exceptionWrapper))
                 prova.add(res);
+            if(res instanceof exceptionWrapper)
+                return null;
         }
         listOfResults aggregateResult = new listOfResults(prova);
         return aggregateResult;

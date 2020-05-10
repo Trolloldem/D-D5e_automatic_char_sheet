@@ -55,7 +55,7 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
             pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
            System.err.println(e);
-           return null;
+           return new exceptionWrapper();
        }
        return  pg;
     }
@@ -68,6 +68,7 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
 	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
     	} catch (Exception e) {
 			System.err.println(e);
+			return new exceptionWrapper();
 		}
     	return  eq;
     }
@@ -102,8 +103,10 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
-            if(res != null)
+            if(res != null && !(res instanceof exceptionWrapper))
                 prova.add(res);
+            if(res instanceof exceptionWrapper)
+                return null;
         }
         listOfResults aggregateResult = new listOfResults(prova);
         return aggregateResult;
