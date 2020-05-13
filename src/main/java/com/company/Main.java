@@ -3,9 +3,11 @@ package com.company;
 import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
+import util.checkerSetting;
 import wrappers.exceptionWrapper;
 import wrappers.listOfResults;
 import wrappers.semanticResult;
+
 
 class Scan{
     public void executeParsing() {
@@ -21,6 +23,7 @@ class Scan{
             ddmLangVisitor<semanticResult> visitor = new visitorImpl(parser);
             ddmLangParser.StartContext parserTree = parser.start();
         semanticResult resParsing = visitor.visitStart(parserTree);
+        checkerSetting.existName(resParsing);
         if(((listOfResults)resParsing).getResults().get(0) instanceof exceptionWrapper)
             System.err.println(resParsing);
         else
@@ -41,5 +44,6 @@ public class Main {
 	public static void main(String[] args) {
 	Scan a = new Scan();
 	a.executeParsing();
+	
     }
 }

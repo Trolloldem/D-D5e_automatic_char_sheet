@@ -2,18 +2,24 @@ package util;
 
 
 import myLex.ddmLangParser;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.antlr.v4.runtime.Token;
 import parsingExceptions.setMalformedException;
 
 public class settingChecker {
 
     private static final int DESC_MAX_LEN = 250;
-
+    public static List<String> names=new ArrayList<String>();
+    public static List<String> equipNames=new ArrayList<String>();
     public static void checkSettingFormat(ddmLangParser.SettingContext ctx, ddmLangParser parser){
-        if(!ctx.OPTIONAL().getText().equals("Level") && ctx.OF()!=null){
+    	addname(ctx.LETTER().getText());
+    
+    	if(!ctx.OPTIONAL().getText().equals("Level") && ctx.OF()!=null){
             throw new setMalformedException("Setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+" presents 'of'.Only Level settings can have 'of' inside");
         }
-
         if(ctx.OPTIONAL().getText().equals("Level") && ctx.OF() == null){
             throw new setMalformedException("Wrong format for Level setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". Level settings must have 'of' inside");
         }
@@ -29,6 +35,7 @@ public class settingChecker {
                     if(!(childToken.getType() == parser.getTokenType("DIGIT")))
                         throw new setMalformedException("Wrong format for Level setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". Level value must be a number");
                 }
+                break;
             case "Description":
 
                 if(child instanceof Token){
@@ -38,6 +45,7 @@ public class settingChecker {
                 if(((ddmLangParser.DescriptionContext) child).getText().length()>DESC_MAX_LEN){
                     throw new setMalformedException("Wrong format for Description setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The description is too long. Max "+DESC_MAX_LEN+" characters");
                 }
+                break;
             case "Background":
                 if(!(child instanceof Token)){
 
@@ -47,6 +55,7 @@ public class settingChecker {
                     if(!(childToken.getType() == parser.getTokenType("BACKGROUND")))
                         throw new setMalformedException("Wrong format for Background setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The background specified is not part of the manual");
                 }
+                break;
             case "Items":
                 if(!(child instanceof Token)){
 
@@ -56,7 +65,20 @@ public class settingChecker {
                     if(!(childToken.getType() == parser.getTokenType("LETTER")))
                         throw new setMalformedException("Wrong format for Items setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The equipment specified must be a name of an Equipment");
                 }
+                addEquipNames(((Token) child).getText());
+                break;
         }
     }
-
+    public static void addname(String s) {
+		names.add(s);
+    }
+    public static List<String> getEquipNames() {
+		return equipNames;
+	}
+	public static void addEquipNames(String tempItem) {
+		equipNames.add(tempItem);
+	}
+	public static List<String> getnames() {
+    	return names;
+    }
 }

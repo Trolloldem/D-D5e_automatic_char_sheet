@@ -11,12 +11,13 @@ import parsingExceptions.sameNameException;
 
 public class listOfResults implements semanticResult {
 
-    private List<semanticResult> results;
+     List<semanticResult> results;
 
     public listOfResults(List<semanticResult> list){
         results=list;
         checkName(results);
         checkEquipName(results);
+        
     }
 
     public listOfResults(){
@@ -27,7 +28,7 @@ public class listOfResults implements semanticResult {
         this.results = results;
     }
 
-    public List<semanticResult> getResults() {
+    public  List<semanticResult> getResults() {
         return results;
     }
 
@@ -79,6 +80,7 @@ public class listOfResults implements semanticResult {
     	if(flag==true) {
     		throw new sameNameException("multiple equipment have the same name: " + error);
     	}
+    	
     }
     
     

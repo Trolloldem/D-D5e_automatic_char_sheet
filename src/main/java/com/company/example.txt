@@ -5,7 +5,8 @@ funziona o no.
 */
 import rogueEquip from baseEquip
 import Brando from unibgPlayers
-
+import gian from unibgPlayers
+set Background for Ado = Acolyte
 create Player Ado{
     race: Half Orc
     hp:10
@@ -15,10 +16,23 @@ create Player Ado{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Items for Ado = AdoEquip
+
+set Background for LOL = Acolyte
+set Background for tetteculo = Acolyte
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
     consumables:(Gold*100,Health potion*2)
     weapon:Axe
 }
+
+create Player Gion{
+    race: Half Orc
+    hp:10
+    archetype: (Barbarian->Berserker,Bard->College of Lore)
+    abilities:(15,15,15,15,15,15)
+    alignment:chaotic good  //Ado è proprio un bravo ragazzo
+    skills: (Religion,Medicine)
+    languages: (Abissal,Common)
+}
+set Background for Gion = Acolyte

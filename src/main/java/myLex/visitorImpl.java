@@ -123,10 +123,9 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
        try {
            settingChecker.checkSettingFormat(ctx,parser);
        }catch (Exception e){
-
            return new exceptionWrapper(e);
        }
-
+     
        return visitChildren(ctx);
     }
 }
