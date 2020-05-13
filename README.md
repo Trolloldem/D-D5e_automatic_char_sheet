@@ -6,7 +6,5 @@
 ## Non urgenti:
 
 ## Opzionali
-* PDFBox, vedere come scrivere
-* Usare i set
-* da vedere: come scaricare un eventuale PDF
-* Rinominare il g4 da digits4 a qualcosa di più appropriato
+* PDFBox, vedere come scrivere -> da passare ad urgenti appena finito con i Set 
+* da vedere: come scaricare un eventuale PDF -> non necessario => possibile leggera package nel JAR

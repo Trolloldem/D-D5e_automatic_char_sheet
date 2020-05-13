@@ -50,6 +50,16 @@ public class settingChecker {
                         throw new setMalformedException("Wrong format for Background setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The background specified is not part of the manual");
                 }
                 break;
+            case "Items":
+                if(!(child instanceof Token)){
+
+                    throw new setMalformedException("Wrong format for Items setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The equipment specified must be a name of an Equipment");
+                }else{
+                    Token childToken = (Token) child;
+                    if(!(childToken.getType() == parser.getTokenType("LETTER")))
+                        throw new setMalformedException("Wrong format for Items setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The equipment specified must be a name of an Equipment");
+                }
+                break;
         }
     }
 

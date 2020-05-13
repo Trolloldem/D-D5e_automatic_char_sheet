@@ -168,12 +168,12 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
-OPTIONAL : ('Description' | 'Level' | 'Background');
+OPTIONAL : ('Description' | 'Level' | 'Background' | 'Items');
 
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
 
 
-optionalValue : (description | DIGIT | BACKGROUND);
+optionalValue : (description | DIGIT | BACKGROUND | LETTER);
 toSet : (PGCLASS);
 description : '"'(DIGIT | LETTER | BLANKSPACE)+ '"';
 

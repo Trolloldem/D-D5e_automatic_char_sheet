@@ -15,7 +15,7 @@ create Player Ado{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Level of Barbarian for Ado = 15
+set Background for Ado = Acolyte
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
