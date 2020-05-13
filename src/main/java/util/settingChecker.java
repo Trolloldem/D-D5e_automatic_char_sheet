@@ -29,6 +29,7 @@ public class settingChecker {
                     if(!(childToken.getType() == parser.getTokenType("DIGIT")))
                         throw new setMalformedException("Wrong format for Level setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". Level value must be a number");
                 }
+                break;
             case "Description":
 
                 if(child instanceof Token){
@@ -38,6 +39,7 @@ public class settingChecker {
                 if(((ddmLangParser.DescriptionContext) child).getText().length()>DESC_MAX_LEN){
                     throw new setMalformedException("Wrong format for Description setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The description is too long. Max "+DESC_MAX_LEN+" characters");
                 }
+                break;
             case "Background":
                 if(!(child instanceof Token)){
 
@@ -47,6 +49,7 @@ public class settingChecker {
                     if(!(childToken.getType() == parser.getTokenType("BACKGROUND")))
                         throw new setMalformedException("Wrong format for Background setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The background specified is not part of the manual");
                 }
+                break;
         }
     }
 
