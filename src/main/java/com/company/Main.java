@@ -24,6 +24,7 @@ class Scan{
             ddmLangParser.StartContext parserTree = parser.start();
         semanticResult resParsing = visitor.visitStart(parserTree);
         checkerSetting.existName(resParsing);
+        checkerSetting.existEquipName(resParsing);
         if(((listOfResults)resParsing).getResults().get(0) instanceof exceptionWrapper)
             System.err.println(resParsing);
         else

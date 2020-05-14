@@ -17,8 +17,7 @@ create Player Ado{
     languages: (Abissal,Common)
 }
 
-set Background for LOL = Acolyte
-set Background for tetteculo = Acolyte
+
 create Equipment AdoEquip{
     armor:Full plate
     shield:Yes
@@ -35,4 +34,4 @@ create Player Gion{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Background for Gion = Acolyte
+set Level of Barbarian for Gion = 15

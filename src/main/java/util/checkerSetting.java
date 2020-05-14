@@ -7,7 +7,8 @@
 
 	import parsingExceptions.nameNotExist;
 	import wrappers.characterWrapper;
-	import wrappers.listOfResults;
+import wrappers.equipWrapper;
+import wrappers.listOfResults;
 	import wrappers.semanticResult;
 
 	public class checkerSetting {
@@ -35,5 +36,32 @@
 				throw new nameNotExist("names" +result+" do not exist");	
 		}
 	}
+		public static void existEquipName(semanticResult resParsing) {
+			
+			List<semanticResult> tempResult = new ArrayList<semanticResult>();
+			tempResult=((listOfResults) resParsing).getResults();
+			equipWrapper temp=null;
+			Set<String> names= new HashSet<String>( settingChecker.getEquipNames());
+			Set<String> equip= new HashSet<String>(); 
+			boolean flag=false;
+			for(int i=0;i<tempResult.size();i++) {
+	    		if(tempResult.get(i) instanceof equipWrapper) {
+	    			temp=(equipWrapper) tempResult.get(i);
+	    			equip.add(temp.getName());
+	    		}
+	    	}
+			Set<String> intersezione = new HashSet<String>(names);
+			intersezione.retainAll(equip);
+			if(!intersezione.equals(names)) {
+				String result="";
+				for(String name:names) {
+					if(!intersezione.contains(name))
+						result = result+" "+name;
+				}
+				throw new nameNotExist("equip names" +result+" do not exist");	
+		}
 	}
+	
+}
+	
 
