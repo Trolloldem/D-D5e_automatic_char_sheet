@@ -34,7 +34,7 @@ class Scan{
                 boolean noErrorsPg = !errorPrinter.print(mappaPgNames);
                 boolean noErrorsEquip = !errorPrinter.print(mappaEquipNames);
                 if(noErrorsPg && noErrorsEquip) {
-                    listOfResults levelErrors = checkerSetting.setClassLevel(mappaPgNames);
+                    listOfResults levelErrors = checkerSetting.setOptionals(mappaPgNames);
                     errorPrinter.print(levelErrors);
                 }
             }

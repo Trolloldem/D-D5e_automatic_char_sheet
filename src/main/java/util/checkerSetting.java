@@ -77,9 +77,8 @@
 			}
 			return  equips;
 	}
-	public static listOfResults setClassLevel(Map<String, semanticResult> resParsing){
-			listOfResults res = null;
-			List<semanticResult> errors = new ArrayList<semanticResult>();
+
+	public static void setClassLevel(Map<String ,semanticResult> resParsing, List<semanticResult> errors){
 
 			for(settingWrapper w : settingChecker.getSettingWrappers().get("Level")){
 				if( w instanceof levelSetting) {
@@ -95,36 +94,50 @@
 				}
 			}
 
-			for(Map.Entry<String,semanticResult> entry : resParsing.entrySet()){
-				characterWrapper wrapper = (characterWrapper)entry.getValue();
-				int charTotalLevel = 0;
+		for(Map.Entry<String,semanticResult> entry : resParsing.entrySet()){
+			characterWrapper wrapper = (characterWrapper)entry.getValue();
+			int charTotalLevel = 0;
 
-				for(Map.Entry<Pair<Classi, subClass>, Integer> charLevel : wrapper.getPgClass().entrySet()){
+			for(Map.Entry<Pair<Classi, subClass>, Integer> charLevel : wrapper.getPgClass().entrySet()){
 
-					if(charLevel.getValue() < 0){
-						errors.add(new exceptionWrapper(new classLevelException(wrapper.getName(),charLevel.getKey().a.toString().replace("_"," "))));
-						continue;
-					}
-					if(charLevel.getValue() >20){
-						errors.add(new exceptionWrapper(new classLevelException(wrapper.getName(),charLevel.getKey().a.toString().replace("_"," "),20)));
-
-					}
-					charTotalLevel = charTotalLevel + charLevel.getValue();
-
-					try{
-						wrapper.hasCorrectSubClass(charLevel.getKey().a);
-					}catch (CharacterWithoutClassException e){
-						errors.add(new exceptionWrapper(e));
-					}
+				if(charLevel.getValue() <= 0){
+					errors.add(new exceptionWrapper(new classLevelException(wrapper.getName(),charLevel.getKey().a.toString().replace("_"," "))));
+					continue;
 				}
-				if(charTotalLevel > 20){
-					errors.add(new exceptionWrapper(new classLevelException(wrapper.getName())));
+				if(charLevel.getValue() >20){
+					errors.add(new exceptionWrapper(new classLevelException(wrapper.getName(),charLevel.getKey().a.toString().replace("_"," "),20)));
+
+				}
+				charTotalLevel = charTotalLevel + charLevel.getValue();
+
+				try{
+					wrapper.hasCorrectSubClass(charLevel.getKey().a);
+				}catch (CharacterWithoutClassException e){
+					errors.add(new exceptionWrapper(e));
 				}
 			}
+			if(charTotalLevel > 20){
+				errors.add(new exceptionWrapper(new classLevelException(wrapper.getName())));
+			}
+			wrapper.setTotalLevel(charTotalLevel);
 
-			if(errors.size()>0)
-				res = new listOfResults(errors);
-			return res;
+
+		}
+
+
+
+	}
+
+	public static listOfResults setOptionals(Map<String, semanticResult> resParsing){
+			listOfResults res = null;
+			List<semanticResult> errors = new ArrayList<semanticResult>();
+
+			setClassLevel(resParsing, errors);
+
+		if(errors.size()>0)
+			res = new listOfResults(errors);
+		return res;
+
 	}
 	
 }

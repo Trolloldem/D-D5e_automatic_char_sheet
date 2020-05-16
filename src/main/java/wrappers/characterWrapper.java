@@ -21,8 +21,16 @@ public class characterWrapper implements semanticResult{
     List<String> skills;
     List<String> languages;
     int settedProperty;
+    int totalLevel;
 
 
+    public int getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(int total){
+        totalLevel = total;
+    }
 
     public characterWrapper(){
         settedProperty = 0;
@@ -134,6 +142,15 @@ public class characterWrapper implements semanticResult{
     	}
 		return result;
     	
+    }
+
+    public int getProficiencyBonus(){
+        int mod = totalLevel % 4;
+        int div = totalLevel / 4;
+        if(mod == 0)
+            return div +1;
+        else
+            return div + 2;
     }
 
     public String getAlignment() {
