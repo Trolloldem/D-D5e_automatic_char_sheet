@@ -5,6 +5,7 @@
 	import org.antlr.v4.runtime.misc.Pair;
 	import parsingExceptions.CharacterWithoutClassException;
 	import parsingExceptions.classLevelException;
+	import parsingExceptions.multipleLevelSettingException;
 	import parsingExceptions.nameNotExist;
 	import util.lexEnum.Classi;
 	import util.lexEnum.subClass;
@@ -80,12 +81,25 @@
 
 	public static void setClassLevel(Map<String ,semanticResult> resParsing, List<semanticResult> errors){
 
+			Map<String,Set<Classi>> alreadySetClass = new HashMap<String, Set<Classi>>();
+
 			for(settingWrapper w : settingChecker.getSettingWrappers().get("Level")){
 				if( w instanceof levelSetting) {
 					levelSetting wrapper = (levelSetting) w;
 					characterWrapper character = (characterWrapper)resParsing.get(wrapper.getPgName());
 					try {
 						character.setClassLevel(wrapper.getPgClass(),wrapper.getSetting());
+						if(alreadySetClass.containsKey(wrapper.getPgName())){
+							if(alreadySetClass.get(wrapper.getPgName()).contains(wrapper.getPgClass())){
+								errors.add(new exceptionWrapper(new multipleLevelSettingException(wrapper.getPgName(),wrapper.getPgClass().toString().replace("_"," "))));
+							}else{
+								alreadySetClass.get(wrapper.getPgName()).add(wrapper.getPgClass());
+							}
+						}else{
+							Set<Classi> set = new HashSet<Classi>();
+							set.add(wrapper.getPgClass());
+							alreadySetClass.put(wrapper.getPgName(),set);
+						}
 					}catch (CharacterWithoutClassException e){
 						errors.add(new exceptionWrapper(e));
 					}
