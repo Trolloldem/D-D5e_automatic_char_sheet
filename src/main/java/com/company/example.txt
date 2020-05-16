@@ -6,7 +6,7 @@ funziona o no.
 import rogueEquip from baseEquip
 import Brando from unibgPlayers
 import gian from unibgPlayers
-set Background for Ado = Acolyte
+set Items for Ado = rogueEquip
 create Player Ado{
     race: Half Orc
     hp:10
@@ -34,4 +34,16 @@ create Player Gion{
     skills: (Religion,Medicine)
     languages: (Abissal,Common)
 }
-set Level of Barbarian for Gion = 15
+set Background for Gion = Folk Hero
+
+set Level of Barbarian for Ado = 3
+set Level of Bard for Ado = 5
+
+set Level of Barbarian for Brando = 3
+set Level of Bard for Brando = 5
+
+set Level of Barbarian for Gion = 3
+set Level of Bard for Gion = 5
+
+set Level of Barbarian for gian = 3
+set Level of Bard for gian = 5

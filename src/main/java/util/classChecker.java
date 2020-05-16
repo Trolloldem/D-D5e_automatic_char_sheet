@@ -23,7 +23,7 @@ public class classChecker implements semanticResult {
     		S = S.replace(' ','_');
     		for( Classi check:Classi.values()){
     			if(C.equals(check.name())) {
-    				for(subClass tempo:check.subClasses) {
+    				for(subClass tempo:check.getSubClasses()) {
     					if(S.equals(tempo.name())) {
 
     						flag=true;
@@ -33,7 +33,7 @@ public class classChecker implements semanticResult {
     	 	}
     	 	if(flag==false) {
     	 		String s="the subclass is not compatible with the class, please select a one of:"+ "\n";
-    	 		for(subClass tempS:TempClasse.subClasses)
+    	 		for(subClass tempS:TempClasse.getSubClasses())
     				s=s+tempS+"\n";
     	 		s=s.replace("_", " ");
             	throw new notSubclassException(s);

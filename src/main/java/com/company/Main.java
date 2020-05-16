@@ -4,31 +4,42 @@ import myLex.*;
 import org.antlr.v4.runtime.*;
 import parsingExceptions.CustomErrorListener;
 import util.checkerSetting;
-import wrappers.exceptionWrapper;
+import resultValidators.errorPrinter;
+import wrappers.characterWrapper;
 import wrappers.listOfResults;
 import wrappers.semanticResult;
+
+import java.util.Map;
 
 
 class Scan{
     public void executeParsing() {
         try{
-        String fileIn = Main.BASEPATH + "example.txt";
+
+            String fileIn = Main.BASEPATH + "example.txt";
             ddmLangLexer lexer = new ddmLangLexer(CharStreams.fromFileName(fileIn));
-        lexer.removeErrorListeners();
-        lexer.addErrorListener(CustomErrorListener.INSTANCE);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-            ddmLangParser parser = new ddmLangParser(tokens);
-        parser.removeErrorListeners();
-        parser.addErrorListener(CustomErrorListener.INSTANCE);
+            lexer.removeErrorListeners();
+            lexer.addErrorListener(CustomErrorListener.INSTANCE);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+                ddmLangParser parser = new ddmLangParser(tokens);
+            parser.removeErrorListeners();
+            parser.addErrorListener(CustomErrorListener.INSTANCE);
             ddmLangVisitor<semanticResult> visitor = new visitorImpl(parser);
             ddmLangParser.StartContext parserTree = parser.start();
-        semanticResult resParsing = visitor.visitStart(parserTree);
-        checkerSetting.existName(resParsing);
-        checkerSetting.existEquipName(resParsing);
-        if(((listOfResults)resParsing).getResults().get(0) instanceof exceptionWrapper)
-            System.err.println(resParsing);
-        else
-            System.out.println(resParsing);
+            semanticResult resParsing = visitor.visitStart(parserTree);
+
+            if(!errorPrinter.print(resParsing)){
+                Map<String, semanticResult> mappaPgNames = checkerSetting.existName(resParsing);
+                Map<String, semanticResult> mappaEquipNames =checkerSetting.existEquipName(resParsing);
+                boolean noErrorsPg = !errorPrinter.print(mappaPgNames);
+                boolean noErrorsEquip = !errorPrinter.print(mappaEquipNames);
+                if(noErrorsPg && noErrorsEquip) {
+                    listOfResults levelErrors = checkerSetting.setClassLevel(mappaPgNames);
+                    errorPrinter.print(levelErrors);
+                }
+            }
+
+
         }catch(Exception e){
             System.err.println(e);
             return;

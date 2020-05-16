@@ -1,6 +1,7 @@
 package wrappers;
 
 import org.antlr.v4.runtime.misc.Pair;
+import parsingExceptions.CharacterWithoutClassException;
 import parsingExceptions.pgMalformedException;
 import util.lexEnum.Classi;
 import util.lexEnum.Races;
@@ -13,6 +14,7 @@ public class characterWrapper implements semanticResult{
     String name;
     Races race;
     Map<Pair<Classi, subClass>, Integer> pgClass;
+    Map<Classi, subClass> subClassMap;
     int hp;
     Map<String, Integer> stats;
     String alignment;
@@ -28,6 +30,7 @@ public class characterWrapper implements semanticResult{
         skills = new ArrayList<String>();
         stats = new HashMap<String, Integer>();
         pgClass = new HashMap<Pair<Classi, subClass>, Integer>();
+        subClassMap = new HashMap<Classi,subClass>();
     }
 
 
@@ -49,6 +52,37 @@ public class characterWrapper implements semanticResult{
 
     }
 
+    public void hasCorrectSubClass(Classi toCheck){
+        subClass sub = subClassMap.get(toCheck);
+        Pair<Classi,subClass> key = new Pair<Classi,subClass>(toCheck, sub);
+        if(pgClass.get(key)>= toCheck.getSubClassLevel() && sub == null){
+            throw new CharacterWithoutClassException(name,key.a);
+        }
+        if(pgClass.get(key)< toCheck.getSubClassLevel() && sub != null){
+            throw new CharacterWithoutClassException(name,key.a, sub);
+        }
+    }
+
+    public void setClassLevel(Classi toSet, int level){
+
+        if(!subClassMap.containsKey(toSet))
+            throw new CharacterWithoutClassException(name,toSet.toString().replace("_"," "));
+
+        Pair<Classi,subClass> key = new Pair<Classi,subClass>(toSet,subClassMap.get(toSet));
+        if(pgClass.containsKey(key)){
+            pgClass.replace(key,level);
+        }
+    }
+
+    public Integer getClassLevel(Classi toGet){
+
+        Pair<Classi,subClass> key = new Pair<Classi,subClass>(toGet,subClassMap.get(toGet));
+        if(pgClass.containsKey(key)){
+            return pgClass.get(key);
+        }
+        return null;
+
+    }
     public void setRace(String razza) {
         setRace(Races.valueOf(razza.replace(' ','_')));
     }
@@ -60,6 +94,8 @@ public class characterWrapper implements semanticResult{
     public void setPgClass(Map<Pair<Classi, subClass>, Integer> pgClass) {
         settedProperty++;
         this.pgClass = pgClass;
+        for(Pair<Classi,subClass> key : pgClass.keySet())
+            subClassMap.put(key.a,key.b);
     }
 
     public int getHp() {
