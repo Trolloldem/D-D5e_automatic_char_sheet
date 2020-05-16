@@ -2,6 +2,7 @@ package com.company;
 
 import myLex.*;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import parsingExceptions.CustomErrorListener;
 import util.checkerSetting;
 import resultValidators.errorPrinter;
@@ -26,6 +27,11 @@ class Scan{
             parser.addErrorListener(CustomErrorListener.INSTANCE);
             ddmLangVisitor<semanticResult> visitor = new visitorImpl(parser);
             ddmLangParser.StartContext parserTree = parser.start();
+            if(CustomErrorListener.errors.size()>0){
+                for(ParseCancellationException e : CustomErrorListener.errors)
+                    System.err.println(e);
+                return;
+            }
             semanticResult resParsing = visitor.visitStart(parserTree);
 
             if(!errorPrinter.print(resParsing)){
