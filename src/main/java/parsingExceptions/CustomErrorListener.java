@@ -13,9 +13,12 @@ public class CustomErrorListener extends BaseErrorListener {
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e)
             throws ParseCancellationException {
-        int tokenType = ((Token)offendingSymbol).getType();
-        String tokenName = recognizer.getVocabulary().getDisplayName(tokenType);
-        throw new ParseCancellationException("line " + line + ":" + charPositionInLine + " " + msg+"; unexpected token "+tokenName);
+        if(offendingSymbol != null) {
+            int tokenType = ((Token) offendingSymbol).getType();
+            String tokenName = recognizer.getVocabulary().getDisplayName(tokenType);
+            throw new ParseCancellationException("line " + line + ":" + charPositionInLine + " " + msg + "; unexpected token " + tokenName);
+        }
 
+        throw new ParseCancellationException("line " + line + ":" + charPositionInLine + " " + msg);
     }
 }
