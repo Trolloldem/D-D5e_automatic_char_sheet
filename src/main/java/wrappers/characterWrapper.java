@@ -3,6 +3,7 @@ package wrappers;
 import org.antlr.v4.runtime.misc.Pair;
 import parsingExceptions.CharacterWithoutClassException;
 import parsingExceptions.pgMalformedException;
+import util.lexEnum.Backgrounds;
 import util.lexEnum.Classi;
 import util.lexEnum.Races;
 import util.lexEnum.subClass;
@@ -22,6 +23,8 @@ public class characterWrapper implements semanticResult{
     List<String> languages;
     int settedProperty;
     int totalLevel;
+    int extraLang;
+    Backgrounds bg;
 
 
     public int getTotalLevel() {
@@ -39,8 +42,22 @@ public class characterWrapper implements semanticResult{
         stats = new HashMap<String, Integer>();
         pgClass = new HashMap<Pair<Classi, subClass>, Integer>();
         subClassMap = new HashMap<Classi,subClass>();
+        extraLang = 0;
+        bg = null;
     }
 
+    public void setBackground(Backgrounds background){
+        bg = background;
+        extraLang = extraLang + background.getExtraLang();
+    }
+
+    public int getExtraLang(){
+        return extraLang;
+    }
+
+    public Backgrounds getBackground(){
+        return bg;
+    }
 
     public Boolean allSetted(){
         if(this.settedProperty == 12)
@@ -56,6 +73,10 @@ public class characterWrapper implements semanticResult{
         if(race==null){
             settedProperty++;
             this.race = razza;
+            List<String> langRace = new ArrayList<String>();
+            Collections.addAll(langRace,razza.getLanguages());
+            setLanguages(langRace);
+            extraLang = extraLang + razza.getExtraLang();
         }
 
     }
@@ -185,10 +206,10 @@ public class characterWrapper implements semanticResult{
        if(this.languages.size()==0){
            settedProperty++;
            this.languages = languages;
+       }else{
+           this.languages.addAll(languages);
        }
-       if(this.languages.size()==1){
-           throw new pgMalformedException("Only 1 language specified for Player '"+this.getName()+"'. If only one language is specified, it cannot be 'Common'");
-       }
+
 
     }
 

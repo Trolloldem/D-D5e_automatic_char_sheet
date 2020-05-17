@@ -72,14 +72,6 @@ public class pgChecker {
             for(TerminalNode lang : allLang.LANGUAGE()){
                 languages.add(lang.getText());
             }
-            if(languages.size()==1 && !languages.toArray()[0].equals("Common")){
-                languages.add("Common");
-            }else if(languages.size()==1 && languages.toArray()[0].equals("Common")){
-                throw new pgMalformedException("Only 1 language specified for Player '"+character.getName()+"'. If only one language is specified, it cannot be 'Common'");
-            }
-            if(languages.size()==2 && languages.toArray()[0].equals(languages.toArray()[1])){
-                throw new pgMalformedException("The character must know 2 languages. The language '"+languages.toArray()[0]+"' is specified 2 times for Player '"+character.getName()+"'");
-            }
 
             character.setLanguages(languages);
       }

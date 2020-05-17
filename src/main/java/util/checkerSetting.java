@@ -3,13 +3,11 @@
 	import java.util.*;
 
 	import org.antlr.v4.runtime.misc.Pair;
-	import parsingExceptions.CharacterWithoutClassException;
-	import parsingExceptions.classLevelException;
-	import parsingExceptions.multipleLevelSettingException;
-	import parsingExceptions.nameNotExist;
+	import parsingExceptions.*;
 	import util.lexEnum.Classi;
 	import util.lexEnum.subClass;
 	import wrappers.*;
+	import wrappers.settings.bgSetting;
 	import wrappers.settings.levelSetting;
 	import wrappers.settings.settingWrapper;
 
@@ -142,18 +140,69 @@
 
 	}
 
+	public static void setBg(Map<String,semanticResult> resParsing, List<semanticResult> errors){
+			Set<String> alreadySetBg = new HashSet<String>();
+			for(settingWrapper w : settingChecker.getSettingWrappers().get("Background")){
+				bgSetting bg = (bgSetting) w;
+				if(resParsing.containsKey(bg.getPgName())){
+					if(!alreadySetBg.contains(bg.getPgName())) {
+						characterWrapper character = (characterWrapper) resParsing.get(bg.getPgName());
+						character.setBackground(bg.getSetting());
+						alreadySetBg.add(bg.getPgName());
+					}else{
+						errors.add(new exceptionWrapper(new multipleBackgroundSettingException(bg.getPgName())));
+					}
+
+				}
+
+		}
+	}
+
 	public static listOfResults setOptionals(Map<String, semanticResult> resParsing){
 			listOfResults res = null;
 			List<semanticResult> errors = new ArrayList<semanticResult>();
 
 			setClassLevel(resParsing, errors);
+			setBg(resParsing, errors);
 
+			checkLanguages(resParsing,errors);
 		if(errors.size()>0)
 			res = new listOfResults(errors);
 		return res;
 
 	}
-	
-}
+
+		private static void checkLanguages(Map<String, semanticResult> resParsing, List<semanticResult> errors) {
+
+			for(Map.Entry<String,semanticResult> entry : resParsing.entrySet()) {
+
+				characterWrapper wrapper = (characterWrapper) entry.getValue();
+				int numLang = wrapper.getLanguages().size();
+				int expectedNumLang;
+				if(wrapper.getBackground() != null)
+					expectedNumLang = wrapper.getRace().getLanguages().length + wrapper.getBackground().getExtraLang() + wrapper.getRace().getExtraLang();
+				else
+					expectedNumLang= wrapper.getRace().getLanguages().length + wrapper.getRace().getExtraLang();
+
+				if(numLang > expectedNumLang)
+					errors.add(new exceptionWrapper(new pgMalformedException("Wrong number of languages for Player '"+wrapper.getName()+"'\nOnly "+(expectedNumLang-wrapper.getRace().getLanguages().length)+" can be specified in 'languages'")));
+				if(numLang < expectedNumLang)
+					errors.add(new exceptionWrapper(new pgMalformedException("Wrong number of languages for Player '"+wrapper.getName()+"'\n"+(expectedNumLang-wrapper.getRace().getLanguages().length)+" languages must be specified in 'languages'")));
+				Set<String> langOccurrence = new HashSet<String>();
+				for(String lang : wrapper.getLanguages()){
+					if(!langOccurrence.contains(lang))
+						langOccurrence.add(lang);
+					else {
+						String errorMsg = "Repeated language '" + lang + "' for Player '" + wrapper.getName() + "'\nRace languages:";
+						for(String s : wrapper.getRace().getLanguages())
+							errorMsg = errorMsg + " " + s;
+
+						errors.add(new exceptionWrapper(new pgMalformedException(errorMsg)));
+					}
+				}
+			}
+		}
+
+	}
 	
 

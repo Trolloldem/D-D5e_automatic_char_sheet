@@ -164,7 +164,7 @@ BACKGROUND:
 'Urchin';
 
 
-LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
+LANGUAGE: 'Common' | 'Draconic' | 'Infernal' | 'Dwarvish' | 'Elvish' | 'Gnomish' | 'Orc' | 'Halfling' ;
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
@@ -195,7 +195,7 @@ abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
 skills: '(' SKILL ',' SKILL ')';
 
 
-languages: '('LANGUAGE (',' LANGUAGE)?')';
+languages: '('(LANGUAGE)? (',' LANGUAGE)?  (',' LANGUAGE)?')';
 
 
 

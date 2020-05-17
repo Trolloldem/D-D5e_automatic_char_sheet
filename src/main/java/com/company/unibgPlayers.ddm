@@ -5,7 +5,7 @@ create Player Brando{
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
     skills: (Religion,Medicine)
-    languages: (Abissal,Common)
+    languages: ()
 }
 create Player gian{
     race: Half Orc
@@ -14,5 +14,5 @@ create Player gian{
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
     skills: (Religion,Medicine)
-    languages: (Abissal,Common)
+    languages: ()
 }
