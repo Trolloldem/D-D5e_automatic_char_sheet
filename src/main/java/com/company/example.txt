@@ -7,6 +7,8 @@ import rogueEquip from baseEquip
 import Brando from unibgPlayers
 import gian from unibgPlayers
 set Items for Ado = rogueEquip
+set Items for Ado = AdoEquip
+set Active Equipment for Ado = AdoEquip
 create Player Ado{
     race: Half Orc
     hp:10

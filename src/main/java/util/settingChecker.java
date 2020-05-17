@@ -79,6 +79,18 @@ public class settingChecker {
                 addEquipNames(((Token) child).getText());
                 addSetting("Items", ctx.LETTER().getText(),((Token) child).getText());
                 break;
+            case "Active Equipment":
+                if(!(child instanceof Token)){
+
+                    throw new setMalformedException("Wrong format for Active Equipment setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The equipment specified must be a name of an Equipment");
+                }else{
+                    Token childToken = (Token) child;
+                    if(!(childToken.getType() == parser.getTokenType("LETTER")))
+                        throw new setMalformedException("Wrong format for Active Equipment setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The equipment specified must be a name of an Equipment");
+                }
+                addEquipNames(((Token) child).getText());
+                addSetting("Active Equipment", ctx.LETTER().getText(),((Token) child).getText());
+                break;
         }
         addname(ctx.LETTER().getText());
     }
@@ -131,6 +143,14 @@ public class settingChecker {
                         settingWrappers.put("Items",new ArrayList<settingWrapper>());
                     key = "Items";
                     toAdd = new itemsSetting(pgName, (String) val);
+                }
+                break;
+            case "Active Equipment":
+                if(val instanceof String) {
+                    if(!settingWrappers.containsKey("Active Equipment"))
+                        settingWrappers.put("Active Equipment",new ArrayList<settingWrapper>());
+                    key = "Active Equipment";
+                    toAdd = new activeSetting(pgName, (String) val);
                 }
                 break;
         }

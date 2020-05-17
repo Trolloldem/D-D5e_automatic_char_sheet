@@ -168,7 +168,7 @@ LANGUAGE: 'Common' | 'Elfic' | 'Abissal';
 
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
-OPTIONAL : ('Description' | 'Level' | 'Background' | 'Items');
+OPTIONAL : ('Description' | 'Level' | 'Background' | 'Items' | 'Active Equipment');
 
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
 
