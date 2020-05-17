@@ -42,18 +42,18 @@ class Scan{
                 boolean noErrorsEquip = !errorPrinter.print(mappaEquipNames);
                 if(noErrorsPg && noErrorsEquip) {
                     listOfResults settingErrors = checkerSetting.setOptionals(mappaPgNames);
-                    errorPrinter.print(settingErrors);
-                    return;
+                    if(errorPrinter.print(settingErrors))
+                        return;
                 }
             }
 
-            ddmProducer.produceDocument(mappaPgNames, mappaEquipNames);
+            ddmProducer.produceDocument(mappaPgNames, mappaEquipNames, new String[] {});
 
 
 
 
         }catch(Exception e){
-            System.err.println(e);
+            e.printStackTrace();
             return;
         }
     }
