@@ -37,7 +37,6 @@ create Player Gion{
 set Background for Gion = Folk Hero
 
 set Level of Barbarian for Ado = 11
-set Level of Barbarian for Ado = 12
 set Level of Bard for Ado = 5
 
 set Level of Barbarian for Brando = 3

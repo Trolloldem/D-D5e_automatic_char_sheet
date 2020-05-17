@@ -6,9 +6,9 @@ import org.antlr.v4.runtime.misc.ParseCancellationException;
 import parsingExceptions.CustomErrorListener;
 import util.checkerSetting;
 import resultValidators.errorPrinter;
-import wrappers.characterWrapper;
 import wrappers.listOfResults;
 import wrappers.semanticResult;
+import documentProducer.ddmProducer;
 
 import java.util.Map;
 
@@ -33,17 +33,23 @@ class Scan{
                 return;
             }
             semanticResult resParsing = visitor.visitStart(parserTree);
-
+            Map<String, semanticResult> mappaPgNames = null;
+            Map<String, semanticResult> mappaEquipNames = null;
             if(!errorPrinter.print(resParsing)){
-                Map<String, semanticResult> mappaPgNames = checkerSetting.existName(resParsing);
-                Map<String, semanticResult> mappaEquipNames =checkerSetting.existEquipName(resParsing);
+                mappaPgNames = checkerSetting.existName(resParsing);
+                mappaEquipNames =checkerSetting.existEquipName(resParsing);
                 boolean noErrorsPg = !errorPrinter.print(mappaPgNames);
                 boolean noErrorsEquip = !errorPrinter.print(mappaEquipNames);
                 if(noErrorsPg && noErrorsEquip) {
-                    listOfResults levelErrors = checkerSetting.setOptionals(mappaPgNames);
-                    errorPrinter.print(levelErrors);
+                    listOfResults settingErrors = checkerSetting.setOptionals(mappaPgNames);
+                    errorPrinter.print(settingErrors);
+                    return;
                 }
             }
+
+            ddmProducer.produceDocument(mappaPgNames, mappaEquipNames);
+
+
 
 
         }catch(Exception e){
