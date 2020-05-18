@@ -33,4 +33,8 @@ public enum Backgrounds {
     public int getExtraLang(){
         return extraLang;
     }
+
+    public Skills[] getSkills() {
+        return skills;
+    }
 }

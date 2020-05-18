@@ -14,6 +14,7 @@ import java.util.*;
 public class characterWrapper implements semanticResult{
     String name;
     Races race;
+    Classi savingThrowClass;
     Map<Pair<Classi, subClass>, Integer> pgClass;
     Map<Classi, subClass> subClassMap;
     int hp;
@@ -44,6 +45,7 @@ public class characterWrapper implements semanticResult{
         subClassMap = new HashMap<Classi,subClass>();
         extraLang = 0;
         bg = null;
+        savingThrowClass = null;
     }
 
     public void setBackground(Backgrounds background){
@@ -125,6 +127,14 @@ public class characterWrapper implements semanticResult{
         this.pgClass = pgClass;
         for(Pair<Classi,subClass> key : pgClass.keySet())
             subClassMap.put(key.a,key.b);
+    }
+
+    public void setSavingThrowClass(Classi c) {
+        this.savingThrowClass = c;
+    }
+
+    public Classi getSavingThrowClass(){
+        return savingThrowClass;
     }
 
     public int getHp() {

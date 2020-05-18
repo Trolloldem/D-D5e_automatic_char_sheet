@@ -104,6 +104,7 @@ public class pgChecker {
           List<String> classAlredySetted = new ArrayList<String>();
           ddmLangParser.ClassVectorContext classVector = (ClassVectorContext) value;
           ddmLangParser.ClassVectorElemContext allclass = classVector.classVectorElem();
+          Classi savingThrow = null;
     	  while (allclass != null) {
               Classi tempClasse = Classi.valueOf(allclass.PGCLASS().getText());
               subClass tempSubclass = null;
@@ -118,12 +119,16 @@ public class pgChecker {
               if(!classAlredySetted.contains(tempClasse.name())) {
                   classAlredySetted.add(tempClasse.name());
                   temp.put(classes, -1);
+
               }else {
                   throw new pgMalformedException("The class '"+tempClasse+"' is specified more than 1 time for Player '"+character.getName()+"'");
               }
+              if(savingThrow == null)
+                  savingThrow = tempClasse;
               allclass = allclass.classVectorElem();
           }
     	  character.setPgClass(temp);
+    	  character.setSavingThrowClass(savingThrow);
       }
 
     }

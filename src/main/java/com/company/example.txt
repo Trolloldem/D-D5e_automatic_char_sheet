@@ -33,10 +33,10 @@ create Player Gion{
     archetype: (Barbarian->Berserker,Bard->College of Lore)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
-    skills: (Religion,Medicine)
-    languages: (Infernal)
+    skills: (Perception,Medicine)
+    languages: (Infernal,Elvish)
 }
-set Background for Gion = Guild Artisan
+set Background for Gion = Acolyte
 
 set Level of Barbarian for Ado = 11
 set Level of Bard for Ado = 5

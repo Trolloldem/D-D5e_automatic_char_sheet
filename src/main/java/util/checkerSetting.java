@@ -5,6 +5,7 @@
 	import org.antlr.v4.runtime.misc.Pair;
 	import parsingExceptions.*;
 	import util.lexEnum.Classi;
+	import util.lexEnum.Skills;
 	import util.lexEnum.subClass;
 	import wrappers.*;
 	import wrappers.settings.bgSetting;
@@ -149,6 +150,12 @@
 						characterWrapper character = (characterWrapper) resParsing.get(bg.getPgName());
 						character.setBackground(bg.getSetting());
 						alreadySetBg.add(bg.getPgName());
+						List<String> skillsSetted = character.getSkills();
+						for(Skills skill : bg.getSetting().getSkills()){
+							if(skillsSetted.contains(skill.name().replace("_"," "))){
+								errors.add(new exceptionWrapper(new pgMalformedException("Repeated skill: '"+skill+"' for Player '"+bg.getPgName()+"': also present in setted background: "+bg.getSetting().name().replace("_"," "))));
+							}
+						}
 					}else{
 						errors.add(new exceptionWrapper(new multipleBackgroundSettingException(bg.getPgName())));
 					}
