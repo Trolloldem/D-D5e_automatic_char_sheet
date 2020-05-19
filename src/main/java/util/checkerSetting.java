@@ -180,6 +180,7 @@
 				}
 			}
 			if(settingChecker.getSettingWrappers().containsKey("Active Equipment")){
+				Set<String> alreadySetActive = new HashSet<String>();
 				for(settingWrapper w : settingChecker.getSettingWrappers().get("Active Equipment")){
 					activeSetting items = (activeSetting) w;
 					if(resParsing.containsKey(items.getPgName())){
@@ -190,6 +191,12 @@
 							character.setActiveEquip(equipMent);
 						}else {
 							errors.add(new exceptionWrapper(new cannotSetActiveException(items.getPgName(),items.getSetting())));
+						}
+
+						if(alreadySetActive.contains(character.getName())){
+							errors.add(new exceptionWrapper(new cannotSetActiveException(items.getPgName(),items.getSetting(),true)));
+						}else {
+							alreadySetActive.add(character.getName());
 						}
 					}
 

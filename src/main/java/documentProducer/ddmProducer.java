@@ -6,11 +6,9 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import util.lexEnum.Abilities;
-import util.lexEnum.Classi;
-import util.lexEnum.Skills;
-import util.lexEnum.subClass;
+import util.lexEnum.*;
 import wrappers.characterWrapper;
+import wrappers.equipWrapper;
 import wrappers.semanticResult;
 
 import java.io.File;
@@ -189,6 +187,24 @@ public class ddmProducer {
             }
         }
     }
+
+    private static void processAC(PDAcroForm acroForm,characterWrapper pg) throws IOException{
+        PDField field;
+        int value;
+        if(pg.getActiveEquip() != null){
+            equipWrapper equip = pg.getActiveEquip();
+            if(equip.getArmor().getScaling()!= null){
+                value = equip.getArmor().getArmorClass() + pg.getBonus().get(equip.getArmor().getScaling().toString());
+            }else if(equip.getArmor()!= Armors.None){
+                value = equip.getArmor().getArmorClass();
+            }else
+                value = 10 + pg.getBonus().get("DEX");
+
+        }else
+            value = 10 + pg.getBonus().get("DEX");
+        field = acroForm.getField("AC");
+        field.setValue(Integer.toString(value));
+    }
     private static void processCharWrapper(PDAcroForm acroForm, String name, characterWrapper pg) throws IOException {
 
         PDField field = acroForm.getField("CharacterName");
@@ -231,6 +247,15 @@ public class ddmProducer {
         int value = 10 + Integer.parseInt(field.getValueAsString());
         field = acroForm.getField("Passive");
         field.setValue(Integer.toString(value));
+
+        //Set CA
+        processAC(acroForm,pg);
+
+        //Set HP
+        field = acroForm.getField("HPMax");
+        field.setValue(Integer.toString(pg.getHp()));
+        field = acroForm.getField("HPCurrent");
+        field.setValue(Integer.toString(pg.getHp()));
 
 
         }

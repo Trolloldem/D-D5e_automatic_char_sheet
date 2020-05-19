@@ -14,17 +14,17 @@ public enum Armors {
 	Chain_mail(16,armorType.Heavy_Armor),
 	Splint(17,armorType.Heavy_Armor),
 	Plate(18,armorType.Heavy_Armor),
-	None(0,armorType.Heavy_Armor);
+	None(10,null);
 
-	private int armorClass;
+	private Integer armorClass;
 	private armorType typeOfArmor;
 
-	Armors(int ca,armorType type){
+	Armors(Integer ca,armorType type){
 		this.armorClass = ca;
 		typeOfArmor = type;
 	}
 
-	public int getArmorClass() {
+	public Integer getArmorClass() {
 		return armorClass;
 	}
 
