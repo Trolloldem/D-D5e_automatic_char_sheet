@@ -260,6 +260,12 @@ public class ddmProducer {
 
         //set Wpn
         processWeapons(acroForm, pg);
+        
+        //set lang
+        processLang(acroForm,pg);
+        
+        equip(acroForm,pg);
+  
         }
 
 
@@ -268,9 +274,15 @@ public class ddmProducer {
     	int i=1;
     	int j=1;
     	int value;
-    	for(Map.Entry<String, equipWrapper> entrys:pg.getEquipments().entrySet()) {
+    	List<equipWrapper> entrys = new ArrayList<equipWrapper>();
+    	for(Map.Entry<String, equipWrapper> temp:pg.getEquipments().entrySet()) {
+    		if(temp.getValue().getWeapon().equals(Weapons.None)==false && entrys.size()<3) 
+    			entrys.add(temp.getValue());
+    	}
+    	for(int k=0;k<entrys.size();k++) {
     		if(i==1) {
-    		Weapons temp =entrys.getValue().getWeapon();
+    		if(entrys.get(k).getWeapon().equals(Weapons.None)==false) {
+    		Weapons temp =entrys.get(k).getWeapon();
     		value =pg.getBonus().get(temp.getScaling().toString());
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
@@ -278,10 +290,11 @@ public class ddmProducer {
     		field.setValue("+"+ value);
     		field=acroForm.getField("Wpn1 Damage");
     		field.setValue(temp.getValue());
-    	
+    		}
     		}
     		else {
-    			Weapons temp =entrys.getValue().getWeapon();
+    			
+    			Weapons temp =entrys.get(k).getWeapon();
     			value =pg.getBonus().get(temp.getScaling().toString());
         		field=acroForm.getField("Wpn Name "+i);
         		field.setValue(temp.name().replace("_", " "));
@@ -294,11 +307,59 @@ public class ddmProducer {
         		}
         		field=acroForm.getField("Wpn"+j+ " Damage ");
         		field.setValue(temp.getValue());
-        		}
+        	
+    		}
+    		
     		i++;
     		j++;
-    		}
+    	}
     	
     }
-
+    private static void processLang(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+    	PDField field;
+    	String result = "";
+    	for(int i=0;i<pg.getLanguages().size();i++) {
+    	result= result+ pg.getLanguages().get(i)+"\n";
+    	}
+    	field=acroForm.getField("ProficienciesLang");
+    	field.setValue(result);
+    }
+    
+    private static void equip(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+    	PDField field;
+    	String temp="";
+    	int gold=0;
+    	int hpotion=0;
+    	int mpotion=0;
+    	String golden="";
+    	Boolean shield=false;
+    	for(Map.Entry<String, equipWrapper> entrys:pg.getEquipments().entrySet()) {
+    	temp=temp+entrys.getValue().getWeapon()+'\n';
+    	if(shield==false && entrys.getValue().getShield().equals(Shields.Yes)){
+    		temp= temp + "shield" +'\n';
+    		shield=true;
+    	}
+    	if(entrys.getValue().getArmor().equals(Armors.None)==false) {
+    			temp=temp+entrys.getValue().getArmor()+'\n';
+    	}
+    	for(Map.Entry<Consumables, Integer> con:entrys.getValue().getConsumables().entrySet()) {
+    		if(con.getKey().equals(Consumables.Health_potion)) 
+    			hpotion = hpotion+ con.getValue();
+    		if(con.getKey().equals(Consumables.Mana_potion)) 
+    			mpotion = mpotion+ con.getValue();
+    		if(con.getKey().equals(Consumables.Gold)) 
+    			gold = gold+ con.getValue();
+    	}
+    	
+    	}
+    	if(hpotion!=0)
+    	temp=temp+ "Health Potion: "+hpotion + '\n';
+    	if(mpotion!=0)
+        temp=temp+ "Mana Potion: "+mpotion + '\n';
+    	temp=temp.replaceAll("_", " ");
+    	field=acroForm.getField("Equipment");
+		field.setValue(temp);
+		field=acroForm.getField("GP");
+		field.setValue(" "+gold);
+    }
 }

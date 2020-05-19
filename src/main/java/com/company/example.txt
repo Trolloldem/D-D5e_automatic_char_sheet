@@ -5,11 +5,15 @@ funziona o no.
 */
 import rogueEquip from baseEquip
 import heavyEquip from baseEquip
+import temp from baseEquip
+import tempo from baseEquip
 import Brando from unibgPlayers
 import gian from unibgPlayers
 set Items for Ado = rogueEquip
 set Items for Ado = AdoEquip
 set Items for Ado = heavyEquip
+set Items for Ado = temp
+set Items for Ado = tempo
 set Active Equipment for Ado = AdoEquip
 create Player Ado{
     race: Human
@@ -17,8 +21,8 @@ create Player Ado{
     archetype: (Barbarian->Berserker)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
-    skills: (Intimidation,Survival)
-    languages: (Elvish)
+    skills: (Intimidation,Nature)
+    languages: (Elvish,Infernal)
 }
 
 
@@ -26,7 +30,7 @@ create Equipment AdoEquip{
     armor:Plate
     shield:Yes
     consumables:(Gold*100,Health potion*2)
-    weapon:Axe
+    weapon:None
 }
 
 create Player Gion{
@@ -50,3 +54,5 @@ set Level of Wizard for Gion = 5
 
 set Level of Barbarian for gian = 3
 set Level of Bard for gian = 5
+
+set Background for Ado = Outlander

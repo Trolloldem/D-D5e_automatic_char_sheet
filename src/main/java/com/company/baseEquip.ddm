@@ -10,3 +10,16 @@ create Equipment heavyEquip{
     consumables:(Health potion*5)
     weapon:Longbow
 }
+create Equipment temp{
+    armor:Plate
+    shield:Yes
+    consumables:(Health potion*5)
+    weapon:Dagger
+}
+create Equipment tempo{
+    armor:Plate
+    shield:Yes
+    consumables:(Health potion*5)
+    weapon:Longbow
+}
+
