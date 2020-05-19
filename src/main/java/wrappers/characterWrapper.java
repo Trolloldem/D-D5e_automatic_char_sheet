@@ -17,6 +17,8 @@ public class characterWrapper implements semanticResult{
     Classi savingThrowClass;
     Map<Pair<Classi, subClass>, Integer> pgClass;
     Map<Classi, subClass> subClassMap;
+    Map<String, equipWrapper> equipments;
+    equipWrapper activeEquip;
     int hp;
     Map<String, Integer> stats;
     String alignment;
@@ -46,6 +48,8 @@ public class characterWrapper implements semanticResult{
         extraLang = 0;
         bg = null;
         savingThrowClass = null;
+        equipments = new HashMap<String, equipWrapper>();
+        activeEquip = null;
     }
 
     public void setBackground(Backgrounds background){
@@ -81,6 +85,22 @@ public class characterWrapper implements semanticResult{
             extraLang = extraLang + razza.getExtraLang();
         }
 
+    }
+
+    public void addEquipments(Pair<String, equipWrapper> equip){
+        equipments.put(equip.a,equip.b);
+    }
+
+    public Map<String, equipWrapper> getEquipments() {
+        return equipments;
+    }
+
+    public void setActiveEquip(equipWrapper activeEquip) {
+        this.activeEquip = activeEquip;
+    }
+
+    public equipWrapper getActiveEquip() {
+        return activeEquip;
     }
 
     public void hasCorrectSubClass(Classi toCheck){

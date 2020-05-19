@@ -61,7 +61,20 @@ WEAPON: 'weapon';
 SHIELD: 'shield';
 CONSUMABLES: 'consumables';
 
-ARMORTYPE: ('Half plate' | 'Full plate' | NONE);
+ARMORTYPE: (
+'Padded'|
+'Leather'|
+'Studded leather'|
+'Hide'|
+'Chain shirt'|
+'Scale mail'|
+'Breastplate'|
+'Half plate'|
+'Ring mail'|
+'Chain mail'|
+'Splint'|
+'Plate' |
+NONE);
 WEAPONTYPE: ('Bastard sword' | 'Axe' | NONE);
 SHIELDPRESENCE: ('Yes' | 'No');
 NONE: 'None';

@@ -5,7 +5,7 @@ create Equipment rogueEquip{
     weapon:Bastard sword
 }
 create Equipment heavyEquip{
-    armor:Full plate
+    armor:Plate
     shield:Yes
     consumables:(Health potion*5)
     weapon:Axe

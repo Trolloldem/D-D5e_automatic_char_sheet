@@ -42,7 +42,7 @@ class Scan{
                 boolean noErrorsPg = !errorPrinter.print(mappaPgNames);
                 boolean noErrorsEquip = !errorPrinter.print(mappaEquipNames);
                 if(noErrorsPg && noErrorsEquip) {
-                    listOfResults settingErrors = checkerSetting.setOptionals(mappaPgNames);
+                    listOfResults settingErrors = checkerSetting.setOptionals(mappaPgNames,mappaEquipNames);
                     if(errorPrinter.print(settingErrors))
                         return;
                 }else

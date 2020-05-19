@@ -8,9 +8,7 @@
 	import util.lexEnum.Skills;
 	import util.lexEnum.subClass;
 	import wrappers.*;
-	import wrappers.settings.bgSetting;
-	import wrappers.settings.levelSetting;
-	import wrappers.settings.settingWrapper;
+	import wrappers.settings.*;
 
 	public class checkerSetting {
 		public static Map<String, semanticResult>  existName(semanticResult resParsing) {
@@ -167,13 +165,46 @@
 
 	}
 
-	public static listOfResults setOptionals(Map<String, semanticResult> resParsing){
+		public static void setEquipments(Map<String,semanticResult> resParsing, Map<String, semanticResult> resParsingEquip,List<semanticResult> errors){
+
+			if(settingChecker.getSettingWrappers().containsKey("Items")){
+				for(settingWrapper w : settingChecker.getSettingWrappers().get("Items")){
+					itemsSetting items = (itemsSetting) w;
+					if(resParsing.containsKey(items.getPgName())){
+						characterWrapper character = (characterWrapper) resParsing.get(items.getPgName());
+						equipWrapper equipMent = (equipWrapper) resParsingEquip.get(items.getSetting());
+
+						character.addEquipments(new Pair<String, equipWrapper>(equipMent.getName(),equipMent));
+					}
+
+				}
+			}
+			if(settingChecker.getSettingWrappers().containsKey("Active Equipment")){
+				for(settingWrapper w : settingChecker.getSettingWrappers().get("Active Equipment")){
+					activeSetting items = (activeSetting) w;
+					if(resParsing.containsKey(items.getPgName())){
+						characterWrapper character = (characterWrapper) resParsing.get(items.getPgName());
+						equipWrapper equipMent = (equipWrapper) resParsingEquip.get(items.getSetting());
+
+						if(character.getEquipments().containsKey(equipMent.getName())){
+							character.setActiveEquip(equipMent);
+						}else {
+							errors.add(new exceptionWrapper(new cannotSetActiveException(items.getPgName(),items.getSetting())));
+						}
+					}
+
+				}
+			}
+
+		}
+
+	public static listOfResults setOptionals(Map<String, semanticResult> resParsing,Map<String, semanticResult> resParsingEquip){
 			listOfResults res = null;
 			List<semanticResult> errors = new ArrayList<semanticResult>();
 
 			setClassLevel(resParsing, errors);
 			setBg(resParsing, errors);
-
+			setEquipments(resParsing,resParsingEquip,errors);
 			checkLanguages(resParsing,errors);
 		if(errors.size()>0)
 			res = new listOfResults(errors);
