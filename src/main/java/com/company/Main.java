@@ -27,8 +27,8 @@ class Scan{
             parser.addErrorListener(CustomErrorListener.INSTANCE);
             ddmLangVisitor<semanticResult> visitor = new visitorImpl(parser);
             ddmLangParser.StartContext parserTree = parser.start();
-            if(CustomErrorListener.errors.size()>0){
-                for(ParseCancellationException e : CustomErrorListener.errors)
+            if(CustomErrorListener.INSTANCE.errors.size()>0){
+                for(ParseCancellationException e : CustomErrorListener.INSTANCE.errors)
                     System.err.println(e);
                 return;
             }
