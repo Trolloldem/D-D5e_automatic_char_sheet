@@ -17,7 +17,7 @@ set Items for Ado = tempo
 set Active Equipment for Ado = AdoEquip
 create Player Ado{
     race: Human
-    hp:10
+    hp:11
     archetype: (Barbarian->Berserker)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
