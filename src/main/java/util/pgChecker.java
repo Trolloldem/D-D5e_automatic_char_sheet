@@ -65,9 +65,10 @@ public class pgChecker {
         Classi firstClass = character.getSavingThrowClass();
         int totalSkills = firstClass.getNumSkills();
         for(Classi classe : allClass){
-            permittedSkils.addAll(Arrays.asList(classe.getProf()));
-            if(!classe.equals(firstClass)){
-                totalSkills = classe.isAddSkillMulticlass()? totalSkills + 1 : totalSkills ;
+            if(classe.equals(firstClass) || classe.isAddSkillMulticlass())
+                permittedSkils.addAll(Arrays.asList(classe.getProf()));
+            if(!classe.equals(firstClass) && classe.isAddSkillMulticlass()){
+                totalSkills = totalSkills + 1  ;
                 for(Skills skill : classe.getProf()) {
                     if(!Arrays.asList(firstClass.getProf()).contains(skill))
                         permittedByOthers.put(skill, classe);

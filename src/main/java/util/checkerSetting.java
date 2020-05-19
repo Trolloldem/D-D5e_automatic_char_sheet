@@ -81,7 +81,6 @@
 	public static void setClassLevel(Map<String ,semanticResult> resParsing, List<semanticResult> errors){
 
 			Map<String,Set<Classi>> alreadySetClass = new HashMap<String, Set<Classi>>();
-
 			for(settingWrapper w : settingChecker.getSettingWrappers().get("Level")){
 				if( w instanceof levelSetting) {
 					levelSetting wrapper = (levelSetting) w;
@@ -143,6 +142,7 @@
 
 	public static void setBg(Map<String,semanticResult> resParsing, List<semanticResult> errors){
 			Set<String> alreadySetBg = new HashSet<String>();
+			if(settingChecker.getSettingWrappers().containsKey("Background")){
 			for(settingWrapper w : settingChecker.getSettingWrappers().get("Background")){
 				bgSetting bg = (bgSetting) w;
 				if(resParsing.containsKey(bg.getPgName())){
@@ -163,6 +163,8 @@
 				}
 
 		}
+		}
+
 	}
 
 	public static listOfResults setOptionals(Map<String, semanticResult> resParsing){

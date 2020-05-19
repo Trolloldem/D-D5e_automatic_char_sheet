@@ -30,13 +30,13 @@ create Equipment AdoEquip{
 create Player Gion{
     race: Half Orc
     hp:10
-    archetype: (Barbarian->Berserker,Bard->College of Lore)
+    archetype: (Barbarian->Berserker,Wizard->School of abjuration)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
-    skills: (Perception,Medicine,Survival)
+    skills: (Perception,Athletics)
     languages: ()
 }
-set Background for Gion = Urchin
+
 
 set Level of Barbarian for Ado = 11
 
@@ -44,7 +44,7 @@ set Level of Barbarian for Brando = 3
 set Level of Bard for Brando = 5
 
 set Level of Barbarian for Gion = 3
-set Level of Bard for Gion = 5
+set Level of Wizard for Gion = 5
 
 set Level of Barbarian for gian = 3
 set Level of Bard for gian = 5
