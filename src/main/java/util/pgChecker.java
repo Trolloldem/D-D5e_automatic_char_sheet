@@ -7,11 +7,14 @@ import org.antlr.v4.runtime.misc.Pair;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parsingExceptions.pgMalformedException;
 import util.lexEnum.Classi;
+import util.lexEnum.Skills;
 import util.lexEnum.subClass;
 import wrappers.characterWrapper;
 import wrappers.equipWrapper;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class pgChecker {
 
@@ -45,11 +48,49 @@ public class pgChecker {
                 break;
         }
         if(character.allSetted()){
+            checkSkillPermitted(character);
             return character;
         }else {
             throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
         }
     }
+
+    private static void checkSkillPermitted(characterWrapper character) {
+
+        Set<Pair<Classi,subClass>> keyClasses = character.getPgClass().keySet();
+        Set <Classi> allClass = keyClasses.stream().map(elem -> {return elem.a;}).collect(Collectors.toSet());
+        Set<Skills> permittedSkils = new HashSet<Skills>();
+        Map<Skills, Classi> permittedByOthers = new HashMap<>();
+        Set<Classi> multiClassFlag = new HashSet<>();
+        Classi firstClass = character.getSavingThrowClass();
+        int totalSkills = firstClass.getNumSkills();
+        for(Classi classe : allClass){
+            permittedSkils.addAll(Arrays.asList(classe.getProf()));
+            if(!classe.equals(firstClass)){
+                totalSkills = classe.isAddSkillMulticlass()? totalSkills + 1 : totalSkills ;
+                for(Skills skill : classe.getProf()) {
+                    if(!Arrays.asList(firstClass.getProf()).contains(skill))
+                        permittedByOthers.put(skill, classe);
+                }
+            }
+        }
+        for(String skill: character.getSkills()){
+            Skills enumSkill = Skills.valueOf(skill.replace(" ","_"));
+            if(!permittedSkils.contains(enumSkill)){
+                throw new pgMalformedException("Player '"+character.getName()+"' has skills not permitted by his classes. Permitted skills are: "+permittedSkils.toString());
+            }
+            if(permittedByOthers.containsKey(enumSkill)){
+                if(multiClassFlag.contains(permittedByOthers.get(enumSkill)))
+                    throw new pgMalformedException("Player '"+character.getName()+"' cannot have more than 1 skill provided by his multiclass.");
+                else
+                    multiClassFlag.add(permittedByOthers.get(enumSkill));
+            }
+        }
+        if(character.getSkills().size() != totalSkills){
+            throw new pgMalformedException("Player '"+character.getName()+"' has the wrong number of skills. Number of skills : "+totalSkills);
+        }
+        }
+
 
     private static void selectOperationCase12(characterWrapper character, ddmLangParser.StatIDContext mandatoryChild, Object value, ddmLangParser parser) {
         character.setSingleStat(mandatoryChild.getText(),Integer.parseInt(((Token)value).getText()) );
@@ -79,12 +120,14 @@ public class pgChecker {
 
             List<String > skills = new ArrayList<String>();
           ddmLangParser.SkillsContext allSkills = (ddmLangParser.SkillsContext) value;
+
             for(TerminalNode skill : allSkills.SKILL()){
+                if(skills.contains(skill.getText())){
+                    throw new pgMalformedException("The skill '"+skill.getText()+"' is specified multiple times for Player '"+character.getName()+"'");
+                }
                 skills.add(skill.getText());
             }
-            if(skills.toArray()[1].equals(skills.toArray()[0])){
-                throw new pgMalformedException("The character must have 2 skills. The skill '"+skills.toArray()[0]+"' is specified 2 times for Player '"+character.getName()+"'");
-            }
+
             character.setSkills(skills);
       }
 

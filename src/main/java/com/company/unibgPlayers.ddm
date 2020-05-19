@@ -4,7 +4,7 @@ create Player Brando{
     archetype: (Barbarian->Berserker,Bard->College of Lore)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
-    skills: (Religion,Medicine)
+    skills: (Intimidation,Nature,Religion)
     languages: ()
 }
 create Player gian{
@@ -13,6 +13,6 @@ create Player gian{
     archetype: (Barbarian->Berserker,Bard->College of Lore)
     abilities:(15,15,15,15,15,15)
     alignment:chaotic good  //Ado è proprio un bravo ragazzo
-    skills: (Religion,Medicine)
+    skills: (Intimidation,Nature,Religion)
     languages: ()
 }

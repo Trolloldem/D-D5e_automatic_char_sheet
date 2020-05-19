@@ -185,9 +185,6 @@ public class ddmProducer {
 
 
                 field.setValue(Integer.toString(value));
-
-                field = acroForm.getField("Check Box "+skill.getCheckBox());
-                ((PDCheckBox) field).check();
                 alreadySet.add(skill);
             }
         }

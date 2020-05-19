@@ -192,7 +192,7 @@ classVectorElem: (PGCLASS ('->' SUBCLASS)? ',' classVectorElem | PGCLASS ('->' S
 
 abilities: '(' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ',' DIGIT ')';
 
-skills: '(' SKILL ',' SKILL ')';
+skills: '(' SKILL ',' SKILL (',' SKILL)? (',' SKILL)? (',' SKILL)?')';
 
 
 languages: '('(LANGUAGE)? (',' LANGUAGE)?  (',' LANGUAGE)?')';

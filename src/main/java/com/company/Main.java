@@ -35,6 +35,7 @@ class Scan{
             semanticResult resParsing = visitor.visitStart(parserTree);
             Map<String, semanticResult> mappaPgNames = null;
             Map<String, semanticResult> mappaEquipNames = null;
+
             if(!errorPrinter.print(resParsing)){
                 mappaPgNames = checkerSetting.existName(resParsing);
                 mappaEquipNames =checkerSetting.existEquipName(resParsing);
@@ -44,8 +45,10 @@ class Scan{
                     listOfResults settingErrors = checkerSetting.setOptionals(mappaPgNames);
                     if(errorPrinter.print(settingErrors))
                         return;
-                }
-            }
+                }else
+                    return;
+            }else
+                return;
 
             ddmProducer.produceDocument(mappaPgNames, mappaEquipNames, new String[] {});
 
