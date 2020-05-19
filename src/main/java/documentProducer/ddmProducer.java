@@ -267,27 +267,33 @@ public class ddmProducer {
     	PDField field;
     	int i=1;
     	int j=1;
+    	int value;
     	for(Map.Entry<String, equipWrapper> entrys:pg.getEquipments().entrySet()) {
     		if(i==1) {
     		Weapons temp =entrys.getValue().getWeapon();
-    		
+    		value =pg.getBonus().get(temp.getScaling().toString());
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
     		field=acroForm.getField("Wpn1 AtkBonus");
-    		field.setValue( temp.getScaling().toString());
+    		field.setValue("+"+ value);
+    		field=acroForm.getField("Wpn1 Damage");
+    		field.setValue(temp.getValue());
+    	
     		}
     		else {
     			Weapons temp =entrys.getValue().getWeapon();
+    			value =pg.getBonus().get(temp.getScaling().toString());
         		field=acroForm.getField("Wpn Name "+i);
         		field.setValue(temp.name().replace("_", " "));
         		if(j==2) {
         		field=acroForm.getField("Wpn"+i +" AtkBonus ");
-        		field.setValue( temp.getScaling().toString());
+        		field.setValue("+"+ value);
         		}else {
         			field=acroForm.getField("Wpn"+i +" AtkBonus  ");
-            		field.setValue( temp.getScaling().toString());
+            		field.setValue("+"+ value);
         		}
-        		
+        		field=acroForm.getField("Wpn"+j+ " Damage ");
+        		field.setValue(temp.getValue());
         		}
     		i++;
     		j++;

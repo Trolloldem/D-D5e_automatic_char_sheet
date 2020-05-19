@@ -1,15 +1,18 @@
 package util.lexEnum;
 
 public enum Weapons {
-	Bastard_sword(WeaponsType.Normal),
-	Axe(WeaponsType.Normal),
-	Dagger(WeaponsType.Finesse),
-	Longbow(WeaponsType.Ranged),
-	None(null);
+	Bastard_sword(WeaponsType.Normal,"1d8"),
+	Axe(WeaponsType.Normal,"1d6"),
+	Dagger(WeaponsType.Finesse,"1d6"),
+	Longbow(WeaponsType.Ranged,"1d4"),
+	None(null,null);
 	
+
 	WeaponsType Type;
-	Weapons(WeaponsType type) {
+	String value;
+	Weapons(WeaponsType type,String s) {
 	 this.Type = type;	
+	 value=s;
 	}
 	public Abilities getScaling() {
 		if(Type!=null)
@@ -19,5 +22,9 @@ public enum Weapons {
 	public WeaponsType getType() {
 		return Type;
 	}
+	public String getValue() {
+		return value;
+	}
+	
 	
 }
