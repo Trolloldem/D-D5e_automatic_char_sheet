@@ -2,7 +2,7 @@ create Equipment rogueEquip{
     armor:None
     shield:No
     consumables:(Gold*10,Gold*22,Health potion*1)
-    weapon:Bastar sword
+    weapon:Bastard sword
 }
 create Equipment heavyEquip{
     armor:Plate
