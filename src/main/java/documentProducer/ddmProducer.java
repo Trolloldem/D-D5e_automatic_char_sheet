@@ -202,6 +202,8 @@ public class ddmProducer {
 
         }else
             value = 10 + pg.getBonus().get("DEX");
+        if(pg.getActiveEquip()!=null && pg.getActiveEquip().getShield().equals(Shields.Yes))
+        	value=value+2;
         field = acroForm.getField("AC");
         field.setValue(Integer.toString(value));
     }
@@ -257,10 +259,41 @@ public class ddmProducer {
         field = acroForm.getField("HPCurrent");
         field.setValue(Integer.toString(pg.getHp()));
 
-
+        //set Wpn
+        processWeapons(acroForm, pg);
         }
 
 
-
+    private static void processWeapons(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+    	PDField field;
+    	int i=1;
+    	int j=1;
+    	for(Map.Entry<String, equipWrapper> entrys:pg.getEquipments().entrySet()) {
+    		if(i==1) {
+    		Weapons temp =entrys.getValue().getWeapon();
+    		
+    		field=acroForm.getField("Wpn Name");
+    		field.setValue(temp.name().replace("_", " "));
+    		field=acroForm.getField("Wpn1 AtkBonus");
+    		field.setValue( temp.getScaling().toString());
+    		}
+    		else {
+    			Weapons temp =entrys.getValue().getWeapon();
+        		field=acroForm.getField("Wpn Name "+i);
+        		field.setValue(temp.name().replace("_", " "));
+        		if(j==2) {
+        		field=acroForm.getField("Wpn"+i +" AtkBonus ");
+        		field.setValue( temp.getScaling().toString());
+        		}else {
+        			field=acroForm.getField("Wpn"+i +" AtkBonus  ");
+            		field.setValue( temp.getScaling().toString());
+        		}
+        		
+        		}
+    		i++;
+    		j++;
+    		}
+    	
+    }
 
 }

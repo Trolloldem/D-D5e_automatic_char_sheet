@@ -8,5 +8,5 @@ create Equipment heavyEquip{
     armor:Plate
     shield:Yes
     consumables:(Health potion*5)
-    weapon:Axe
+    weapon:Longbow
 }

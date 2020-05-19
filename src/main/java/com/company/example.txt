@@ -4,10 +4,12 @@ se il nostro linugaggio
 funziona o no.
 */
 import rogueEquip from baseEquip
+import heavyEquip from baseEquip
 import Brando from unibgPlayers
 import gian from unibgPlayers
 set Items for Ado = rogueEquip
 set Items for Ado = AdoEquip
+set Items for Ado = heavyEquip
 set Active Equipment for Ado = AdoEquip
 create Player Ado{
     race: Human

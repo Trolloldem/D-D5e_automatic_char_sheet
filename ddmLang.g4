@@ -75,7 +75,7 @@ ARMORTYPE: (
 'Splint'|
 'Plate' |
 NONE);
-WEAPONTYPE: ('Bastard sword' | 'Axe' | NONE);
+WEAPONTYPE: ('Bastard sword' | 'Axe' | 'Dagger' | 'Longbow' | NONE);
 SHIELDPRESENCE: ('Yes' | 'No');
 NONE: 'None';
 CONSUMABLE: ('Health potion' | 'Mana potion' | 'Gold');
