@@ -263,8 +263,8 @@ public class ddmProducer {
         
         //set lang
         processLang(acroForm,pg);
-        
-        equip(acroForm,pg);
+        //set equip
+        processequip(acroForm,pg);
   
         }
 
@@ -287,7 +287,10 @@ public class ddmProducer {
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
     		field=acroForm.getField("Wpn1 AtkBonus");
-    		field.setValue("+"+ value);
+    		if(value>0)
+    			field.setValue("+"+ value);
+    		else
+    			field.setValue(""+value);
     		field=acroForm.getField("Wpn1 Damage");
     		field.setValue(temp.getValue());
     		}
@@ -300,10 +303,16 @@ public class ddmProducer {
         		field.setValue(temp.name().replace("_", " "));
         		if(j==2) {
         		field=acroForm.getField("Wpn"+i +" AtkBonus ");
-        		field.setValue("+"+ value);
+        		if(value>0)
+        			field.setValue("+"+ value);
+        		else
+        			field.setValue(""+value);
         		}else {
         			field=acroForm.getField("Wpn"+i +" AtkBonus  ");
-            		field.setValue("+"+ value);
+        			if(value>0)
+            			field.setValue("+"+ value);
+            		else
+            			field.setValue(""+value);
         		}
         		field=acroForm.getField("Wpn"+j+ " Damage ");
         		field.setValue(temp.getValue());
@@ -325,7 +334,7 @@ public class ddmProducer {
     	field.setValue(result);
     }
     
-    private static void equip(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+    private static void processequip(PDAcroForm acroForm, characterWrapper pg) throws IOException {
     	PDField field;
     	String temp="";
     	int gold=0;
@@ -333,14 +342,24 @@ public class ddmProducer {
     	int mpotion=0;
     	String golden="";
     	Boolean shield=false;
+    	Map<Weapons,Integer> temp_weapons = new HashMap<Weapons,Integer>();
+    	Map<Armors,Integer> temp_armors = new HashMap<Armors,Integer>();
     	for(Map.Entry<String, equipWrapper> entrys:pg.getEquipments().entrySet()) {
-    	temp=temp+entrys.getValue().getWeapon()+'\n';
+    	if(entrys.getValue().getWeapon().equals(Weapons.None)==false) {
+    		if(temp_weapons.containsKey(entrys.getValue().getWeapon())==true)
+    			temp_weapons.replace(entrys.getValue().getWeapon(), temp_weapons.get(entrys.getValue().getWeapon())+1);
+    		else
+    			temp_weapons.put(entrys.getValue().getWeapon(), 1);
+    	}
     	if(shield==false && entrys.getValue().getShield().equals(Shields.Yes)){
     		temp= temp + "shield" +'\n';
     		shield=true;
     	}
     	if(entrys.getValue().getArmor().equals(Armors.None)==false) {
-    			temp=temp+entrys.getValue().getArmor()+'\n';
+    		if(temp_armors.containsKey(entrys.getValue().getArmor())==true)
+    			temp_armors.replace(entrys.getValue().getArmor(), temp_armors.get(entrys.getValue().getArmor())+1);
+    		else
+    			temp_armors.put(entrys.getValue().getArmor(), 1);
     	}
     	for(Map.Entry<Consumables, Integer> con:entrys.getValue().getConsumables().entrySet()) {
     		if(con.getKey().equals(Consumables.Health_potion)) 
@@ -350,7 +369,12 @@ public class ddmProducer {
     		if(con.getKey().equals(Consumables.Gold)) 
     			gold = gold+ con.getValue();
     	}
-    	
+    	}
+    	for(Map.Entry<Weapons, Integer> tempW:temp_weapons.entrySet()) {
+    		temp=temp+tempW.getKey()+" : "+tempW.getValue()+'\n';
+    	}
+    	for(Map.Entry<Armors, Integer> tempA:temp_armors.entrySet()) {
+    		temp=temp+tempA.getKey()+" : "+tempA.getValue()+'\n';
     	}
     	if(hpotion!=0)
     	temp=temp+ "Health Potion: "+hpotion + '\n';
