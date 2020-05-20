@@ -182,13 +182,12 @@ LANGUAGE: 'Common' | 'Draconic' | 'Infernal' | 'Dwarvish' | 'Elvish' | 'Gnomish'
 RACES : ('Dragonborn'|'Dwarf'|'Elf'|'Gnome' | 'Half Elf'| 'Halfling'|'Half Orc'|'Human'|'Tiefling');
 
 OPTIONAL : ('Description' | 'Level' | 'Background' | 'Items' | 'Active Equipment');
-
 LETTER 	: ('a'..'z'|'A'..'Z')+ ;
 
 
 optionalValue : (description | DIGIT | BACKGROUND | LETTER);
 toSet : (PGCLASS);
-description : '"'(DIGIT | LETTER | BLANKSPACE)+ '"';
+description : '"'.*? '"';
 
 piece: (ARMOR | WEAPON | SHIELD | CONSUMABLES);
 pieceValue: (ARMORTYPE | WEAPONTYPE | SHIELDPRESENCE | consumableVector );

@@ -319,7 +319,7 @@ public class ddmProducer {
     	PDField field;
     	int i=1;
     	int j=1;
-    	int value;
+    	int value = 0;
     	List<equipWrapper> entrys = new ArrayList<equipWrapper>();
     	for(Map.Entry<String, equipWrapper> temp:pg.getEquipments().entrySet()) {
     		if(temp.getValue().getWeapon().equals(Weapons.None)==false && entrys.size()<3) 
@@ -329,7 +329,11 @@ public class ddmProducer {
     		if(i==1) {
     		if(entrys.get(k).getWeapon().equals(Weapons.None)==false) {
     		Weapons temp =entrys.get(k).getWeapon();
-    		value =pg.getBonus().get(temp.getScaling().toString());
+    		if(!temp.getType().equals(WeaponsType.Finesse)) {
+                value = pg.getBonus().get(temp.getScaling().toString());
+            }else{
+    		    value = pg.getBonus().get("DEX") > pg.getBonus().get("DEX") ? pg.getBonus().get("DEX") : pg.getBonus().get("STR");
+            }
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
     		field=acroForm.getField("Wpn1 AtkBonus");
