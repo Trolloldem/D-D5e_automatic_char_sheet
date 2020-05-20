@@ -1,8 +1,12 @@
 package documentProducer;
 
 import com.company.Main;
+import org.apache.pdfbox.cos.COSDictionary;
+import org.apache.pdfbox.cos.COSName;
+import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
@@ -72,6 +76,7 @@ public class ddmProducer {
             //Set scores
             field = acroForm.getField(score.name());
             field.setValue(Integer.toString(pg.getStats().get(score.name())));
+
 
             //Set modifiers, special case because Acroform not well formatted
             if (score.name().equals("CHA"))
@@ -317,11 +322,20 @@ public class ddmProducer {
     }
     private static void processLang(PDAcroForm acroForm, characterWrapper pg) throws IOException {
     	PDField field;
-    	String result = "";
+    	String result = "Languages:\n";
     	for(int i=0;i<pg.getLanguages().size();i++) {
-    	result= result+ pg.getLanguages().get(i)+"\n";
+    	    result= result+ (i+1)+")"+ pg.getLanguages().get(i)+"\n";
     	}
     	field=acroForm.getField("ProficienciesLang");
+        COSDictionary dict = field.getCOSObject();
+        COSString defaultAppearance = (COSString) dict
+                .getDictionaryObject(COSName.DA);
+        if (defaultAppearance != null)
+        {
+
+            dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
+
+        }
     	field.setValue(result);
     }
     
