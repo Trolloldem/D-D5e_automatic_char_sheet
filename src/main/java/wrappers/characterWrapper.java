@@ -28,6 +28,7 @@ public class characterWrapper implements semanticResult{
     int totalLevel;
     int extraLang;
     Backgrounds bg;
+    String description;
 
 
     public int getTotalLevel() {
@@ -50,6 +51,16 @@ public class characterWrapper implements semanticResult{
         savingThrowClass = null;
         equipments = new HashMap<String, equipWrapper>();
         activeEquip = null;
+        description = null;
+    }
+
+    public void setDescription(String description) {
+        if(this.description == null)
+            this.description = description;
+    }
+
+    public String getDescription(){
+        return description;
     }
 
     public void setBackground(Backgrounds background){

@@ -63,7 +63,8 @@ public class ddmProducer {
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
         processCharWrapper(acroForm, name, pg);
-
+        document.removePage(2);
+        document.removePage(1);
         document.save(new File("./src/test/outputs/"+name+".pdf"));
         document.close();
 
@@ -233,10 +234,19 @@ public class ddmProducer {
         //Set level for each class
         processClassLevel(acroForm,pg);
 
+        //Set bg
+        if(pg.getBackground()!= null) {
+            field = acroForm.getField("Background");
+            field.setValue(pg.getBackground().name().replace("_", " "));
+        }
 
         //Set proficiency
         field = acroForm.getField("ProfBonus");
         field.setValue(Integer.toString(pg.getProficiencyBonus()));
+
+        //Set proficiency
+        field = acroForm.getField("Speed");
+        field.setValue(Integer.toString(pg.getRace().getSpeed()));
 
         //Set saving throws
         processSaving(acroForm,pg);
@@ -247,6 +257,19 @@ public class ddmProducer {
         //Set initiative
         field = acroForm.getField("Initiative");
         field.setValue(Integer.toString(pg.getBonus().get("DEX")));
+
+        //Set Descr
+        field = acroForm.getField("Features and Traits");
+        COSDictionary dict = field.getCOSObject();
+        COSString defaultAppearance = (COSString) dict
+                .getDictionaryObject(COSName.DA);
+        if (defaultAppearance != null)
+        {
+
+            dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
+
+        }
+        field.setValue("Description: \n"+pg.getDescription());
 
         //Set passive perception
         field = acroForm.getField("Perception ");
@@ -270,6 +293,8 @@ public class ddmProducer {
         processLang(acroForm,pg);
         
         equip(acroForm,pg);
+
+
   
         }
 

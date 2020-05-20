@@ -233,8 +233,8 @@ entity : (pgDefition | equipDefinition);
 
 setting : SET BLANKSPACE OPTIONAL  BLANKSPACE (OF BLANKSPACE toSet BLANKSPACE)? FOR BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
 
-line : (entity | importData | setting) BL | BL;
+line : (entity | importData | setting) BL | BL | (entity | importData | setting) EOF;
 
-start : (line)+ EOF;
+start : (line)+;
 
 

@@ -54,7 +54,7 @@ public class settingChecker {
                 if(((ddmLangParser.DescriptionContext) child).getText().length()>DESC_MAX_LEN){
                     throw new setMalformedException("Wrong format for Description setting at line: "+ctx.OPTIONAL().getSymbol().getLine()+". The description is too long. Max "+DESC_MAX_LEN+" characters");
                 }
-                addSetting("Description", ctx.LETTER().getText(),((Token) child).getText());
+                addSetting("Description", ctx.LETTER().getText(),((ddmLangParser.DescriptionContext) child).getText());
                 break;
             case "Background":
                 if(!(child instanceof Token)){

@@ -56,3 +56,4 @@ set Level of Barbarian for gian = 3
 set Level of Bard for gian = 5
 
 set Background for Ado = Outlander
+set Description for Ado = "Ado ha avuto una vita da bravo ragazzo fino a quando la legione del fuoco non decise di attaccare"

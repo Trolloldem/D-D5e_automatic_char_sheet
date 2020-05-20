@@ -213,11 +213,33 @@
 			setBg(resParsing, errors);
 			setEquipments(resParsing,resParsingEquip,errors);
 			checkLanguages(resParsing,errors);
+			setDescr(resParsing,errors);
 		if(errors.size()>0)
 			res = new listOfResults(errors);
 		return res;
 
 	}
+
+		private static void setDescr(Map<String, semanticResult> resParsing, List<semanticResult> errors) {
+			HashSet<String> alreadySetDescr = new HashSet<String >();
+			if(settingChecker.getSettingWrappers().containsKey("Description")){
+				for(settingWrapper w : settingChecker.getSettingWrappers().get("Description")){
+					descrSetting descr = (descrSetting) w;
+					if(resParsing.containsKey(descr.getPgName())){
+						characterWrapper character = (characterWrapper) resParsing.get(descr.getPgName());
+
+						if(!alreadySetDescr.contains(descr.getPgName())) {
+							character.setDescription(descr.getSetting());
+							alreadySetDescr.add(descr.getPgName());
+						}else{
+							String errorMsg = "Player '"+descr.getPgName()+"' has multiple Description settings";
+							errors.add(new exceptionWrapper(new pgMalformedException(errorMsg)));
+						}
+					}
+
+				}
+			}
+		}
 
 		private static void checkLanguages(Map<String, semanticResult> resParsing, List<semanticResult> errors) {
 
