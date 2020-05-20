@@ -293,8 +293,8 @@ public class ddmProducer {
         
         //set lang
         processLang(acroForm,pg);
-        
-        equip(acroForm,pg);
+        //set equip
+        processequip(acroForm,pg);
 
 
   
@@ -332,7 +332,7 @@ public class ddmProducer {
     		if(!temp.getType().equals(WeaponsType.Finesse)) {
                 value = pg.getBonus().get(temp.getScaling().toString());
             }else{
-    		    value = pg.getBonus().get("DEX") > pg.getBonus().get("DEX") ? pg.getBonus().get("DEX") : pg.getBonus().get("STR");
+    		    value = pg.getBonus().get("DEX") > pg.getBonus().get("STR") ? pg.getBonus().get("DEX") : pg.getBonus().get("STR");
             }
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
@@ -399,7 +399,6 @@ public class ddmProducer {
     	int gold=0;
     	int hpotion=0;
     	int mpotion=0;
-    	String golden="";
     	Boolean shield=false;
     	Map<Weapons,Integer> temp_weapons = new HashMap<Weapons,Integer>();
     	Map<Armors,Integer> temp_armors = new HashMap<Armors,Integer>();
