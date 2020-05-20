@@ -1,6 +1,9 @@
 package documentProducer;
 
 import com.company.Main;
+import org.apache.pdfbox.cos.COSDictionary;
+import org.apache.pdfbox.cos.COSName;
+import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
@@ -59,7 +62,8 @@ public class ddmProducer {
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
         processCharWrapper(acroForm, name, pg);
-
+        document.removePage(2);
+        document.removePage(1);
         document.save(new File("./src/test/outputs/"+name+".pdf"));
         document.close();
 
@@ -72,6 +76,7 @@ public class ddmProducer {
             //Set scores
             field = acroForm.getField(score.name());
             field.setValue(Integer.toString(pg.getStats().get(score.name())));
+
 
             //Set modifiers, special case because Acroform not well formatted
             if (score.name().equals("CHA"))
@@ -228,10 +233,22 @@ public class ddmProducer {
         //Set level for each class
         processClassLevel(acroForm,pg);
 
+        //Set bg
+        if(pg.getBackground()!= null) {
+            field = acroForm.getField("Background");
+            field.setValue(pg.getBackground().name().replace("_", " "));
+        }
 
         //Set proficiency
         field = acroForm.getField("ProfBonus");
         field.setValue(Integer.toString(pg.getProficiencyBonus()));
+
+        //Set proficiency
+        field = acroForm.getField("Speed");
+        field.setValue(Integer.toString(pg.getRace().getSpeed()));
+
+        //Set HD
+        processHD(acroForm,pg);
 
         //Set saving throws
         processSaving(acroForm,pg);
@@ -242,6 +259,19 @@ public class ddmProducer {
         //Set initiative
         field = acroForm.getField("Initiative");
         field.setValue(Integer.toString(pg.getBonus().get("DEX")));
+
+        //Set Descr
+        field = acroForm.getField("Features and Traits");
+        COSDictionary dict = field.getCOSObject();
+        COSString defaultAppearance = (COSString) dict
+                .getDictionaryObject(COSName.DA);
+        if (defaultAppearance != null)
+        {
+
+            dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
+
+        }
+        field.setValue("Description: \n"+pg.getDescription());
 
         //Set passive perception
         field = acroForm.getField("Perception ");
@@ -263,17 +293,33 @@ public class ddmProducer {
         
         //set lang
         processLang(acroForm,pg);
-        //set equip
-        processequip(acroForm,pg);
+        
+        equip(acroForm,pg);
+
+
   
         }
+
+    private static void processHD(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+        PDField field = acroForm.getField("HDTotal");
+        String fieldVal = "";
+        for(Map.Entry<Pair<Classi,subClass>,Integer> entry : pg.getPgClass().entrySet()){
+            int value = entry.getValue();
+             fieldVal = fieldVal+ value+entry.getKey().a.getDice() +" ";
+        }
+        field.setValue(fieldVal);
+
+        field = acroForm.getField("HD");
+        field.setValue("1"+pg.getSavingThrowClass().getDice());
+
+    }
 
 
     private static void processWeapons(PDAcroForm acroForm, characterWrapper pg) throws IOException {
     	PDField field;
     	int i=1;
     	int j=1;
-    	int value;
+    	int value = 0;
     	List<equipWrapper> entrys = new ArrayList<equipWrapper>();
     	for(Map.Entry<String, equipWrapper> temp:pg.getEquipments().entrySet()) {
     		if(temp.getValue().getWeapon().equals(Weapons.None)==false && entrys.size()<3) 
@@ -283,7 +329,11 @@ public class ddmProducer {
     		if(i==1) {
     		if(entrys.get(k).getWeapon().equals(Weapons.None)==false) {
     		Weapons temp =entrys.get(k).getWeapon();
-    		value =pg.getBonus().get(temp.getScaling().toString());
+    		if(!temp.getType().equals(WeaponsType.Finesse)) {
+                value = pg.getBonus().get(temp.getScaling().toString());
+            }else{
+    		    value = pg.getBonus().get("DEX") > pg.getBonus().get("DEX") ? pg.getBonus().get("DEX") : pg.getBonus().get("STR");
+            }
     		field=acroForm.getField("Wpn Name");
     		field.setValue(temp.name().replace("_", " "));
     		field=acroForm.getField("Wpn1 AtkBonus");
@@ -326,11 +376,20 @@ public class ddmProducer {
     }
     private static void processLang(PDAcroForm acroForm, characterWrapper pg) throws IOException {
     	PDField field;
-    	String result = "";
+    	String result = "Languages:\n";
     	for(int i=0;i<pg.getLanguages().size();i++) {
-    	result= result+ pg.getLanguages().get(i)+"\n";
+    	    result= result+ (i+1)+")"+ pg.getLanguages().get(i)+"\n";
     	}
     	field=acroForm.getField("ProficienciesLang");
+        COSDictionary dict = field.getCOSObject();
+        COSString defaultAppearance = (COSString) dict
+                .getDictionaryObject(COSName.DA);
+        if (defaultAppearance != null)
+        {
+
+            dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
+
+        }
     	field.setValue(result);
     }
     
