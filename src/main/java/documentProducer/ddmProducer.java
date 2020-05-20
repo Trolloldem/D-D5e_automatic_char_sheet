@@ -6,7 +6,6 @@ import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
@@ -248,6 +247,9 @@ public class ddmProducer {
         field = acroForm.getField("Speed");
         field.setValue(Integer.toString(pg.getRace().getSpeed()));
 
+        //Set HD
+        processHD(acroForm,pg);
+
         //Set saving throws
         processSaving(acroForm,pg);
 
@@ -297,6 +299,20 @@ public class ddmProducer {
 
   
         }
+
+    private static void processHD(PDAcroForm acroForm, characterWrapper pg) throws IOException {
+        PDField field = acroForm.getField("HDTotal");
+        String fieldVal = "";
+        for(Map.Entry<Pair<Classi,subClass>,Integer> entry : pg.getPgClass().entrySet()){
+            int value = entry.getValue();
+             fieldVal = fieldVal+ value+entry.getKey().a.getDice() +" ";
+        }
+        field.setValue(fieldVal);
+
+        field = acroForm.getField("HD");
+        field.setValue("1"+pg.getSavingThrowClass().getDice());
+
+    }
 
 
     private static void processWeapons(PDAcroForm acroForm, characterWrapper pg) throws IOException {
