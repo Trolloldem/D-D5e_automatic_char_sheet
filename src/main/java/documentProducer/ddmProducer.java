@@ -261,17 +261,18 @@ public class ddmProducer {
         field.setValue(Integer.toString(pg.getBonus().get("DEX")));
 
         //Set Descr
-        field = acroForm.getField("Features and Traits");
-        COSDictionary dict = field.getCOSObject();
-        COSString defaultAppearance = (COSString) dict
-                .getDictionaryObject(COSName.DA);
-        if (defaultAppearance != null)
-        {
+        if(pg.getDescription()!=null) {
+            field = acroForm.getField("Features and Traits");
+            COSDictionary dict = field.getCOSObject();
+            COSString defaultAppearance = (COSString) dict
+                    .getDictionaryObject(COSName.DA);
+            if (defaultAppearance != null) {
 
-            dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
+                dict.setString(COSName.DA, "/RobotoCondensed 10 Tf 2 Tr .5 w 0 g");
 
+            }
+            field.setValue("Description: \n" + pg.getDescription());
         }
-        field.setValue("Description: \n"+pg.getDescription());
 
         //Set passive perception
         field = acroForm.getField("Perception ");
