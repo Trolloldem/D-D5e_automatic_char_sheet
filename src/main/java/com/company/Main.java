@@ -14,10 +14,14 @@ import java.util.Map;
 
 
 class Scan{
-    public void executeParsing() {
+    public void executeParsing(String fileIn) {
         try{
 
-            String fileIn = Main.BASEPATH + "example.txt";
+            if(fileIn == null)
+                fileIn = Main.BASEPATH + "example.txt";
+            else
+                fileIn = System.getProperty("user.dir")+"/"+fileIn;
+
             ddmLangLexer lexer = new ddmLangLexer(CharStreams.fromFileName(fileIn));
             lexer.removeErrorListeners();
             lexer.addErrorListener(CustomErrorListener.INSTANCE);
@@ -67,10 +71,17 @@ class Scan{
 public class Main {
 
 	public static final String BASEPATH = "./src/main/java/com/company/";
-
+    public static boolean checkArgs= false;
 	public static void main(String[] args) {
+
 	Scan a = new Scan();
-	a.executeParsing();
+	if(args.length>0 && args[0]!= null) {
+        checkArgs = true;
+        a.executeParsing(args[0]);
+
+    }
+	else
+        a.executeParsing(null);
 	
     }
 }

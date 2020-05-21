@@ -25,7 +25,12 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
    
    	@Override public semanticResult visitImportData(ddmLangParser.ImportDataContext ctx) {
    		String fileName = ctx.LETTER(1).getText() + ".ddm";
-   		String moduleFileName = com.company.Main.BASEPATH + fileName;
+        String moduleFileName = null;
+        if(!com.company.Main.checkArgs)
+            moduleFileName  = com.company.Main.BASEPATH + fileName;
+        else
+            moduleFileName  = System.getProperty("user.dir")+"/"+ fileName;
+        System.out.println(moduleFileName);
    		String entityName = ctx.LETTER(0).getText();
 
         semanticResult importedEntity = entityImporter.load(moduleFileName, entityName);

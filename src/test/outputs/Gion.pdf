@@ -802,7 +802,7 @@ endobj
 /Subtype /Widget
 /T (ClassLevel)
 /Type /Annot
-/V (School of abjuration:5, Berserker:3)
+/V (Berserker:3, School of abjuration:5)
 /AP 396 0 R
 >>
 endobj
@@ -1234,7 +1234,7 @@ endobj
 /Subtype /Widget
 /T (HDTotal)
 /Type /Annot
-/V (5d6 3d12 )
+/V (3d12 5d6 )
 /AP 413 0 R
 >>
 endobj
@@ -19691,7 +19691,7 @@ BT
 /DeviceGray cs
 0 sc
 2 5.1289 Td
-(School of abjuration:5, Berserker:3) Tj
+(Berserker:3, School of abjuration:5) Tj
 ET
 Q
 EMC
@@ -20218,7 +20218,7 @@ BT
 /DeviceGray cs
 0 sc
 2 2.7148 Td
-(5d6 3d12 ) Tj
+(3d12 5d6 ) Tj
 ET
 Q
 EMC

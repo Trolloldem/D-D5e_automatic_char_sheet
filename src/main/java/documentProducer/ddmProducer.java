@@ -40,7 +40,6 @@ public class ddmProducer {
             File file = new File(PDFPath);
             document = PDDocument.load(file);
         }else{
-
             document = PDDocument.load(in);
         }
 
@@ -53,9 +52,16 @@ public class ddmProducer {
     }
 
     private static void processWriting(PDDocument original,String name ,characterWrapper pg) throws IOException {
-        original.save("./src/test/outputs/"+name+".pdf");
+        if(!Main.checkArgs)
+            original.save(new File("./src/test/outputs/"+name+".pdf"));
+        else
+            original.save(new File(System.getProperty("user.dir")+"/"+name+".pdf"));
+        File file = null;
 
-        File file = new File("./src/test/outputs/"+name+".pdf");
+        if(!Main.checkArgs)
+         file = new File("./src/test/outputs/"+name+".pdf");
+        else
+            file = new File(System.getProperty("user.dir")+"/"+name+".pdf");
         PDDocument document = PDDocument.load(file);
 
         PDDocumentCatalog docCatalog = document.getDocumentCatalog();
@@ -64,7 +70,10 @@ public class ddmProducer {
         processCharWrapper(acroForm, name, pg);
         document.removePage(2);
         document.removePage(1);
-        document.save(new File("./src/test/outputs/"+name+".pdf"));
+        if(!Main.checkArgs)
+            document.save(new File("./src/test/outputs/"+name+".pdf"));
+        else
+            document.save(new File(System.getProperty("user.dir")+"/"+name+".pdf"));
         document.close();
 
     }
