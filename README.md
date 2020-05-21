@@ -20,10 +20,10 @@ operations to help you in the character creation process:
 ---
 ## How to use this tool
 1. [Prerequisites and installation](./doc/Req_Inst.md)
-2. [Create a single character](./doc/SingleChar.md)
-3. [Create a single equipment](./doc/SingleEquip.md)
-4. [Definition of multiple characters](./doc/mulChar.md)
-5. [Definition of multiple equipment](./doc/mulEquip.md)
-5. [Set properties](./doc/settings.md)
-6. [Errors](./doc/errors.md)
-7. [Usage](./doc/usage.md)
+2. [Usage](./doc/usage.md)
+3. [Create a single character](./doc/SingleChar.md)
+4. [Create a single equipment](./doc/SingleEquip.md)
+5. [Definition of multiple characters](./doc/mulChar.md)
+6. [Definition of multiple equipment](./doc/mulEquip.md)
+7. [Set properties](./doc/settings.md)
+8. [Errors](./doc/errors.md)
