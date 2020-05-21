@@ -6,6 +6,11 @@
 5. [Alignment](#align)
 6. [Skills](#skills)
 7. [Languages](#lang)
+8. [Armor](#armor)
+9. [Weapons](#wpn)
+10. [Backgrounds](#bg)
+11. [Consumables](#con)
+
 ## Important note <a name = "important"/>
 All the following vocabolary elements are case sensitive
 ## Races<a name = "races"/>
@@ -127,7 +132,7 @@ The following elements can be used in this field:
 ## Languages<a name ="lang"/>
 The following elements can be used in this field: 
 
-        languages:  (<elem>,elem)
+        languages:  (<elem>,<elem>)
 
 * Common
 * Draconic
@@ -137,3 +142,61 @@ The following elements can be used in this field:
 * Gnomish
 * Orc
 * Halfling
+
+## Armor<a name ="armor"/>
+The following elements can be used in this field: 
+
+        armor:  <elem>
+* Padded
+* Leather
+* Studded leather
+* Hide
+* Chain shirt
+* Scale mail
+* Breastplate
+* Half plate
+* Ring mail
+* Chain mail
+* Splint
+* Plate
+* None
+## Weapons <a name ="wpn"/>
+The following elements can be used in this field: 
+
+        weapon:  <elem>
+* Bastard sword
+* Axe
+* Dagger
+* Longbow
+* None
+## Backgrounds <a name ="bg"/>
+The following elements can be used in this field: 
+
+        set Background for Ado = <elem>
+* Acolyte
+* Charlatan
+* Criminal
+* Entertainer
+* Folk Hero
+* Gladiator
+* Guild Artisan
+* Guild Merchant
+* Hermit
+* Knight
+* Noble
+* Outlander
+* Pirate
+* Sage
+* Sailor
+* Soldier
+* Spy
+* Urchin
+
+## Consumables <a name = "con"/>
+The following elements can be used in this field: 
+
+        consumables = (<elem>*10,<elem>*5,...)
+        
+* Health potion
+* Mana potion
+* Gold
