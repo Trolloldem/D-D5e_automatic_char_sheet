@@ -108,3 +108,7 @@ Here you can see the effects of multiclassing on the charsheet:
 ![Single character charsheet example](./img/multiclassExample.jpg "Single character multiclassing example")
 
 
+## Possible errors
+During the creation of your character, the tool can inform you that the .ddm or .txt file contains error.
+To know why your file has errors, follow [this link](./errors.md). Remember also that the supported values
+of any property are listed [here](./vocab.md).
