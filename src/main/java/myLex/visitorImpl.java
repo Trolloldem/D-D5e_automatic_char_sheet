@@ -30,7 +30,6 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
             moduleFileName  = com.company.Main.BASEPATH + fileName;
         else
             moduleFileName  = System.getProperty("user.dir")+"/"+ fileName;
-        System.out.println(moduleFileName);
    		String entityName = ctx.LETTER(0).getText();
 
         semanticResult importedEntity = entityImporter.load(moduleFileName, entityName);

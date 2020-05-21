@@ -8,6 +8,7 @@
     <artifactId>D_and_D_Compiler</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
+        <finalName>DD_Automatic_Charsheet_Compiler</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -29,6 +30,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
         </plugins>
