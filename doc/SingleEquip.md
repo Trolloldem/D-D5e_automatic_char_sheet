@@ -22,4 +22,4 @@ Inside the equipment definition, there are 4 mandatory fields:
 The first 3 fields admit the key word 'None' in case the equipment does not contain that piece.
 The field 'shield' has only 2 possible values: 'Yes' and 'No'.
 
-Using the characters defined by [singleChar.ddm](./SingleChar.md#secondDef)
+Using the characters defined by [singleChar.ddm](./SingleChar.md#seconddef)
