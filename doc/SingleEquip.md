@@ -28,7 +28,12 @@ equipment to a character using the [Items setting](./settings.md#items) to obtai
 
 ![Single equip example](./img/equipNotActive.jpg "Equip not active setted")
 
-As you can see, the armor class is still the same of a character without armor: to show
+As shown in the image above, the armor class is still the same of a character without armor: to show
 the actual armor class is necessary the [Active setting](./settings.md#active), in this case the charsheet shows:
 
-![Single equip example](./img/equipCAActive.jpg "Equip not active setted")
+![Single equip example](./img/equipCAActive.jpg "Equip active setted")
+
+## Possible errors
+During the creation of your equipment, the tool can inform you that the .ddm or .txt file contains error.
+To know why your file has errors, follow [this link](./errors.md). Remember also that the supported values
+of any property are listed [here](./vocab.md).
