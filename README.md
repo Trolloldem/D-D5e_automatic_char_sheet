@@ -26,5 +26,5 @@ operations to help you in the character creation process:
 5. [Definition of multiple characters](./doc/mulChar.md)
 6. [Definition of multiple equipment](./doc/mulEquip.md)
 7. [Set properties](./doc/settings.md)
-8. [vocabolary](./doc/vocab.md))
+8. [vocabolary](./doc/vocab.md)
 9. [Errors](./doc/errors.md)
