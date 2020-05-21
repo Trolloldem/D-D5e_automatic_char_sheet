@@ -68,7 +68,7 @@ Using the command
         
 You will obtain the following result:
 
-![alt text](./img/singleCharExample.jpg "Single character charsheet example")
+![Single character charsheet example](./img/singleCharExample.jpg "Single character charsheet example")
 
 
 ## Auto completed fields
@@ -80,6 +80,31 @@ As you can see in the image above, the following fields are compiled:
 5. skill bonuses;
 6. speed;
 7. number of hit dice;
-8. 
+8. initiative;
+9. character's gold;
+10. passive wisdom.
+
+## Multiclassing
+It is possible to define a character that has done multiclassing:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian->Berserker,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        
+        set Level of Barbarian for myFirstCharacter = 5
+        set Level of Cleric for myFirstCharacter = 5
+        
+Like for characters without muticlassing, it is mandatory to set the level of every class used in multiclassing.
+
+## Result of multiclassing
+Here you can see the effects of multiclassing on the charsheet:
+
+![Single character charsheet example](./img/multiclassExample.jpg "Single character multiclassing example")
 
 
