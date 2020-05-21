@@ -4,4 +4,4 @@ installed on your machine.
 
 ## Installation
 Once you've Java 8, or a more recent version, you can install this tool downloading the
-[following jar](../target/DD_Automatic_Charsheet_Compiler.jarD) package
+[following jar](../target/DD_Automatic_Charsheet_Compiler.jar) package
