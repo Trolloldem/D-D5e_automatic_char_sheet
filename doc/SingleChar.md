@@ -59,9 +59,14 @@ As you can see, inside both the ddm file presented, there is also a setting:
 
 This setting is the only mandatory one, and is needed to know the class level.
 
+
+##Result
 Using the command
 
     java -jar D_Automatic_Charsheet_Compiler.jar singleChar.ddm
         
 You will obtain the following result:
+
 ![alt text](./img/singleCharExample.jpg "Single character charsheet example")
+
+
