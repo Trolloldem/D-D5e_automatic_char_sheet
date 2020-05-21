@@ -14,6 +14,16 @@ operations to help you in the character creation process:
 1. checking the validity of the ability scores;
 2. checking the validity of the class;
 3. calculates all bonuses provided by ability scores and proficiencies;
-3. checking the validity of additional languages;
-4  checking the validity of additional skills;
+4. checking the validity of additional languages;
+5.  checking the validity of additional skills;
 
+---
+## How to use this tool
+1. [Prerequisites and installation](./doc/Req_Inst.md)
+2. [Create a single character](./doc/SingleChar.md)
+3. [Create a single equipment](./doc/SingleEquip.md)
+4. [Definition of multiple characters](./doc/mulChar.md)
+5. [Definition of multiple equipment](./doc/mulEquip.md)
+5. [Set properties](./doc/settings.md)
+6. [Errors](./doc/errors.md)
+7. [Usage](./doc/usage.md)
