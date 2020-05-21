@@ -85,7 +85,7 @@ As you can see in the image above, the following fields are compiled:
 10. passive wisdom.
 
 ## Multiclassing
-It is possible to define a character that has done multiclassing:
+It is possible to define a character that has done multiclassing:[](#secondDef)
 
         create Player myFirstCharacter{
             race: Human

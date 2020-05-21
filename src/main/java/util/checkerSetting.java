@@ -177,6 +177,8 @@
 						equipWrapper equipMent = (equipWrapper) resParsingEquip.get(items.getSetting());
 
 						character.addEquipments(new Pair<String, equipWrapper>(equipMent.getName(),equipMent));
+					}else{
+						errors.add(new exceptionWrapper(new equipMalformedException("Equipment '"+items.getSetting()+"' cannot be set for Player '"+items.getPgName()+"': the Player does not exist")));
 					}
 
 				}
@@ -200,6 +202,8 @@
 						}else {
 							alreadySetActive.add(character.getName());
 						}
+					}else{
+						errors.add(new exceptionWrapper(new equipMalformedException("Equipment '"+items.getSetting()+"' cannot be set as active for Player '"+items.getPgName()+"': the Player does not exist")));
 					}
 
 				}
