@@ -57,7 +57,7 @@ name the .ddm won't be valid.
 ### Setting the same equipment on multiple characters <a name = "same"/>
 The language permits this action: the [Items setting](./settings.md#items) can be used for the same
 equipment on multiple characters, in order to avoid having multiple equipment with the same name.
-The following code is therefore valid:
+The following code is therefore valid:<a name = "fourDef"/>
         
         //First character definition
         create Player myFirstCharacter{
