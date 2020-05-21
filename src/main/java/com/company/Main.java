@@ -10,7 +10,9 @@ import wrappers.listOfResults;
 import wrappers.semanticResult;
 import documentProducer.ddmProducer;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 class Scan{
@@ -72,10 +74,23 @@ public class Main {
 
 	public static final String BASEPATH = "./src/main/java/com/company/";
     public static boolean checkArgs= false;
+    private static String helpString = "Welcome to the D&D Automatic Charsheet Compiler.\n" +
+                                        "In order to compile your charsheet, you have to provide a ddm or .txt file written in DDM.\n" +
+                                        "This file must be inside your current folder, together the other files used for the imports.\n" +
+                                        "Example:" +
+                                        "java -jar DD_Automatic_Charsheet_Compiler.jar example.txt";
 	public static void main(String[] args) {
 
 	Scan a = new Scan();
 	if(args.length>0 && args[0]!= null) {
+	    if(Arrays.stream(args)
+                .filter( arg -> {
+	                return arg.equals("-help") || arg.equals("-h");
+                })
+                .collect(Collectors.toSet()).size()>0) {
+            System.out.println(helpString);
+	        return;
+        }
         checkArgs = true;
         a.executeParsing(args[0]);
 
