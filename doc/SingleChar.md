@@ -60,7 +60,8 @@ As you can see, inside both the ddm file presented, there is also a setting:
 This setting is the only mandatory one, and is needed to know the class level.
 
 
-##Result
+## Result
+
 Using the command
 
     java -jar D_Automatic_Charsheet_Compiler.jar singleChar.ddm
@@ -68,5 +69,17 @@ Using the command
 You will obtain the following result:
 
 ![alt text](./img/singleCharExample.jpg "Single character charsheet example")
+
+
+## Auto completed fields
+As you can see in the image above, the following fields are compiled:
+1. ability score bonuses;
+2. proficiency bonus;
+3. saving throws bonuses and  proficiency;
+4. armor class;
+5. skill bonuses;
+6. speed;
+7. number of hit dice;
+8. 
 
 
