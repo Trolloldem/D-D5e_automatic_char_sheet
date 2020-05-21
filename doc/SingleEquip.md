@@ -1,4 +1,4 @@
-#Create a single equipment
+# Create a single equipment
 1. [Create your first equipment](#first)
 2. [Possible errors](#errors)
 ## Create your first equipment<a name = "first"/>
