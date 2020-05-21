@@ -105,7 +105,7 @@ Like for characters without muticlassing, it is mandatory to set the level of ev
 ## Result of multiclassing
 Here you can see the effects of multiclassing on the charsheet:
 
-![Single character charsheet example](./img/multiclassExample.jpg "Single character multiclassing example")
+![Single character multiclass example](./img/multiclassExample.jpg "Single character multiclassing example")
 
 
 ## Possible errors

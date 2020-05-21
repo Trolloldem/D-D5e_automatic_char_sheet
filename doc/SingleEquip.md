@@ -22,4 +22,13 @@ Inside the equipment definition, there are 4 mandatory fields:
 The first 3 fields admit the key word 'None' in case the equipment does not contain that piece.
 The field 'shield' has only 2 possible values: 'Yes' and 'No'.
 
-Using the characters defined by [singleChar.ddm](./SingleChar.md#seconddef)
+Using the characters defined by [singleChar.ddm](./SingleChar.md#seconddef), is possibile to add
+equipment to a character using the [Items setting](./settings.md#items) to obtain:
+
+
+![Single equip example](./img/equipNotActive.jpg "Equip not active setted")
+
+As you can see, the armor class is still the same of a character without armor: to show
+the actual armor class is necessary the [Active setting](./settings.md#active), in this case the charsheet shows:
+
+![Single equip example](./img/equipCAActive.jpg "Equip not active setted")
