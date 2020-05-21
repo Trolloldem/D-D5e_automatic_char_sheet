@@ -1,4 +1,7 @@
-## Create your first equipment
+#Create a single equipment
+1. [Create your first equipment](#first)
+2. [Possible errors](#errors)
+## Create your first equipment<a name = "first"/>
 To define an equipment, you have to add these lines inside your .ddm file:
 
         create Equipment heavyEquip{
@@ -33,7 +36,7 @@ the actual armor class is necessary the [Active setting](./settings.md#active), 
 
 ![Single equip example](./img/equipCAActive.jpg "Equip active setted")
 
-## Possible errors
+## Possible errors<a name = "errors"/>
 During the creation of your equipment, the tool can inform you that the .ddm or .txt file contains error.
 To know why your file has errors, follow [this link](./errors.md). Remember also that the supported values
 of any property are listed [here](./vocab.md).

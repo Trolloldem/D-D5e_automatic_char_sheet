@@ -1,4 +1,8 @@
-## Create multiple character
+# Definition of multiple characters
+1. [Create multiple character](#multiCre)
+2. [Important note](#notes)
+3. [Setting the same equipment on multiple characters](#same)
+## Create multiple character<a name = "multiCre"/>
 The DDM language supports the definition of multiple characters inside a
 single .ddm or .txt file. 
 Creating additional characters follows this procedure:<a name="terzaref"></a>
@@ -46,11 +50,11 @@ The resulting 'additionalCharacter.pdf':
 
 ![Second character](./img/secondChar.jpg "Second")         
 
-## Important note
+## Important note <a name = "notes"/>
 When defining more than one character is important that every character name is different. Is there are character with the same
 name the .ddm won't be valid.
 
-### Setting the same equipment on multiple characters
+### Setting the same equipment on multiple characters <a name = "same"/>
 The language permits this action: the [Items setting](./settings.md#items) can be used for the same
 equipment on multiple characters, in order to avoid having multiple equipment with the same name.
 The following code is therefore valid:

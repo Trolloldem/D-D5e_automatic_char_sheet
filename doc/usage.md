@@ -1,4 +1,8 @@
 ## Usage
+1. [Steps to use the tool](#steps)
+2. [Important usage notes](#notes)
+3. [Other command parameters](#other)
+### Steps to use the tool <a name="steps"/>
 To use the tool, you need to:
 1. open the terminal(Linux) or open the command prompt(Windows);
 2. navigate to the folder where you've downloaded the tool jar;
@@ -10,7 +14,7 @@ To use the tool, you need to:
 
 If you want to know hot to write a DDM or TXT file in order to generate your characters,
 follow the steps presentend in [this guide](SingleChar.md).
-### Important usage notes
+### Important usage notes<a name="notes"/>
 Remember this points when using the tool:
 1. the working directory of the tool will be the one where you're calling the command.
 For example by calling: 
@@ -22,7 +26,7 @@ For example by calling:
  3. you can specify the relative path to DDMFile if the file does not contain 'import' statements;
  4. if the DDM file contains import statements, they will probably break due to the incorrect working directory.
 
-### Other command parameters
+### Other command parameters<a name="other"/>
 If you need a remainder about the usage command, just tipe
 
         java -jar ./DownloadFolder/D_Automatic_Charsheet_Compiler.jar -h

@@ -1,4 +1,11 @@
-## Create your first character
+# Create a single character
+1. [Create your first character](#ref)
+2. [Result](#res)
+3. [Auto completed fields](#auto)
+4. [Multiclassing](#multi)
+5. [Result of multiclassing](#resMulti)
+6. [Possible errors](#errors)
+## Create your first character <a name = "ref"/>
 In order to create your first character you need to:
 1. create a new .txt or .ddm file, in this example the file will be named 'singleChar.ddm';
 2. the example suppose the following directory content:
@@ -60,7 +67,7 @@ As you can see, inside both the ddm file presented, there is also a setting:
 This setting is the only mandatory one, and is needed to know the class level.
 
 
-## Result
+## Result<a name = "res"/>
 
 Using the command
 
@@ -71,7 +78,7 @@ You will obtain the following result:
 ![Single character charsheet example](./img/singleCharExample.jpg "Single character charsheet example")
 
 
-## Auto completed fields
+## Auto completed fields<a name = "auto"/>
 As you can see in the image above, the following fields are compiled:
 1. ability score bonuses;
 2. proficiency bonus;
@@ -84,7 +91,7 @@ As you can see in the image above, the following fields are compiled:
 9. character's gold;
 10. passive wisdom.
 
-## Multiclassing
+## Multiclassing<a name = "multi"/>
 It is possible to define a character that has done multiclassing:<a name="seconddef"></a>
 
         create Player myFirstCharacter{
@@ -102,13 +109,13 @@ It is possible to define a character that has done multiclassing:<a name="second
         
 Like for characters without muticlassing, it is mandatory to set the level of every class used in multiclassing.
 
-## Result of multiclassing
+## Result of multiclassing<a name = "resMulti"/>
 Here you can see the effects of multiclassing on the charsheet:
 
 ![Single character multiclass example](./img/multiclassExample.jpg "Single character multiclassing example")
 
 
-## Possible errors
+## Possible errors<a name = "errors"/>
 During the creation of your character, the tool can inform you that the .ddm or .txt file contains error.
 To know why your file has errors, follow [this link](./errors.md). Remember also that the supported values
 of any property are listed [here](./vocab.md).
