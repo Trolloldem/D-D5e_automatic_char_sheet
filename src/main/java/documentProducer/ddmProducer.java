@@ -17,6 +17,8 @@ import wrappers.semanticResult;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import org.antlr.v4.runtime.misc.Pair;
@@ -54,14 +56,17 @@ public class ddmProducer {
     private static void processWriting(PDDocument original,String name ,characterWrapper pg) throws IOException {
         if(!Main.checkArgs)
             original.save(new File("./src/test/outputs/"+name+".pdf"));
-        else
-            original.save(new File(System.getProperty("user.dir")+"/"+name+".pdf"));
+        else {
+            if(!new File(System.getProperty("user.dir") + "/"+"outputs").exists());
+                new File(System.getProperty("user.dir") + "/"+"outputs").mkdir();
+            original.save(new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf"));
+        }
         File file = null;
 
         if(!Main.checkArgs)
          file = new File("./src/test/outputs/"+name+".pdf");
         else
-            file = new File(System.getProperty("user.dir")+"/"+name+".pdf");
+            file = new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf");
         PDDocument document = PDDocument.load(file);
 
         PDDocumentCatalog docCatalog = document.getDocumentCatalog();
@@ -73,7 +78,7 @@ public class ddmProducer {
         if(!Main.checkArgs)
             document.save(new File("./src/test/outputs/"+name+".pdf"));
         else
-            document.save(new File(System.getProperty("user.dir")+"/"+name+".pdf"));
+            document.save(new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf"));
         document.close();
 
     }
