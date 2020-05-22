@@ -252,3 +252,80 @@ will print the following error:
 
 changing the background, removing it, change the skill will solve the problem. Indication about the skills provided
 by a background can be found inside the player manual.
+
+### Background setting
+#### cannotSetActiveException
+* The following code:
+        
+           create Player myFirstCharacter{
+               race: Human
+               hp:82
+               archetype: (Barbarian,Cleric->War Domain)
+               abilities:(18,10,15,15,15,15)
+               alignment:chaotic good
+               skills: (Intimidation,Survival)
+               languages: (Elvish)
+           }
+           set Active Equipment for myFirstCharacter = heavyEquip
+           set Active Equipment for myFirstCharacter = heavyEquip
+
+will print these errors:
+
+        1) parsingExceptions.cannotSetActiveException: Cannot set 'heavyEquip' as active equipment for Player 'myFirstCharacter': does not have this equipment
+        2) parsingExceptions.cannotSetActiveException: Cannot set 'heavyEquip' as active equipment for Player 'myFirstCharacter': multiple active equipments setted
+
+1. this error can be solved by removing the active setting or by adding an item setting for the printed equipment
+2. this error can be solved by removing one of the active setting entries
+
+### Language setting
+#### pgMalformedException
+* The following code:
+           
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Survival)
+            languages: ()
+        }    
+will print this error:
+        
+        parsingExceptions.pgMalformedException: Wrong number of languages for Player 'myFirstCharacter'
+        1 languages must be specified in 'languages'
+        
+this problem can be solved by changing the race of the character, removing its background setting or by adding the specified number of languages.
+* The following code:
+           
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Survival)
+            languages: (Orc,Infernal)
+        }    
+will print this error:
+        
+        parsingExceptions.pgMalformedException: Wrong number of languages for Player 'myFirstCharacter'
+        Only 1 can be specified in 'languages'
+this problem can be solved by removing the needed number of languages from the character's language entry.
+
+* The following code:
+           
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Survival)
+            languages: (Common)
+        }
+will print this error:
+        
+        parsingExceptions.pgMalformedException: Repeated language 'Common' for Player 'myFirstCharacter'
+        Race languages: Common
+this problem can be solved by changing the race of the character or by changing the character's language entry.
