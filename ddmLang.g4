@@ -13,7 +13,7 @@ options {
 
 
 BLANKSPACE: ' ';
-WS: BLANKSPACE BLANKSPACE -> skip;
+WS: ((BLANKSPACE BLANKSPACE) | '\t')-> skip;
 COMMENT: '/*' .*? '*/' -> skip;
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
 
@@ -243,8 +243,8 @@ entity : (pgDefition | equipDefinition);
 
 setting : SET BLANKSPACE OPTIONAL  BLANKSPACE (OF BLANKSPACE toSet BLANKSPACE)? FOR BLANKSPACE LETTER (BLANKSPACE)*'='(BLANKSPACE)* optionalValue;
 
-line : (entity | importData | setting) BL | (entity | importData | setting) EOF | BL ;
+line : ((entity | importData | setting) BL) |((entity | importData | setting) EOF)|BL;
 
-start : (line)+;
+start : (line)+EOF;
 
 

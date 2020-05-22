@@ -7,8 +7,6 @@ import rogueEquip from baseEquip
 import heavyEquip from baseEquip
 import temp from baseEquip
 import tempo from baseEquip
-import Brando from unibgPlayers
-import gian from unibgPlayers
 set Items for Ado = rogueEquip
 set Items for Ado = AdoEquip
 set Items for Ado = heavyEquip
@@ -20,12 +18,10 @@ create Player Ado{
     hp:11
     archetype: (Barbarian->Berserker)
     abilities:(18,10,15,15,15,15)
-    alignment:chaotic good  //Ado è proprio un bravo ragazzo
+    alignment:chaotic good
     skills: (Intimidation,Nature)
     languages: (Elvish,Infernal)
 }
-
-
 create Equipment AdoEquip{
     armor:Plate
     shield:Yes
@@ -46,14 +42,12 @@ create Player Gion{
 
 set Level of Barbarian for Ado = 11
 
-set Level of Barbarian for Brando = 3
-set Level of Bard for Brando = 5
+
 
 set Level of Barbarian for Gion = 3
 set Level of Wizard for Gion = 5
 
-set Level of Barbarian for gian = 3
-set Level of Bard for gian = 5
+
 
 set Background for Ado = Outlander
 set Description for Ado = "Ado è un bravo ragazzo, fino a quando la legione del fuoco non decise di attaccare"
