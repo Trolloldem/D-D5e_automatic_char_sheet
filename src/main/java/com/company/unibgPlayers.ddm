@@ -1,4 +1,4 @@
-create Player Brando{
+create Player Brand{
     race: Half Orc
     hp:10
     archetype: (Barbarian->Berserker,Bard->College of Lore)
@@ -7,7 +7,7 @@ create Player Brando{
     skills: (Intimidation,Nature,Religion)
     languages: ()
 }
-create Player gian{
+create Player Jack{
     race: Half Orc
     hp:10
     archetype: (Barbarian->Berserker,Bard->College of Lore)
