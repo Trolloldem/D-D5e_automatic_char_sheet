@@ -9,3 +9,10 @@
 Validation on the provided file follows 4 phases. A valid file must pass a check phase before
 being checked by next one. Only files that pass the last phase will be used to create the corresponding PDF files.
 All the errors inside a phase will be printed, in this way users can correct all errors of a certain type.
+
+
+
+## Parsing errors<a name ="parsing"/>
+1. 
+
+		notSubclassExcepetion 
