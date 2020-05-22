@@ -221,3 +221,34 @@ will print the following error:
         parsingExceptions.classLevelException: Player 'myFirstCharacter' has a player level above 20
 the solution is lowering the level inside the level settings in order to have a total level below 20.
 
+### Background setting
+#### multipleBackgroundSettingException
+The following code:
+
+        set Background for myFirstCharacter = Acolyte
+        set Background for myFirstCharacter = Charlatan
+will print the following error:
+
+    parsingExceptions.multipleBackgroundSettingException: Player myFirstCharacter's background is set multiple times
+removing one of the repeated background entry will solve the issue.
+
+#### pgMalformedException
+The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Survival)
+            languages: (Elvish)
+        }
+        set Background for myFirstCharacter = Outlander
+        
+will print the following error:
+
+        parsingExceptions.pgMalformedException: Repeated skill: 'Survival' for Player 'myFirstCharacter': also present in setted background: Outlander
+
+changing the background, removing it, change the skill will solve the problem. Indication about the skills provided
+by a background can be found inside the player manual.
