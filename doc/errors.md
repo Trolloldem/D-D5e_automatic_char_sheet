@@ -6,7 +6,14 @@
 5. [Setting errors](#settings)
 
 ## Error phases<a name ="phase"/>
-Validation on the provided file follows 4 phases. A valid file must pass a check phase before
+Validation on the provided file follows 4 phases:
+1. Parsing validation: the tool check that all the terms inside the file are in the DDM grammar
+2. Visiting validation: the tool visit the parsing tree created by the parser. In this phase the validation controls all the semantic
+bindings between a property and its value. 
+3. Naming validation: the tool controls that all the setting defined refers to existing characters or equipments
+4. Setting validation: the tool controls that after the settings defined produce valid effects on the characters
+
+A file must pass a check phase before
 being checked by next one. Only files that pass the last phase will be used to create the corresponding PDF files.
 All the errors inside a phase will be printed, in this way users can correct all errors of a certain type.
 
@@ -63,5 +70,154 @@ This type of errors will produce more error than the actual one, for example:
 1. As stated in the [vocabolary](vocab.md) the grammar is case sensitive
 2. At the end of the file there must be a new line(the tool will ask you for a 'BL' token)
 
+## Naming errors<a name="name"/>
+These errors occur when a setting refers to a not existing character or equipment.
+For example, the following code:
+        
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian->Berserker,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        
+        create Equipment heavyEquip{
+            armor:Plate
+            shield:Yes
+            consumables:(Health potion*5,Gold*10)
+            weapon:Longbow
+        }
+        set Level of Barbarian for myFirst = 10
+        set Items for myFirstCharacter = myEquip
+        set Active Equipment for myFirstCharactr = actiVe
+        set Items for myFirstCharacter = heavyEquip
 
+will print the following errors:
+
+        parsingExceptions.nameNotExist: name 'myFirstCharactr' do not exist
+        parsingExceptions.nameNotExist: name 'myFirst' do not exist
+        parsingExceptions.nameNotExist: equip name 'myEquip' do not exist
+        parsingExceptions.nameNotExist: equip name 'actiVe' do not exist
+Removing the presented setting or creating the entity printed will solve the error.
+## Setting errors<a name = "settings"/>
+### Level setting
+#### multipleLevelSettingException
+If the code presents this 2 lines:
+
+        set Level of Barbarian for myFirstCharacter = 10
+        set Level of Barbarian for myFirstCharacter = 10
+        
+it will print the following error:
+
+        parsingExceptions.multipleLevelSettingException: The level of the class 'Barbarian' of Player 'myFirstCharacter' has multiple settings: only 1 setting is allowed
+The solution is removing one of the 2 set entries. 
+#### CharacterWithoutClassException
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian->Berserker,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Ranger for myFirstCharacter = 10
+will print the following error: 
+
+       parsingExceptions.CharacterWithoutClassException: Player 'myFirstCharacter' is not a 'Ranger'
+Removing the set entry or adding the class to the character will solve the problem.
+ 
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian->Berserker,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Ranger for myFirstCharacter = 1
+will print the following error:
+        
+        parsingExceptions.CharacterWithoutClassException: Player 'myFirstCharacter' cannot choose a subclass for class 'Barbarian': class level too low; level needed: 3
+The solution is to remove the subclass from the class presented inside the error or to increase the class level.
+
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Ranger for myFirstCharacter = 10
+will print the following error:
+
+        parsingExceptions.CharacterWithoutClassException: Player 'myFirstCharacter' must choose a subclass for class 'Barbarian; max class level without subclass: 2
+Adding the subclass to the class presented or decreasing the class level will solve the problem.
+
+#### classLevelException
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Barbarian for myFirstCharacter = 10 
+        
+will print the following error:
+
+        parsingExceptions.classLevelException: Player 'myFirstCharacter' has class 'Cleric' without a level defined
+the solution is removing the class from the character or to add a set level entry for the class.
+
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Barbarian for myFirstCharacter = 22
+        
+will print the following error:
+
+        parsingExceptions.classLevelException: Player 'myFirstCharacter' has class 'Barbarian' with level above 20
+the solution is lowering the level below 20.
+* The following code:
+
+        create Player myFirstCharacter{
+            race: Human
+            hp:82
+            archetype: (Barbarian,Cleric->War Domain)
+            abilities:(18,10,15,15,15,15)
+            alignment:chaotic good
+            skills: (Intimidation,Nature)
+            languages: (Elvish)
+        }
+        set Level of Barbarian for myFirstCharacter = 7
+        set Level of Cleric for myFirstCharacter = 15
+        
+will print the following error:
+
+        parsingExceptions.classLevelException: Player 'myFirstCharacter' has a player level above 20
+the solution is lowering the level inside the level settings in order to have a total level below 20.
 
