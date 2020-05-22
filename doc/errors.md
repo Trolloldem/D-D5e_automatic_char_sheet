@@ -329,3 +329,14 @@ will print this error:
         parsingExceptions.pgMalformedException: Repeated language 'Common' for Player 'myFirstCharacter'
         Race languages: Common
 this problem can be solved by changing the race of the character or by changing the character's language entry.
+
+### Description setting
+#### pgMalformedException
+The following code:
+        
+        set Description for myFirstCharacter = "OK"
+        set Description for myFirstCharacter = "OK"
+will print this error:
+
+        parsingExceptions.pgMalformedException: Player 'myFirstCharacter' has multiple Description settings
+this error can be solved by removing one of the description setting entries.
