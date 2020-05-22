@@ -28,14 +28,15 @@ For example, the following code:
             languages: (Elvish)
         }
         
-        reate Equipment heavyEquip{
-            armor:Plate
+        create Equipment heavyEquip{
+            aror:Plate
             shield:Yes
-            consumables:(Health potion*5,Gold*10)
+            cnsumables:(Health potion*5,Gold*10)
             weapon:Longbow
         }
         et Level of Barbarian for myFirstCharacter = 10
         set Level of Clric for myFirstCharacter = 5
+
         
 will print the following errors:
 
@@ -48,17 +49,19 @@ will print the following errors:
         org.antlr.v4.runtime.misc.ParseCancellationException:  line 7:4 extraneous input 'skills' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token SKILLSID
         org.antlr.v4.runtime.misc.ParseCancellationException:  line 8:4 extraneous input 'languages' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token LANG
         org.antlr.v4.runtime.misc.ParseCancellationException:  line 9:0 extraneous input '}' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token '}'
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 11:0 extraneous input 'reate' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token LETTER
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 12:4 extraneous input 'armor' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token 'armor'
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 13:4 extraneous input 'shield' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token 'shield'
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 14:4 extraneous input 'consumables' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token 'consumables'
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 15:4 extraneous input 'weapon' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token 'weapon'
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 16:0 extraneous input '}' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token '}'
+        org.antlr.v4.runtime.misc.ParseCancellationException:  line 12:4 mismatched input 'aror' expecting {' ', 'armor', 'weapon', 'shield', 'consumables'}; unexpected token LETTER
+        org.antlr.v4.runtime.misc.ParseCancellationException:  line 14:4 mismatched input 'cnsumables' expecting {' ', 'armor', 'weapon', 'shield', 'consumables'}; unexpected token LETTER
         org.antlr.v4.runtime.misc.ParseCancellationException:  line 17:0 extraneous input 'et' expecting {<EOF>, 'create', 'import', 'set', BL}; unexpected token LETTER
-        org.antlr.v4.runtime.misc.ParseCancellationException:  line 18:13 no viable alternative at input 'set Level of Clric'; unexpected token LETTER
+        org.antlr.v4.runtime.misc.ParseCancellationException:  line 18:13 mismatched input 'Clric' expecting PGCLASS; unexpected token LETTER
         
 This type of errors will produce more error than the actual one, for example:
 
 1. at line 1, the only error is the word 'Plyer' instead of 'Player'
-2. the errors in the lines from 2 to 9 are not actual errors, but will be presented since the character creation identifier is broken
+2. the errors in the lines from 2 to 9 are not actual errors, but will be presented since the character creation identifier is invalid.
+
+### Common errors
+1. As stated in the [vocabolary](vocab.md) the grammar is case sensitive
+2. At the end of the file there must be a new line(the tool will ask you for a 'BL' token)
+
+
 
