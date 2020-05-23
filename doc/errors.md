@@ -81,7 +81,7 @@ this error is called when a subclass of another class is assigned to a class, fo
 		archetype: (Barbarian->Domain of life)
 this code produces the following message 
 		
-		parsingExceptions.notSubclassExcepetionthe subclass is not compatible with the class, 		please select a one of:
+		parsingExceptions.notSubclassExcepetionthe subclass is not compatible with the 		class, please select a one of:
 		Berserker
 		Path of the Totem warrior
 
@@ -100,6 +100,51 @@ for example
 		
 this code produces the following message
 	
+	parsingExceptions.malformedPropertyException: The vale for the race specified in the line: 2 	is not part of the manual
+	
+	
+	
+##pgMalformedException
+
+####duplicated property
+
+this error is called when you miss a property by duplicating another property
+for example 
+
+		hp:12
+		hp:88
+
+in this case we have duplicate hp instead of the alignment, the code produces the following message 
+
+	 parsingExceptions.pgMalformedException: The character named 'myFirstCharacter' 		misses the following properties: [alignment]
+
+for resolve this error you need to inserting the right property
+	
+#### Wrong Skills
+
+this error is called when you chose a wrong skill for a class, for example 
+	
+	archetype: (Barbarian)
+	skills: (Intimidation,History)
+	
+in this case we choose the wrong skill for a Barbarian (History), and the code produces the following error message 
+
+		parsingExceptions.pgMalformedException: Player 'myFirstCharacter' has skills not 		permitted by his classes. Permitted skills are: [Survival, Perception, Nature, 		Athletics, Animal_Handling, Intimidation]
+		
+in this case for resolve this error you need to chose a corrected skill
+
+#### Duplicate skills 
+
+this error is called when you choose the same skill two or more times, for example 
+
+		skills: (Intimidation,Intimidation)
+
+in this case we have choose intimidation twice and we have tho following message
+
+		parsingExceptions.pgMalformedException: The skill 'Intimidation' is specified 		multiple times for Player 'myFirstCharacter'
+
+for resolve this error we need to choose two different skills
+
 ## Naming errors<a name="name"/>
 These errors occur when a setting refers to a not existing character or equipment.
 For example, the following code:
