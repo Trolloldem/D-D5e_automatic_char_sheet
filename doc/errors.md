@@ -96,23 +96,31 @@ for example
  
 		hp: (Cleric)
 		race: 12
-		abilities: Orc
+		abilities: Half Orc
 		
 this code produces the following message
 	
-	parsingExceptions.malformedPropertyException: The vale for the race specified in the line: 2 	is not part of the manual
+	parsingExceptions.malformedPropertyException: The vale for the HP specified in the 	line: 2 is not part of the manual
+	parsingExceptions.malformedPropertyException: The vale for the race specified in 	the line: 3 is not part of the manual
+	parsingExceptions.malformedPropertyException: The ability scores specified at line: 	4 are not in the correct format
 	
+as we can see we have multiple errors
 	
-	
-##pgMalformedException
+## pgMalformedException
 
-####duplicated property
+#### duplicated property
 
 this error is called when you miss a property by duplicating another property
 for example 
 
-		hp:12
-		hp:88
+		create Player myFirstCharacter{
+		race: Half Orc
+		hp: 12
+		archetype: (Bard)
+		abilities: (15,15,15,15,15,15)
+		skills: (History,Religion,Nature,Intimidation)
+		hp: 88
+		}
 
 in this case we have duplicate hp instead of the alignment, the code produces the following message 
 
@@ -150,8 +158,9 @@ for resolve this error we need to choose two different skills
 this error is called when you choose two skills of your subClass, for examle
 
 		archetype: (Barbarian,Bard)
-		skills: (History,Religion)p
-in this case we have choose history and religion and they are a skills of Bard.
+		skills: (History,Religion)
+
+in this case we have choose history and religion and they are a skills of Bard.
 So we have the following message 
 
 	parsingExceptions.pgMalformedException: Player 'myFirstCharacter' cannot have more 	than 1 skill provided by his multiclass.
@@ -159,7 +168,7 @@ So we have the following message
 for resolve this error we need to choose a Barbarians's skill
 
 
-#### too much skills
+#### too many skills
 
 we have this error when you've chosen too many skills, for example
 
@@ -179,9 +188,66 @@ we have this error when yo've chosen the same class twice, for example
 
 		archetype: (Bard,Bard) 
 
-and we have the following warning 
+and we have the following error 
 
 		parsingExceptions.pgMalformedException: The class 'Bard' is specified more than 		1 time for Player 'myFirstCharacter'
+
+
+
+## equipMalformedException
+
+#### invalid armor 
+
+this error is called when you put a possible item value in your armor slot, but that value isn't a possible armor, for example
+
+		 armor: Longbow
+		 
+so, we have the following error 
+
+		parsingExceptions.equipMalformedException: line: 14 Longbow is not a valid armor
+
+
+for fix this error, you need to put a possible armor's value
+
+#### invalid shield
+
+this error is called when you put a possible item value in your shield slot, but that value isn't a possible shield, for example
+
+		 shield: Plate
+		 
+so, we have the following error 
+
+		parsingExceptions.equipMalformedException: line: 14 Plate is not a valid armor
+
+
+for fix this error, you need to put a possible shield's value
+
+#### invalid weapons 
+
+this error is called when you put a possible item value in your weapons slot, but that value isn't a possible weapons, for example
+
+		 shield: Plate
+		 
+so, we have the following error 
+
+		parsingExceptions.equipMalformedException: line: 17 Plate is not a valid weapon
+
+
+for fix this error, you need to put a possible weapons's value
+
+
+#### invalid consumable 
+
+this error is called when you put a possible item value in your consumable slot, but that value isn't a possible consumable, for example
+
+		 shield: Plate
+		 
+so, we have the following error 
+
+		parsingExceptions.equipMalformedException: line: 17 Plate is not a valid weapon
+
+
+for fix this error, you need to put a possible consumable's value 
 
 ## Naming errors<a name="name"/>
 These errors occur when a setting refers to a not existing character or equipment.
