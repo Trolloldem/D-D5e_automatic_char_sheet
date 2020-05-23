@@ -54,26 +54,52 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
     @Override
     public semanticResult visitPgDefition(ddmLangParser.PgDefitionContext ctx) {
         characterWrapper pg = null;
+        List<semanticResult> errors = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            try {
+                visit(c);
+            }catch (Exception e){
+                errors.add( new exceptionWrapper(e));
+            }
+
+        }
+        if (errors.size()>0)
+            return new listOfResults(errors);
        try{
-           visitChildren(ctx);
+
             pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
        } catch (Exception e) {
-
-           return new exceptionWrapper(e);
+           errors.add( new exceptionWrapper(e));
        }
+       if (errors.size()>0)
+                return new listOfResults(errors);
        return  pg;
     }
     
     @Override
     public semanticResult visitEquipDefinition(ddmLangParser.EquipDefinitionContext ctx) {
-        equipWrapper eq= null;
+        semanticResult eq= null;
+        List<semanticResult> errors = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            try {
+                visit(c);
+            }catch (Exception e){
+                errors.add( new exceptionWrapper(e));
+            }
+
+        }
+        if (errors.size()>0)
+            return new listOfResults(errors);
        try{
-	    	visitChildren(ctx);
 	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
     	} catch (Exception e) {
 
-			return new exceptionWrapper(e);
-		}
+           errors.add( new exceptionWrapper(e));
+       }
+        if (errors.size()>0)
+            return new listOfResults(errors);
     	return  eq;
     }
 
@@ -81,6 +107,7 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
     public semanticResult visitEntity(ddmLangParser.EntityContext ctx) {
 
         semanticResult entity = visitChildren(ctx);
+
 
         return entity;
     }
@@ -91,11 +118,14 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
         for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
             ParseTree c = ctx.getChild(i);
             semanticResult res = visit(c);
+
             if(res != null)
                 prova.add(res);
         }
-        if(prova.size()>0)
+        if(prova.size()>0) {
+
             return prova.get(0);
+        }
         else
             return null;
     }
@@ -112,6 +142,12 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
                 prova.add(res);
             if(res instanceof exceptionWrapper)
                 errorList.add(res);
+            if(res instanceof listOfResults){
+                listOfResults checkList = (listOfResults) res;
+                if (checkList.getResults().get(0) instanceof exceptionWrapper){
+                    errorList.addAll(checkList.getResults());
+                }
+            }
         }
         listOfResults aggregateResult;
         if(errorList.size()==0)

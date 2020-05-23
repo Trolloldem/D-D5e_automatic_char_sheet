@@ -15,9 +15,16 @@ public class errorPrinter {
         if(resParsing!=null) {
 
 
-            if (((listOfResults) resParsing).getResults().get(0) instanceof exceptionWrapper) {
+            if (((listOfResults) resParsing).getResults().get(0) instanceof exceptionWrapper ) {
                 System.err.println(resParsing);
                 errorPrinted = true;
+            }
+            if(((listOfResults) resParsing).getResults().get(0) instanceof listOfResults ){
+               listOfResults list = (listOfResults) ((listOfResults) resParsing).getResults().get(0);
+               if(list.getResults().get(0) instanceof  exceptionWrapper){
+                   System.err.println(resParsing);
+                   errorPrinted = true;
+               }
             }
         }
         return errorPrinted;

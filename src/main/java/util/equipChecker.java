@@ -13,11 +13,18 @@ import util.lexEnum.Shields;
 import util.lexEnum.Weapons;
 import util.lexEnum.Consumables;
 import wrappers.equipWrapper;
+import wrappers.listOfResults;
+import wrappers.semanticResult;
+import wrappers.exceptionWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class equipChecker {
 
-	public static equipWrapper check(EquipDefinitionContext ctx, String name) {
+	public static semanticResult check(EquipDefinitionContext ctx, String name) {
 		equipWrapper wrapper = new equipWrapper(name);
-		
+		List<semanticResult> errors = new ArrayList<>();
 		for(EquipPieceContext prop : ctx.equipPiece() ) {
 			PieceContext mandatoryChild = prop.piece();
             PieceValueContext value = prop.pieceValue();
@@ -28,21 +35,21 @@ public class equipChecker {
 				try {
 					wrapper.setArmor(Armors.valueOf(strValue));
 				}catch (IllegalArgumentException e) {
-					throw new equipMalformedException(value.getText() + " is not a valid armor", prop.getStart().getLine());
+					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid armor", prop.getStart().getLine())));
 				}
 			}
 			if ("shield".equals(text)) {
 				try {
 					wrapper.setShield(Shields.valueOf(strValue));
 				}catch (IllegalArgumentException e) {
-					throw new equipMalformedException(value.getText() + " is not a valid shield", prop.getStart().getLine());
+					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid shield", prop.getStart().getLine())));
 				}
 			}
 			if ("weapon".equals(text)) {
 				try {
 					wrapper.setWeapon(Weapons.valueOf(strValue));
 				}catch (IllegalArgumentException e) {
-					throw new equipMalformedException(value.getText() + " is not a valid weapon", prop.getStart().getLine());
+					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid weapon", prop.getStart().getLine())));
 				}
 			}
 			if ("consumables".equals(text)) {
@@ -56,17 +63,21 @@ public class equipChecker {
 					try {
 						consumable = Consumables.valueOf(consumableElem.CONSUMABLE().getText().replace(" ", "_"));
 					}catch (IllegalArgumentException e) {
-						throw new equipMalformedException(value.getText() + " is not a valid consumable", prop.getStart().getLine());
+						errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid consumable", prop.getStart().getLine())));
 					}
 					Integer digit = new Integer(consumableElem.DIGIT().getText());
 
 					if (digit < 1)
-						throw new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(), prop.getStart().getLine());
+						errors.add(new exceptionWrapper(new equipMalformedException("You can't have " + digit + " " + consumableElem.CONSUMABLE().getText(), prop.getStart().getLine())));
 					consumableElem = consumableElem.consumableVectorElem();
 
 					wrapper.addConsumable(consumable, digit);
 				}
 			}
+		}
+		if (errors.size()>0){
+			listOfResults res = new listOfResults(errors);
+			return res;
 		}
 		return wrapper;
 	}

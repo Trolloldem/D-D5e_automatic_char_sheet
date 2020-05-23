@@ -7,6 +7,7 @@ import com.company.Main;
 
 import parsingExceptions.equipMalformedException;
 import parsingExceptions.importException;
+import parsingExceptions.pgMalformedException;
 import util.*;
 import wrappers.*;
 
@@ -43,9 +44,32 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
 
     @Override
     public semanticResult visitPgDefition(ddmLangParser.PgDefitionContext ctx) {
-        characterWrapper pg = null;
+        semanticResult pg = null;
+        List<semanticResult> errors = new ArrayList<semanticResult>();
+        for(int i = 0; i < ctx.getChildCount() && shouldVisitNextChild(ctx, null); ++i) {
+            ParseTree c = ctx.getChild(i);
+            try {
+                visit(c);
+            }catch (Exception e){
+
+                errors.add( new exceptionWrapper(e));
+            }
+
+        }
+
+        if (errors.size()>0) {
+
+            pgMalformedException newExc = new pgMalformedException("Error during import of '"+entityName+"': previous "+errors.size()+" errors refer to that entity");
+            semanticResult ecc = new exceptionWrapper(newExc);
+            errors.add(ecc);
+            pg = new listOfResults(errors);
+        }
+        if(pg!= null ){
+            imported = pg;
+            return pg;
+        }
        try{
-           visitChildren(ctx);
+
            if(ctx.LETTER().getText().equals(entityName)) {
         	   pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
         	   imported = pg;
@@ -59,17 +83,21 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
     
     @Override
     public semanticResult visitEquipDefinition(ddmLangParser.EquipDefinitionContext ctx) {
-        equipWrapper eq= null;
+        semanticResult eq= null;
        try{
 	    	visitChildren(ctx);
 	    	if(ctx.LETTER().getText().equals(entityName)) {
-	    		eq =  equipChecker.check(ctx,ctx.LETTER().getText());	
+	    		eq =  equipChecker.check(ctx,ctx.LETTER().getText());
+	    		if(eq instanceof  listOfResults)
+	    		    throw new Exception();
 	    		imported = eq;
 	    	}
     	} catch (Exception e) {
 
-           equipMalformedException newExc = new equipMalformedException("Error during import of '"+entityName+"' :"+e.getMessage());
-           imported = new exceptionWrapper(newExc);
+           equipMalformedException newExc = new equipMalformedException("Error during import of '"+entityName+"', previous "+((listOfResults) eq).getResults().size()+" errors refer to that entity");
+           semanticResult ecc = new exceptionWrapper(newExc);
+           ((listOfResults) eq).getResults().add(ecc);
+           imported = eq;
 		}
     	return  eq;
     }
@@ -77,7 +105,6 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
     @Override
     public semanticResult visitEntity(ddmLangParser.EntityContext ctx) {
         semanticResult entity = visitChildren(ctx);
-
         return entity;
     }
 
@@ -110,6 +137,12 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
                 prova.add(res);
             if(res instanceof exceptionWrapper)
                 listaEccezioni.add(res);
+            if(res instanceof listOfResults){
+                listOfResults checkList = (listOfResults) res;
+                if (checkList.getResults().get(0) instanceof exceptionWrapper){
+                    listaEccezioni.addAll(checkList.getResults());
+                }
+            }
         }
         listOfResults aggregateResult;
         if(listaEccezioni.size()==0)
