@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class pgChecker {
 public static Set<String> setted;
     public static characterWrapper checkPgDefinition(List<ddmLangParser.PropertyContext> property,String characterName, ddmLangParser parser) {
-        setted = new HashSet<>();
 
         characterWrapper character = new characterWrapper();
         character.setName(characterName);
@@ -51,8 +50,6 @@ public static Set<String> setted;
         }
         if(character.allSetted()){
             checkSkillPermitted(character);
-            if(setted.size() != 12)
-                throw new pgMalformedException("The character named '"+character.getName()+"' has only the following properties set: "+setted);
             return character;
         }else {
             throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
