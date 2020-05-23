@@ -17,8 +17,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class pgChecker {
-
+public static Set<String> setted;
     public static characterWrapper checkPgDefinition(List<ddmLangParser.PropertyContext> property,String characterName, ddmLangParser parser) {
+        setted = new HashSet<>();
+
         characterWrapper character = new characterWrapper();
         character.setName(characterName);
         switch (property.size()){
@@ -49,6 +51,8 @@ public class pgChecker {
         }
         if(character.allSetted()){
             checkSkillPermitted(character);
+            if(setted.size() != 12)
+                throw new pgMalformedException("The character named '"+character.getName()+"' has only the following properties set: "+setted);
             return character;
         }else {
             throw new pgMalformedException("The character named '"+character.getName()+"' misses the following properties: "+character.notSettedProperty());
@@ -79,6 +83,7 @@ public class pgChecker {
             Skills enumSkill = Skills.valueOf(skill.replace(" ","_"));
             if(!permittedSkils.contains(enumSkill)){
                 throw new pgMalformedException("Player '"+character.getName()+"' has skills not permitted by his classes. Permitted skills are: "+permittedSkils.toString());
+
             }
             if(permittedByOthers.containsKey(enumSkill)){
                 if(multiClassFlag.contains(permittedByOthers.get(enumSkill)))
@@ -100,13 +105,16 @@ public class pgChecker {
     private static void selectOperationCase7(characterWrapper character, Token mandatoryChild, Object value, ddmLangParser parser) {
       if(mandatoryChild.getType() == parser.getTokenType("RACE")){
           character.setRace(((Token)value).getText());
+          setted.add("race");
       }
       if(mandatoryChild.getType() == parser.getTokenType("HP")){
           Integer hp = Integer.parseInt(((Token)value).getText());
             character.setHp(hp);
+          setted.add("hp");
       }
       if(mandatoryChild.getType() == parser.getTokenType("ALIGN")){
           character.setAlignment(((Token)value).getText());
+          setted.add("alignment");
       }
       if(mandatoryChild.getType() == parser.getTokenType("LANG")){
             List<String > languages = new ArrayList<String>();
@@ -116,6 +124,7 @@ public class pgChecker {
             }
 
             character.setLanguages(languages);
+          setted.add("languages");
       }
       if(mandatoryChild.getType() == parser.getTokenType("SKILLSID")){
 
@@ -130,6 +139,7 @@ public class pgChecker {
             }
 
             character.setSkills(skills);
+          setted.add("skills");
       }
 
       if(mandatoryChild.getType() == parser.getTokenType("ABILITY")){
@@ -142,6 +152,7 @@ public class pgChecker {
                 i++;
             }
             character.setStats(scores);
+            setted.addAll(Arrays.asList(abilitiesName));
       }
       if(mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")){
           Map<Pair<Classi,subClass>, Integer> temp=new HashMap<Pair<Classi,subClass>, Integer>();
@@ -173,6 +184,7 @@ public class pgChecker {
           }
     	  character.setPgClass(temp);
     	  character.setSavingThrowClass(savingThrow);
+          setted.add("archetype");
       }
 
     }
