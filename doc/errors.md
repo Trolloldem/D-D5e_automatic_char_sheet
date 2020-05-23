@@ -145,6 +145,44 @@ in this case we have choose intimidation twice and we have tho following message
 
 for resolve this error we need to choose two different skills
 
+#### two skill of multiclass
+
+this error is called when you choose two skills of your subClass, for examle
+
+		archetype: (Barbarian,Bard)
+		skills: (History,Religion)p
+in this case we have choose history and religion and they are a skills of Bard.
+So we have the following message 
+
+	parsingExceptions.pgMalformedException: Player 'myFirstCharacter' cannot have more 	than 1 skill provided by his multiclass.
+
+for resolve this error we need to choose a Barbarians's skill
+
+
+#### too much skills
+
+we have this error when you've chosen too many skills, for example
+
+
+		skills: (History,Religion,Nature,Intimidation)
+		
+so we choose four skills and we have the following message		
+
+
+		parsingExceptions.pgMalformedException: Player 'myFirstCharacter' has the wrong 		number of skills. Number of skills : 3
+
+for resolve this error you need to choose a regular number of skills
+
+#### same class
+
+we have this error when yo've chosen the same class twice, for example
+
+		archetype: (Bard,Bard) 
+
+and we have the following warning 
+
+		parsingExceptions.pgMalformedException: The class 'Bard' is specified more than 		1 time for Player 'myFirstCharacter'
+
 ## Naming errors<a name="name"/>
 These errors occur when a setting refers to a not existing character or equipment.
 For example, the following code:
