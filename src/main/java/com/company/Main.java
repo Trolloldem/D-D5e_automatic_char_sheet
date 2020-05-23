@@ -41,7 +41,6 @@ class Scan{
             semanticResult resParsing = visitor.visitStart(parserTree);
             Map<String, semanticResult> mappaPgNames = null;
             Map<String, semanticResult> mappaEquipNames = null;
-
             if(!errorPrinter.print(resParsing)){
                 mappaPgNames = checkerSetting.existName(resParsing);
                 mappaEquipNames =checkerSetting.existEquipName(resParsing);

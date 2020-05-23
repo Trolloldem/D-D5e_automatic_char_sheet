@@ -57,7 +57,11 @@ public class equipChecker {
 					continue;
 
 				ConsumableVectorContext consumableList = value.consumableVector();
-				ConsumableVectorElemContext consumableElem = consumableList.consumableVectorElem();
+				ConsumableVectorElemContext consumableElem = null;
+				if(consumableList == null){
+					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid consumable", prop.getStart().getLine())));
+				}else
+					consumableElem = consumableList.consumableVectorElem();
 				while (consumableElem != null) {
 					Consumables consumable = null;
 					try {

@@ -1,5 +1,5 @@
 create Equipment rogueEquip{
-    armor:Yes
+    armor:None
     shield:No
     consumables:(Gold*10,Gold*22,Health potion*1)
     weapon:Bastard sword

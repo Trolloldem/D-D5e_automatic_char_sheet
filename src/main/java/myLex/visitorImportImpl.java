@@ -68,11 +68,14 @@ public class visitorImportImpl extends ddmLangBaseVisitor<semanticResult>{
             imported = pg;
             return pg;
         }
+
        try{
 
            if(ctx.LETTER().getText().equals(entityName)) {
+
         	   pg = pgChecker.checkPgDefinition(ctx.property(),ctx.LETTER().getText(),parser);
         	   imported = pg;
+
            }
        } catch (Exception e) {
            equipMalformedException newExc = new equipMalformedException("Error during import of '"+entityName+"' :"+e.getMessage());

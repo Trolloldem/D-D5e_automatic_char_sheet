@@ -1,5 +1,5 @@
 create Player Brand{
-    race: 11
+    race: Half Orc
     hp:10
     archetype: (Barbarian->Berserker,Bard->College of Lore)
     abilities:(15,15,15,15,15,15)

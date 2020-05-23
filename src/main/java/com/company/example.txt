@@ -21,11 +21,11 @@ create Player Ado{
     abilities:(18,10,15,15,15,15)
     alignment:chaotic good
     skills: (Intimidation,Nature)
-    hp:12
+    languages: (Elvish,Infernal)
 }
 create Equipment AdoEquip{
-    armor:Yes
-    shield:Plate
+    armor:Plate
+    shield:Yes
     consumables:(Gold*100,Health potion*2)
     weapon:None
 }

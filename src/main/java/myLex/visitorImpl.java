@@ -93,7 +93,7 @@ public class visitorImpl extends ddmLangBaseVisitor<semanticResult>{
         if (errors.size()>0)
             return new listOfResults(errors);
        try{
-	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());	    	
+	    	eq =  equipChecker.check(ctx,ctx.LETTER().getText());
     	} catch (Exception e) {
 
            errors.add( new exceptionWrapper(e));
