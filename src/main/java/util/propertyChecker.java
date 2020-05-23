@@ -106,7 +106,7 @@ public class propertyChecker {
 
         }
         if (mandatoryTokenType == parser.getTokenType("HP")){
-            throw new malformedPropertyException("The vale for the race specified in the line: "+mandatoryToken.getLine()+" is not part of the manual");
+            throw new malformedPropertyException("The vale for the HP specified in the line: "+mandatoryToken.getLine()+" is not part of the manual");
         }
         return false;
     }

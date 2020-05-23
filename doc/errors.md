@@ -70,6 +70,36 @@ This type of errors will produce more error than the actual one, for example:
 1. As stated in the [vocabolary](vocab.md) the grammar is case sensitive
 2. At the end of the file there must be a new line(the tool will ask you for a 'BL' token)
 
+
+## Visiting errors<a name ="visit"/>
+### incorrect subclass:
+
+####notSubclassExcepetion 
+
+this error is called when a subclass of another class is assigned to a class, for example a subclass of clieric is assigned to a barbarian
+
+		archetype: (Barbarian->Domain of life)
+this code produces the following message 
+		
+		parsingExceptions.notSubclassExcepetionthe subclass is not compatible with the class, 		please select a one of:
+		Berserker
+		Path of the Totem warrior
+
+for resolve this error you need to use a correct subClass
+### malformed Property:
+
+
+#### malformedPropertyException
+
+this error is called when a property is matched with a wrong property value
+for example
+ 
+		hp: (Cleric)
+		race: 12
+		abilities: Orc
+		
+this code produces the following message
+	
 ## Naming errors<a name="name"/>
 These errors occur when a setting refers to a not existing character or equipment.
 For example, the following code:
