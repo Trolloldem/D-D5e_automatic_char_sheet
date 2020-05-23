@@ -217,7 +217,7 @@ this error is called when you put a possible item value in your shield slot, but
 		 
 so, we have the following error 
 
-		parsingExceptions.equipMalformedException: line: 14 Plate is not a valid armor
+		parsingExceptions.equipMalformedException: line: 5 Plate is not a valid shield
 
 
 for fix this error, you need to put a possible shield's value
@@ -240,11 +240,12 @@ for fix this error, you need to put a possible weapons's value
 
 this error is called when you put a possible item value in your consumable slot, but that value isn't a possible consumable, for example
 
-		 shield: Plate
+		 consumables:Dagger
 		 
 so, we have the following error 
 
-		parsingExceptions.equipMalformedException: line: 17 Plate is not a valid weapon
+		
+		 parsingExceptions.equipMalformedException: line: 6 Dagger is not a valid consumable
 
 
 for fix this error, you need to put a possible consumable's value 
