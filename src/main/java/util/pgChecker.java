@@ -17,8 +17,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class pgChecker {
+    public static Set<String> setted;
     public static characterWrapper checkPgDefinition(List<ddmLangParser.PropertyContext> property, String characterName, ddmLangParser parser) {
-
+        setted = new HashSet<String>(Arrays.asList(new String[]{"race","hp","archetype","STR", "DEX", "CON", "INT", "WIS", "CHA","alignment","skills","languages"}));
         characterWrapper character = new characterWrapper();
         character.setName(characterName);
         switch (property.size()) {
@@ -48,11 +49,11 @@ public class pgChecker {
                 }
                 break;
         }
-        if (character.allSetted()) {
+        if (setted.size()==0) {
             checkSkillPermitted(character);
             return character;
         } else {
-            throw new pgMalformedException("The character named '" + character.getName() + "' misses the following properties: " + character.notSettedProperty());
+            throw new pgMalformedException("The character named '" + character.getName() + "' misses the following properties: " + setted);
         }
     }
 
@@ -99,18 +100,22 @@ public class pgChecker {
 
     private static void selectOperationCase12(characterWrapper character, ddmLangParser.StatIDContext mandatoryChild, Object value, ddmLangParser parser) {
         character.setSingleStat(mandatoryChild.getText(), Integer.parseInt(((Token) value).getText()));
+        setted.remove(((Token) value).getText());
     }
 
     private static void selectOperationCase7(characterWrapper character, Token mandatoryChild, Object value, ddmLangParser parser) {
         if (mandatoryChild.getType() == parser.getTokenType("RACE")) {
             character.setRace(((Token) value).getText());
+            setted.remove("race");
         }
         if (mandatoryChild.getType() == parser.getTokenType("HP")) {
             Integer hp = Integer.parseInt(((Token) value).getText());
             character.setHp(hp);
+            setted.remove("hp");
         }
         if (mandatoryChild.getType() == parser.getTokenType("ALIGN")) {
             character.setAlignment(((Token) value).getText());
+            setted.remove("alignment");
         }
         if (mandatoryChild.getType() == parser.getTokenType("LANG")) {
             List<String> languages = new ArrayList<String>();
@@ -120,6 +125,7 @@ public class pgChecker {
             }
 
             character.setLanguages(languages);
+            setted.remove("languages");
         }
         if (mandatoryChild.getType() == parser.getTokenType("SKILLSID")) {
 
@@ -134,6 +140,7 @@ public class pgChecker {
             }
 
             character.setSkills(skills);
+            setted.remove("skills");
         }
             if (mandatoryChild.getType() == parser.getTokenType("ABILITY")) {
 
@@ -147,6 +154,7 @@ public class pgChecker {
                     i++;
                 }
                 character.setStats(scores);
+                setted.removeAll(Arrays.asList(abilitiesName));
             }
             if (mandatoryChild.getType() == parser.getTokenType("ARCHTYPE")) {
                 Map<Pair<Classi, subClass>, Integer> temp = new HashMap<Pair<Classi, subClass>, Integer>();
@@ -178,6 +186,7 @@ public class pgChecker {
                 }
                 character.setPgClass(temp);
                 character.setSavingThrowClass(savingThrow);
+                setted.remove("archetype");
             }
 
         }

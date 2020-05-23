@@ -17,12 +17,13 @@ import wrappers.listOfResults;
 import wrappers.semanticResult;
 import wrappers.exceptionWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class equipChecker {
 
 	public static semanticResult check(EquipDefinitionContext ctx, String name) {
+		Set<String> setted = new HashSet<String>(Arrays.asList(new String[]{"armor", "shield", "weapon", "consumables"}));
 		equipWrapper wrapper = new equipWrapper(name);
 		List<semanticResult> errors = new ArrayList<>();
 		for(EquipPieceContext prop : ctx.equipPiece() ) {
@@ -37,6 +38,7 @@ public class equipChecker {
 				}catch (IllegalArgumentException e) {
 					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid armor", prop.getStart().getLine())));
 				}
+				setted.remove("armor");
 			}
 			if ("shield".equals(text)) {
 				try {
@@ -44,6 +46,7 @@ public class equipChecker {
 				}catch (IllegalArgumentException e) {
 					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid shield", prop.getStart().getLine())));
 				}
+				setted.remove("shield");
 			}
 			if ("weapon".equals(text)) {
 				try {
@@ -51,6 +54,7 @@ public class equipChecker {
 				}catch (IllegalArgumentException e) {
 					errors.add(new exceptionWrapper(new equipMalformedException(value.getText() + " is not a valid weapon", prop.getStart().getLine())));
 				}
+				setted.remove("weapon");
 			}
 			if ("consumables".equals(text)) {
 				if (strValue.equals("None"))
@@ -77,7 +81,11 @@ public class equipChecker {
 
 					wrapper.addConsumable(consumable, digit);
 				}
+				setted.remove("consumables");
 			}
+		}
+		if(setted.size()>0){
+			errors.add(new exceptionWrapper(new equipMalformedException("Equipments: "+wrapper.getName()+" misses the following properties: "+setted)));
 		}
 		if (errors.size()>0){
 			listOfResults res = new listOfResults(errors);
