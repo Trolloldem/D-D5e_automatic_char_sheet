@@ -66,6 +66,13 @@ This type of errors will produce more error than the actual one, for example:
 1. at line 1, the only error is the word 'Plyer' instead of 'Player'
 2. the errors in the lines from 2 to 9 are not actual errors, but will be presented since the character creation identifier is invalid.
 
+#### Parsing errors inside imports
+Syntax validation is performed on the entire imported file(non only on the imported entity). The error printed will be in the following format:
+
+    parsingExceptions.importException: module /PATH/TO/MODULE/baseEquip.ddm has parsing errors in rogueEquip:
+    /home/oldem/Desktop/DDExample/baseEquip.ddm line 2:4 mismatched input 'armo' expecting {' ', 'armor', 'weapon', 'shield', 'consumables'}; unexpected token LETTER
+
+
 ### Common errors
 1. As stated in the [vocabolary](vocab.md) the grammar is case sensitive
 2. At the end of the file there must be a new line(the tool will ask you for a 'BL' token)
@@ -195,7 +202,20 @@ and we have the following error
 
 
 ## equipMalformedException
+#### duplicated property
+The following code: 
+        
+        create Equipment AdoEquip{
+            armor:Plate
+            armor:Plate
+            consumables:(Gold*100,Health potion*2)
+            weapon:None
+        }
+        
+will print the following error:
 
+            parsingExceptions.equipMalformedException: Equipments: AdoEquip misses the following properties: [shield]
+to solve this issue, modify the duplicated entry with the missing one.
 #### invalid armor 
 
 this error is called when you put a possible item value in your armor slot, but that value isn't a possible armor, for example
@@ -249,6 +269,13 @@ so, we have the following error
 
 
 for fix this error, you need to put a possible consumable's value 
+
+### Error in imported entity
+The error explained until now are checked also in every imported entity. The error printed will be in the following format:
+
+        parsingExceptions.equipMalformedException: Equipments: rogueEquip misses the following properties: [shield]
+        parsingExceptions.equipMalformedException: Error during import of 'rogueEquip', previous 1 errors refer to that entity
+Correct the error following the normal procedure for an entity in the main file.
 
 ## Naming errors<a name="name"/>
 These errors occur when a setting refers to a not existing character or equipment.

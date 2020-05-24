@@ -1,4 +1,4 @@
-# D & D 5e Automatic charsheet
+# D&D 5e Automatic charsheet
 Welcome to the D&D Automatic charsset compiler. This tool provides a language to define
 yours D&D characters's main characteristics. In particular, using the DDM language you can 
 define multiple characters, comprehensive of:
@@ -15,7 +15,7 @@ operations to help you in the character creation process:
 2. checking the validity of the class;
 3. calculates all bonuses provided by ability scores and proficiencies;
 4. checking the validity of additional languages;
-5.  checking the validity of additional skills;
+5. checking the validity of additional skills.
 
 ---
 ## How to use this tool
