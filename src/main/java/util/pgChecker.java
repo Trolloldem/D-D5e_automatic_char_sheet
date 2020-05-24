@@ -100,7 +100,7 @@ public class pgChecker {
 
     private static void selectOperationCase12(characterWrapper character, ddmLangParser.StatIDContext mandatoryChild, Object value, ddmLangParser parser) {
         character.setSingleStat(mandatoryChild.getText(), Integer.parseInt(((Token) value).getText()));
-        setted.remove(((Token) value).getText());
+        setted.remove(mandatoryChild.getText());
     }
 
     private static void selectOperationCase7(characterWrapper character, Token mandatoryChild, Object value, ddmLangParser parser) {

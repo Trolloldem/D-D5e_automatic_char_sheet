@@ -18,10 +18,15 @@ create Player Ado{
     race: Elf
     hp:11
     archetype: (Barbarian->Berserker)
-    abilities:(18,10,15,15,15,15)
+     STR:18
+                DEX:10
+                CON:15
+                CHA:15
+                INT:15
+                WIS:15
     alignment:chaotic good
     skills: (Intimidation,Nature)
-    languages: (Elvish,Infernal)
+    languages: ()
 }
 create Equipment AdoEquip{
     armor:Plate
