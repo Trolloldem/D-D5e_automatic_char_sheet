@@ -195,7 +195,20 @@ and we have the following error
 
 
 ## equipMalformedException
+#### duplicated property
+The following code: 
+        
+        create Equipment AdoEquip{
+            armor:Plate
+            armor:Plate
+            consumables:(Gold*100,Health potion*2)
+            weapon:None
+        }
+        
+will print the following error:
 
+            parsingExceptions.equipMalformedException: Equipments: AdoEquip misses the following properties: [shield]
+to solve this issue, modify the duplicated entry with the missing one.
 #### invalid armor 
 
 this error is called when you put a possible item value in your armor slot, but that value isn't a possible armor, for example
