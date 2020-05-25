@@ -81,7 +81,7 @@ Syntax validation is performed on the entire imported file(non only on the impor
 ## Visiting errors<a name ="visit"/>
 ### incorrect subclass:
 
-####notSubclassExcepetion 
+#### notSubclassExcepetion 
 
 this error is called when a subclass of another class is assigned to a class, for example a subclass of clieric is assigned to a barbarian
 
