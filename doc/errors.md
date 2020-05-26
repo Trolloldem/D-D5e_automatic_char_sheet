@@ -2,7 +2,7 @@
 1. [Error phases](#phase)
 2. [Parsing errors](#parsing)
 3. [Visiting errors](#visit)
-4. [Naming errors](#name)
+4. [Naming errors](#naming)
 5. [Setting errors](#settings)
 
 ## Error phases<a name ="phase"/>
@@ -277,7 +277,7 @@ The error explained until now are checked also in every imported entity. The err
         parsingExceptions.equipMalformedException: Error during import of 'rogueEquip', previous 1 errors refer to that entity
 Correct the error following the normal procedure for an entity in the main file.
 
-## Naming errors<a name="name"/>
+## Naming errors<a name="naming"/>
 These errors occur when a setting refers to a not existing character or equipment.
 For example, the following code:
         
