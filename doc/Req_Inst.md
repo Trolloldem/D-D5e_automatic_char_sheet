@@ -10,3 +10,9 @@ Once you've Java 8, or a more recent version, you can install this tool download
 [following jar](../target/DD_Automatic_Charsheet_Compiler.jar) package.
 
 Now you're ready to [use](./usage.md) the tool!
+
+## Make your own modification
+If you want to modify the source code, once you've done your modifications you can package
+them running:
+
+	mvn clean compile assembly:single

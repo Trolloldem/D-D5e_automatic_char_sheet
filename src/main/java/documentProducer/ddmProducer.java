@@ -9,6 +9,7 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.apache.pdfbox.Loader;
 import util.lexEnum.*;
 import wrappers.characterWrapper;
 import wrappers.equipWrapper;
@@ -17,8 +18,6 @@ import wrappers.semanticResult;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 import org.antlr.v4.runtime.misc.Pair;
@@ -27,9 +26,6 @@ import org.antlr.v4.runtime.misc.Pair;
 
 
 public class ddmProducer {
-
-    private static final int firstCheckBoxSkills = 23;
-    private static final int lastCheckBoxSkills = 40;
 
     public static final String PDFPath = "./src/main/resources/charsheet.pdf";
 
@@ -40,9 +36,9 @@ public class ddmProducer {
         if(in == null) {
 
             File file = new File(PDFPath);
-            document = PDDocument.load(file);
+            document = Loader.loadPDF(file);
         }else{
-            document = PDDocument.load(in);
+            document = Loader.loadPDF(in);
         }
 
         for(Map.Entry<String,semanticResult> entry : mappaPgNames.entrySet())
@@ -54,20 +50,26 @@ public class ddmProducer {
     }
 
     private static void processWriting(PDDocument original,String name ,characterWrapper pg) throws IOException {
-        if(!Main.checkArgs)
-            original.save(new File("./src/test/outputs/"+name+".pdf"));
+    	
+    	File tmpFile = null;
+    	if(!Main.checkArgs)
+        	tmpFile = File.createTempFile("./src/test/outputs/"+ name + "-", ".pdf");
         else {
-            if(!new File(System.getProperty("user.dir") + "/"+"outputs").exists());
+            
+        	if(!new File(System.getProperty("user.dir") + "/"+"outputs").exists())
                 new File(System.getProperty("user.dir") + "/"+"outputs").mkdir();
-            original.save(new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf"));
+        	
+        	tmpFile = File.createTempFile(System.getProperty("user.dir") + "/" +"outputs/"+ name + "-" , ".pdf");  
         }
+    	original.save(tmpFile);
+    	tmpFile.deleteOnExit();
+    	String tmpFilename = tmpFile.getAbsolutePath();
+    	
         File file = null;
 
-        if(!Main.checkArgs)
-         file = new File("./src/test/outputs/"+name+".pdf");
-        else
-            file = new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf");
-        PDDocument document = PDDocument.load(file);
+        file = new File(tmpFilename);
+        
+        PDDocument document = Loader.loadPDF(file);
 
         PDDocumentCatalog docCatalog = document.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
@@ -75,10 +77,11 @@ public class ddmProducer {
         processCharWrapper(acroForm, name, pg);
         document.removePage(2);
         document.removePage(1);
+         
         if(!Main.checkArgs)
             document.save(new File("./src/test/outputs/"+name+".pdf"));
         else
-            document.save(new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf"));
+        	document.save(new File(System.getProperty("user.dir") + "/" +"outputs/"+ name + ".pdf"));
         document.close();
 
     }

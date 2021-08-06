@@ -1,7 +1,5 @@
 package wrappers;
 
-import wrappers.semanticResult;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,8 +41,8 @@ public class listOfResults implements semanticResult {
     			ListName.add(temp.getName());
     		}
     	}
-    	Set result = new HashSet();
-    	Set Duplicate = new HashSet();
+    	Set<String> result = new HashSet<String>();
+    	Set<String> Duplicate = new HashSet<String>();
     	for(int i=0;i<ListName.size();i++) {
     		 if (!result.add(ListName.get(i))) {
     			 flag=true;
@@ -68,8 +66,8 @@ public class listOfResults implements semanticResult {
     			ListEquipName.add(temp.getName());
     		}
     	}
-    	Set result = new HashSet();
-    	Set Duplicate = new HashSet();
+    	Set<String> result = new HashSet<String>();
+    	Set<String> Duplicate = new HashSet<String>();
     	for(int i=0;i<ListEquipName.size();i++) {
     		 if (!result.add(ListEquipName.get(i))) {
     			 flag=true;
